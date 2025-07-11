@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥MantaMods🔥 - Mods Para SA-MP</title>
+  <meta property="og:title" content="🔥MantaMods🔥 - Mods Para SA-MP" />
+  <meta property="og:description" content="Únete a nuestro Discord y mejora tu GTA con mods únicos. ¡Explora lo mejor de SA-MP con 🔥MantaMods🔥!" />
+  <meta property="og:image" content="https://mantamods.github.io/static.png" />
+  <meta property="og:url" content="https://mantamods.github.io/" />
+  <meta name="theme-color" content="#00ffff" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #33FF99;
+      overflow-x: hidden;
+    }
+    .video-bg {
+      position: fixed;
+      top: 0; left: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+    header img {
+      width: 140px;
+      border-radius: 50%;
+      margin-top: 10px;
+      animation: pulseGlow 2s infinite alternate;
+    }
+    header h1 {
+      font-size: 3em;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      margin: 10px 0;
+    }
+    @keyframes pulseGlow {
+      0% { filter: brightness(1) drop-shadow(0 0 10px #0ff); }
+      100% { filter: brightness(1.4) drop-shadow(0 0 25px #0ff); }
+    }
+    .gta-btn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      border: 2px solid #0ff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      z-index: 20;
+      color: #0ff;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 15px #0ff;
+      transition: all 0.3s ease;
+    }
+    .gta-btn:hover {
+      background: rgba(0,255,255,0.1);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <a class="gta-btn" href="gtavirgen.html">🎮 Gta Virgen</a>
+  <video id="bg-video" autoplay muted loop playsinline class="video-bg">
+    <source src="Video2.mp4" type="video/mp4" />
+  </video>
+  <div class="container">
+    <header>
+      <img src="static.png" alt="Logo MantaMods" />
+      <h1>🔥MantaMods🔥</h1>
+    </header>
+    <p style="font-size: 1.3em;">Sitio oficial de mods extremos para SA-MP</p>
+  </div>
+</body>
+</html>
