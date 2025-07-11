@@ -35,7 +35,7 @@
       height: 100%;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.25;
+      opacity: 0.35;
     }
 
     .container {
@@ -71,7 +71,7 @@
       font-size: 1em;
       border: none;
       border-radius: 12px;
-      margin: 10px 0;
+      margin: 12px;
       box-shadow: 0 0 15px #0ff;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -87,14 +87,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
       margin-top: 20px;
     }
 
-    .btn-inline-group {
+    .btn-inline {
+      margin-top: 20px;
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 40px;
+      flex-wrap: wrap;
     }
 
     .box-content {
@@ -158,7 +159,7 @@
 </head>
 <body>
 
-  <!-- Botón de inicio móvil -->
+  <!-- Botón de inicio para móviles -->
   <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
 
   <!-- Video de fondo -->
@@ -187,9 +188,11 @@
       <a class="btn" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
       <!-- Botones secundarios -->
-      <div class="btn-inline-group">
+      <div class="btn-group">
         <button class="btn" onclick="toggleBox('rules-box')">📜 Reglas de la Comunidad</button>
-        <button class="btn" onclick="toggleBox('plantilla-box')">📋 Plantilla Oficial</button>
+        <div class="btn-inline">
+          <button class="btn" onclick="toggleBox('plantilla-box')">📋 Plantilla Oficial</button>
+        </div>
       </div>
 
       <!-- Caja de reglas -->
