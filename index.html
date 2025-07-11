@@ -11,19 +11,19 @@
   <meta property="og:url" content="https://mantamods.github.io/" />
   <meta name="theme-color" content="#00ffff" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
       background: #000;
-      color: #fff;
+      color: #33FF99;
       overflow-x: hidden;
     }
 
@@ -31,100 +31,105 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      min-width: 100vw;
+      min-height: 100vh;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.35;
     }
 
     .container {
+      width: 100%;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px 20px 60px;
     }
 
-    .rgb-text {
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-circular {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      box-shadow: 0 0 40px #00faff, 0 0 60px #00faff;
+      object-fit: cover;
+      animation: pulseGlow 2.5s ease-in-out infinite alternate;
+      margin-top: 15px;
+    }
+
+    header h1 {
       font-size: 3em;
-      font-weight: bold;
-      background: linear-gradient(270deg, #ff0055, #00fff7, #aaff00, #ff0055);
-      background-size: 600% 600%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rgbMove 5s ease infinite;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      margin: 10px 0 0;
     }
 
-    @keyframes rgbMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes pulseGlow {
+      0% { filter: brightness(1) drop-shadow(0 0 10px #0ff); }
+      100% { filter: brightness(1.4) drop-shadow(0 0 25px #0ff); }
     }
 
-    .btn {
+    .section {
+      max-width: 800px;
+      margin-top: 20px;
+    }
+
+    .cta {
+      background: #0ff;
+      color: #000;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0ff;
+      text-decoration: none;
+      margin: 25px auto 10px;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    .cta:hover {
+      background: #00c9c9;
+    }
+
+    .rules-btn, .plantilla-btn {
       background: #0ff;
       color: #000;
       padding: 12px 28px;
       font-size: 1em;
       border: none;
-      border-radius: 12px;
-      margin: 12px;
+      border-radius: 10px;
       box-shadow: 0 0 15px #0ff;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 15px;
     }
 
-    .btn:hover {
+    .rules-btn:hover, .plantilla-btn:hover {
       background: #00c9c9;
       box-shadow: 0 0 25px #0ff;
-      transform: scale(1.05);
     }
 
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .btn-inline {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .box-content {
+    .rules-box, .plantilla-box {
       display: none;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.9);
       border: 2px solid #0ff;
       border-radius: 10px;
       padding: 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: 20px auto;
       color: #0ff;
       white-space: pre-wrap;
       font-size: 1em;
       line-height: 1.6;
       text-align: left;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #ccc;
-    }
-
-    body {
-      cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1391.cur'), auto;
-    }
-
-    audio {
-      display: none;
     }
 
     #startBtn {
@@ -151,64 +156,135 @@
     }
 
     @media (min-width: 768px) {
-      #startBtn {
-        display: none;
-      }
+      #startBtn { display: none; }
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.8em;
+      color: #ccc;
+    }
+
+    .redes-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .redes-section h2 {
+      font-size: 2.4em;
+      color: #00faff;
+      text-shadow: 0 0 10px #00faff, 0 0 20px #00faff;
+      margin-bottom: 10px;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social a {
+      font-size: 2.1em;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .social a:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes rgbCycle {
+      0%   { color: red; }
+      25%  { color: orange; }
+      50%  { color: lime; }
+      75%  { color: cyan; }
+      100% { color: red; }
+    }
+
+    .rgb-text {
+      animation: rgbCycle 5s linear infinite;
     }
   </style>
 </head>
 <body>
 
-  <!-- Botón de inicio para móviles -->
   <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
 
-  <!-- Video de fondo -->
   <video id="bg-video" autoplay muted loop playsinline class="video-bg">
     <source src="Video2.mp4" type="video/mp4" />
+    Tu navegador no soporta video HTML5.
   </video>
 
-  <!-- Música -->
-  <audio id="music" loop>
+  <audio id="music" loop autoplay>
     <source src="Musicas.mp3" type="audio/mpeg" />
   </audio>
 
+  <script>
+    const music = document.getElementById('music');
+    const video = document.getElementById('bg-video');
+
+    function startMedia() {
+      music.play().catch(() => {});
+      video.play().catch(() => {});
+      document.getElementById('startBtn').style.display = 'none';
+    }
+
+    function toggleRules() {
+      const box = document.getElementById('rules-box');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function togglePlantilla() {
+      const box = document.getElementById('plantilla-box');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      video.play().catch(() => {});
+      music.play().catch(() => {});
+    });
+  </script>
+
+  <div class="redes-section">
+    <h2>Redes</h2>
+    <div class="social">
+      <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a>
+      <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
+      <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
+    </div>
+  </div>
+
   <div class="container">
     <header>
-      <img src="static.png" alt="Logo MantaMods" style="width: 120px; border-radius: 50%; box-shadow: 0 0 25px #0ff;">
-      <h1 class="rgb-text">🔥MantaMods🔥</h1>
+      <img src="static.png" alt="Logo MantaMods" class="logo-circular" />
+      <h1>🔥MantaMods🔥</h1>
     </header>
 
-    <section>
-      <p>
-        Bienvenido a la comunidad más dura de mods para SA-MP. <br/>
-        Mods extremos, sistemas únicos, eventos 🔥 y el coro más activo de la RD.
+    <div class="section">
+      <h2 class="rgb-text">Bienvenido a la comunidad más potente de mods para SA-MP</h2>
+      <p class="rgb-text">
+        Únete a nuestro Discord para explorar mods y modificaciones extremas que harán brillar tu GTA.<br>
+        También puedes hacer amigos nuevos y adentrarte en todos los sistemas que tenemos.
+        ¡Aquí los mods son únicos!
       </p>
 
-      <!-- Botón principal -->
-      <a class="btn" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
+      <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
-      <!-- Botones secundarios -->
-      <div class="btn-group">
-        <button class="btn" onclick="toggleBox('rules-box')">📜 Reglas de la Comunidad</button>
-        <div class="btn-inline">
-          <button class="btn" onclick="toggleBox('plantilla-box')">📋 Plantilla Oficial</button>
-        </div>
-      </div>
+      <button class="rules-btn" onclick="toggleRules()">📜 Reglas de la Comunidad</button>
+      <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla Oficial</button>
 
-      <!-- Caja de reglas -->
-      <div id="rules-box" class="box-content">
+      <div class="rules-box" id="rules-box">
         <ul>
           <li>✅ Respeto mutuo entre todos los miembros.</li>
-          <li>🚫 Prohibido hacer spam, flood o contenido tóxico.</li>
+          <li>🛑 Prohibido hacer spam o flood.</li>
           <li>🔞 Nada de contenido NSFW o ilegal.</li>
-          <li>📢 No promociones sin permiso del staff.</li>
-          <li>🎮 Usa los canales como se debe.</li>
-          <li>⚠️ Incumplimiento = sanciones o ban directo.</li>
+          <li>📢 No promociones en canales no adecuados.</li>
+          <li>🎮 Usa los canales para su propósito.</li>
+          <li>⚠️ El incumplimiento puede llevar a sanciones.</li>
         </ul>
       </div>
 
-      <!-- Caja de plantilla -->
-      <div id="plantilla-box" class="box-content">
+      <div class="plantilla-box" id="plantilla-box">
 🎮 Bienvenido a
 
 🚀・🔥MantaMods🔥  
@@ -227,42 +303,30 @@ Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
 🤝  Alianzas: Conecta Con Otras Comunidades.  
 💬  Comunidad: Chat, Memes, Música, Sugerencias.  
 🧠  Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
-🎮  Minijuegos: Clickers, Conteo, Twitter, Bola Mágica, Confesiones y más.  
+🎮  Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
 🛡  Postulaciones: Staff, Creador De Contenido.
 
-🔗 Discord: https://discord.gg/HqfjQcbDZr  
-🌐 Web: https://mantaralla0880.github.io/mantamods/
+📌 ¿CÓMO UNIRTE?
+
+✅ Ve a canal de verificación  
+✅ Presiona el botón  
+🔔 ¡Y disfruta del servidor completo!
+
+🔗 Discord De 🔥MantaMods🔥:  
+📍 https://discord.gg/HqfjQcbDZr
+
+🌍 Foro De 🔥MantaMods🔥  
+📍 https://mantaralla0880.github.io/mantamods/
 
 💬 Gracias por ser parte de MantaMods.  
 Aquí no solo jugamos... CREAMOS ESTILO 💯  
 🔊 Tag: ||@everyone @here||
       </div>
-    </section>
+    </div>
 
     <footer>
-      🔥 MantaMods RD 🔥 | “Un Flow Diferente, Un Mod Distinto 🇩🇴”
+      🔥MantaMods🔥. Una Vida Única e Inigualable.
     </footer>
   </div>
-
-  <script>
-    function toggleBox(id) {
-      const box = document.getElementById(id);
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-    }
-
-    const music = document.getElementById('music');
-    const video = document.getElementById('bg-video');
-
-    function startMedia() {
-      music.play().catch(() => {});
-      video.play().catch(() => {});
-      document.getElementById('startBtn').style.display = 'none';
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      video.play().catch(() => {});
-      music.play().catch(() => {});
-    });
-  </script>
 </body>
 </html>
