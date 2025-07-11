@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔥MantaMods🔥 - Mods Para SA-MP</title>
-
-  <!-- Vista previa para Discord -->
   <meta property="og:title" content="🔥MantaMods🔥 - Mods Para SA-MP" />
   <meta property="og:description" content="Únete a nuestro Discord y mejora tu GTA con mods únicos. ¡Explora lo mejor de SA-MP con 🔥MantaMods🔥!" />
   <meta property="og:image" content="https://mantamods.github.io/static.png" />
@@ -133,6 +131,9 @@
       box-shadow: 0 0 15px #0ff;
       cursor: pointer;
       transition: background 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .rules-btn:hover, .plantilla-btn:hover {
@@ -140,20 +141,12 @@
       box-shadow: 0 0 25px #0ff;
     }
 
-    .status-indicator {
-      display: inline-block;
+    .status-dot {
       width: 10px;
       height: 10px;
-      margin-left: 8px;
       border-radius: 50%;
-      background-color: red;
-      box-shadow: 0 0 10px red;
-      animation: blink 1.5s infinite alternate;
-    }
-
-    @keyframes blink {
-      from { opacity: 1; box-shadow: 0 0 8px red; }
-      to { opacity: 0.6; box-shadow: 0 0 15px red; }
+      background: red;
+      box-shadow: 0 0 5px red;
     }
 
     .rules-box, .plantilla-box {
@@ -242,20 +235,18 @@
 
     function toggleRules() {
       const box = document.getElementById('rules-box');
-      const indicator = document.getElementById('rules-indicator');
-      const isOpen = box.style.display === 'block';
-      box.style.display = isOpen ? 'none' : 'block';
-      indicator.style.backgroundColor = isOpen ? 'red' : 'limegreen';
-      indicator.style.boxShadow = isOpen ? '0 0 10px red' : '0 0 10px limegreen';
+      const dot = document.getElementById('rules-dot');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+      dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
     }
 
     function togglePlantilla() {
       const box = document.getElementById('plantilla-box');
-      const indicator = document.getElementById('plantilla-indicator');
-      const isOpen = box.style.display === 'block';
-      box.style.display = isOpen ? 'none' : 'block';
-      indicator.style.backgroundColor = isOpen ? 'red' : 'limegreen';
-      indicator.style.boxShadow = isOpen ? '0 0 10px red' : '0 0 10px limegreen';
+      const dot = document.getElementById('plantilla-dot');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+      dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -290,14 +281,8 @@
       <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
       <div class="buttons-row">
-        <button class="rules-btn" onclick="toggleRules()">
-          📜 Reglas De 🔥MantaMods🔥
-          <span id="rules-indicator" class="status-indicator"></span>
-        </button>
-        <button class="plantilla-btn" onclick="togglePlantilla()">
-          📋 Plantilla De 🔥MantaMods🔥
-          <span id="plantilla-indicator" class="status-indicator"></span>
-        </button>
+        <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥 <span id="rules-dot" class="status-dot"></span></button>
+        <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥 <span id="plantilla-dot" class="status-dot"></span></button>
       </div>
 
       <div class="rules-box" id="rules-box">
@@ -312,36 +297,37 @@
       </div>
 
       <div class="plantilla-box" id="plantilla-box">
-        🎮 Bienvenido a
-# `🚀`・🔥MantaMods🔥
-¿Amas el GTA y tunearlo al máximo?
-Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
-# `🎯` ¿QUÉ ENCONTRARÁS AQUÍ?
-🤖 Bot Propio Con Sistemas Únicos.
-🔫 Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.
-🎨 Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Mucho Mas.
-🚗 Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Mas.
-📦 Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Mas.
-🛠️ Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.
-🎉 Eventos & Sorteos: Participa Y Gana Mods Premium.
-🤝 Alianzas: Conecta Con Otras Comunidades.
-💬 Comunidad: Chat, Memes, Música, Sugerencias.
-🧠 Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.
-🎮 Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.
-🛡 Postulaciones: Staff, Creador De Contenido.
-# `📌` ¿CÓMO UNIRTE?
-✅ Ve a canal de verificación
-✅ Presiona el botón
- 🔔 ¡Y disfruta del servidor completo!
- 
-🔗Discord De 🔥MantaMods🔥:
-`📍` https://discord.gg/HqfjQcbDZr
-🌍 Foro De 🔥MantaMods🔥
-`📍` https://mantaralla0880.github.io/mantamods/
-💬 Gracias por ser parte de MantaMods.
-Aquí no solo jugamos... CREAMOS ESTILO 💯
-`🔊`Tag: ||@everyone @here||
-https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243/MantaMods.gif?ex=6865c293&is=68647113&hm=cd116f9b1e87759d5419599e7f623bcb93aea092a9d9a13da20eb52a5cacb308&=
+🎮 Bienvenido a  
+🚀・🔥MantaMods🔥  
+¿Amas el GTA y tunearlo al máximo?  
+Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.  
+
+🎯 ¿QUÉ ENCONTRARÁS AQUÍ?  
+🤖 Bot Propio Con Sistemas Únicos.  
+🔫 Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.  
+🎨 Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Mucho Mas.  
+🚗 Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Mas.  
+📦 Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Mas.  
+🛠️ Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.  
+🎉 Eventos & Sorteos: Participa Y Gana Mods Premium.  
+🤝 Alianzas: Conecta Con Otras Comunidades.  
+💬 Comunidad: Chat, Memes, Música, Sugerencias.  
+🧠 Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
+🎮 Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
+🛡 Postulaciones: Staff, Creador De Contenido.  
+
+📌 ¿CÓMO UNIRTE?  
+✅ Ve a canal de verificación  
+✅ Presiona el botón  
+🔔 ¡Y disfruta del servidor completo!  
+
+🔗 Discord De 🔥MantaMods🔥:  
+📍 https://discord.gg/HqfjQcbDZr  
+🌍 Foro De 🔥MantaMods🔥  
+📍 https://mantaralla0880.github.io/mantamods/  
+💬 Gracias por ser parte de MantaMods.  
+Aquí no solo jugamos... CREAMOS ESTILO 💯  
+🔊Tag: ||@everyone @here||
       </div>
     </div>
 
