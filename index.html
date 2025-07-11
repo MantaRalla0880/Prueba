@@ -96,7 +96,34 @@
       margin-top: 20px;
     }
 
-    .cta, .rules-btn, .plantilla-btn {
+    .cta {
+      background: #0ff;
+      color: #000;
+      padding: 15px 40px;
+      font-size: 1.3em;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0ff;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin: 20px auto 10px;
+      display: inline-block;
+    }
+
+    .cta:hover {
+      background: #00c9c9;
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .buttons-row {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .rules-btn, .plantilla-btn {
       background: #0ff;
       color: #000;
       padding: 12px 25px;
@@ -108,7 +135,7 @@
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .cta:hover, .rules-btn:hover, .plantilla-btn:hover {
+    .rules-btn:hover, .plantilla-btn:hover {
       background: #00c9c9;
       box-shadow: 0 0 25px #0ff;
     }
@@ -172,14 +199,6 @@
       font-size: 0.9em;
       color: #ccc;
     }
-
-    .button-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
@@ -221,6 +240,7 @@
     });
   </script>
 
+  <!-- Redes Sociales -->
   <div class="redes-section">
     <h2>Redes</h2>
     <div class="social">
@@ -244,12 +264,11 @@
         ¡Aquí los mods son únicos!
       </p>
 
-      <div style="margin-top: 20px;">
-        <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
-        <div class="button-row">
-          <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥</button>
-          <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥</button>
-        </div>
+      <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
+
+      <div class="buttons-row">
+        <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥</button>
+        <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥</button>
       </div>
 
       <div class="rules-box" id="rules-box">
@@ -264,42 +283,42 @@
       </div>
 
       <div class="plantilla-box" id="plantilla-box">
-🎮 Bienvenido a
+        🎮 Bienvenido a
 
-🚀・🔥MantaMods🔥  
-¿Amas el GTA y tunearlo al máximo?  
-Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
+        🚀・🔥MantaMods🔥  
+        ¿Amas el GTA y tunearlo al máximo?  
+        Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
 
-🎯 ¿QUÉ ENCONTRARÁS AQUÍ?
+        🎯 ¿QUÉ ENCONTRARÁS AQUÍ?
 
-🤖  Bot Propio Con Sistemas Únicos.  
-🔫  Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.  
-🎨  Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Más.  
-🚗  Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Más.  
-📦  Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Más.  
-🛠️  Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.  
-🎉  Eventos & Sorteos: Participa Y Gana Mods Premium.  
-🤝  Alianzas: Conecta Con Otras Comunidades.  
-💬  Comunidad: Chat, Memes, Música, Sugerencias.  
-🧠  Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
-🎮  Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
-🛡  Postulaciones: Staff, Creador De Contenido.
+        🤖  Bot Propio Con Sistemas Únicos.  
+        🔫  Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.  
+        🎨  Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Más.  
+        🚗  Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Más.  
+        📦  Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Más.  
+        🛠️  Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.  
+        🎉  Eventos & Sorteos: Participa Y Gana Mods Premium.  
+        🤝  Alianzas: Conecta Con Otras Comunidades.  
+        💬  Comunidad: Chat, Memes, Música, Sugerencias.  
+        🧠  Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
+        🎮  Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
+        🛡  Postulaciones: Staff, Creador De Contenido.
 
-📌 ¿CÓMO UNIRTE?
+        📌 ¿CÓMO UNIRTE?
 
-✅ Ve a canal de verificación  
-✅ Presiona el botón  
-🔔 ¡Y disfruta del servidor completo!
+        ✅ Ve a canal de verificación  
+        ✅ Presiona el botón  
+        🔔 ¡Y disfruta del servidor completo!
 
-🔗 Discord De 🔥MantaMods🔥  
-📍 https://discord.gg/HqfjQcbDZr
+        🔗 Discord De 🔥MantaMods🔥  
+        📍 https://discord.gg/HqfjQcbDZr
 
-🌍 Foro De 🔥MantaMods🔥  
-📍 https://mantaralla0880.github.io/mantamods/
+        🌍 Foro De 🔥MantaMods🔥  
+        📍 https://mantaralla0880.github.io/mantamods/
 
-💬 Gracias por ser parte de MantaMods.  
-Aquí no solo jugamos... CREAMOS ESTILO 💯  
-🔊 Tag: ||@everyone @here||
+        💬 Gracias por ser parte de MantaMods.  
+        Aquí no solo jugamos... CREAMOS ESTILO 💯  
+        🔊 Tag: ||@everyone @here||
       </div>
     </div>
 
@@ -309,4 +328,3 @@ Aquí no solo jugamos... CREAMOS ESTILO 💯
   </div>
 </body>
 </html>
-
