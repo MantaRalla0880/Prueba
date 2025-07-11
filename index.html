@@ -5,22 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔥MantaMods🔥 - Mods Para SA-MP</title>
 
-  <!-- Discord Embed -->
   <meta property="og:title" content="🔥MantaMods🔥 - Mods Para SA-MP" />
   <meta property="og:description" content="Únete a nuestro Discord y mejora tu GTA con mods únicos. ¡Explora lo mejor de SA-MP con 🔥MantaMods🔥!" />
   <meta property="og:image" content="https://mantamods.github.io/static.png" />
   <meta property="og:url" content="https://mantamods.github.io/" />
   <meta name="theme-color" content="#00ffff" />
 
-  <!-- Fonts + AOS -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1386.cur'), auto;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
@@ -51,83 +45,59 @@
       padding: 40px 20px 60px;
     }
 
-    header h1.rgb-text {
+    .rgb-text {
       font-size: 2em;
       font-weight: bold;
-      background: linear-gradient(270deg, #ff00cc, #00ffff, #00ff00, #ffff00, #ff0000);
-      background-size: 1000% 1000%;
+      background: linear-gradient(270deg, #ff0000, #ff9900, #33ff00, #00ffff, #0000ff, #cc00ff, #ff0066);
+      background-size: 1400% 1400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: rgbFlow 10s linear infinite;
-      margin-bottom: 10px;
+      animation: rgb 5s ease infinite;
     }
 
-    @keyframes rgbFlow {
+    @keyframes rgb {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    .typing-text {
-      color: #00faff;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #00faff;
-      font-size: 1.2em;
-      animation: typing 4s steps(60) infinite alternate;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    .social a {
-      font-size: 2em;
-      margin: 0 15px;
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-
-    .social a:hover {
-      transform: scale(1.2);
-    }
-
-    .cta {
+    .cta, .rules-btn, .plantilla-btn {
       background: #0ff;
       color: #000;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      text-decoration: none;
-      display: inline-block;
-      margin: 10px;
-    }
-
-    .btn-toggle {
-      background: #0ff;
-      color: #000;
+      padding: 12px 28px;
+      font-size: 1em;
       border: none;
-      padding: 10px 20px;
       border-radius: 10px;
-      margin: 5px;
+      box-shadow: 0 0 15px #0ff;
       cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+      display: inline-block;
+      text-decoration: none;
     }
 
-    .hidden-box {
-      display: none;
-      background: rgba(0,0,0,0.85);
+    .cta:hover, .rules-btn:hover, .plantilla-btn:hover {
+      background: #00c9c9;
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .rules-box, .plantilla-box {
+      display: block;
+      background: rgba(0, 0, 0, 0.9);
       border: 2px solid #0ff;
       border-radius: 10px;
       padding: 20px;
-      margin-top: 15px;
+      max-width: 900px;
+      margin: 20px auto;
       color: #0ff;
+      white-space: pre-wrap;
+      font-size: 1em;
+      line-height: 1.6;
+      text-align: left;
     }
 
-    .counter {
-      font-size: 2em;
-      color: #00faff;
-      margin: 20px 0;
+    .discord-widget {
+      margin-top: 40px;
     }
 
     footer {
@@ -135,121 +105,98 @@
       font-size: 0.8em;
       color: #ccc;
     }
-
-    .carousel {
-      margin-top: 20px;
-    }
-
-    .carousel img {
-      width: 220px;
-      border-radius: 10px;
-      margin: 0 10px;
-      animation: scroll 30s linear infinite;
-    }
-
-    @keyframes scroll {
-      from { transform: translateX(100%); }
-      to { transform: translateX(-100%); }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Fondo video -->
-  <video autoplay muted loop playsinline class="video-bg">
+  <video id="bg-video" autoplay muted loop playsinline class="video-bg">
     <source src="Video2.mp4" type="video/mp4" />
+    Tu navegador no soporta video HTML5.
   </video>
 
-  <audio id="music" autoplay loop>
+  <audio id="music" loop>
     <source src="Musicas.mp3" type="audio/mpeg" />
   </audio>
 
-  <div class="container" data-aos="zoom-in">
+  <script>
+    const music = document.getElementById('music');
+    const video = document.getElementById('bg-video');
+    window.addEventListener('DOMContentLoaded', () => {
+      video.play().catch(() => {});
+      music.play().catch(() => {});
+    });
+  </script>
+
+  <div class="container">
     <header>
-      <h1 class="rgb-text">🔥 Bienvenido a MantaMods 🔥</h1>
-      <div class="typing-text">Explora mods únicos para SA-MP y personaliza tu experiencia GTA</div>
+      <img src="static.png" alt="Logo MantaMods" width="120" style="border-radius: 20%;" />
+      <h1 class="rgb-text">Bienvenido a la comunidad más potente de mods para SA-MP</h1>
+      <p style="color:#0ff; max-width: 800px;">
+        Únete a nuestro Discord para explorar mods y modificaciones extremas que harán brillar tu GTA.<br>
+        También puedes hacer amigos nuevos y adentrarte en todos los sistemas que tenemos. ¡Aquí los mods son únicos!
+      </p>
     </header>
 
-    <!-- Redes -->
-    <div class="social">
-      <a href="https://www.youtube.com/@MantaRalla0880" target="_blank">🔴</a>
-      <a href="https://kick.com/MantaRalla0880" target="_blank">🟢</a>
-      <a href="https://www.twitch.tv/MantaRalla0880" target="_blank">🟣</a>
-    </div>
-
-    <!-- Botones -->
     <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
-    <div>
-      <button class="btn-toggle" onclick="toggleBox('rules-box')">📜 Reglas</button>
-      <button class="btn-toggle" onclick="toggleBox('plantilla-box')">📋 Plantilla</button>
-    </div>
+    <button class="rules-btn">📜 Reglas del Discord</button>
+    <button class="plantilla-btn">📋 Plantilla</button>
 
-    <!-- Cajas -->
-    <div id="rules-box" class="hidden-box">
-      ✅ Respeto mutuo.<br>
-      🚫 Prohibido spam.<br>
-      🔞 No contenido NSFW.<br>
-      📢 No promociones sin permiso.<br>
-      🎮 Usa bien los canales.
-    </div>
-
-    <div id="plantilla-box" class="hidden-box">
-      🎮 Bienvenido a MantaMods.<br>
-      🚗 Descarga y comparte los mejores mods para GTA.<br>
-      🔫 Armas, 🎨 Efectos, 🚓 Skins, 📦 Packs, 🛠 Soporte.
-    </div>
-
-    <!-- Contador animado -->
-    <div class="counter" id="counter" data-count="3541">👥 Miembros: 0</div>
-
-    <!-- Carrusel -->
-    <div class="carousel">
-      <img src="car1.png" />
-      <img src="car2.png" />
-      <img src="car3.png" />
-    </div>
-
-    <!-- Discord Widget -->
-    <iframe src="https://discord.com/widget?id=1133851967191396372&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-
-    <!-- Beneficios Premium -->
-    <div class="hidden-box" style="display: block;" data-aos="fade-up">
-      <h3>🚀 Beneficios Premium</h3>
-      <ul style="text-align:left; color:#0ff;">
-        <li>⭐ Mods exclusivos</li>
-        <li>⭐ Prioridad en soporte</li>
-        <li>⭐ Rol especial en Discord</li>
-        <li>⭐ Acceso anticipado a nuevos packs</li>
+    <div class="rules-box">
+      <ul>
+        <li>✅ Respeto mutuo entre todos los miembros.</li>
+        <li>🛑 Prohibido hacer spam o flood.</li>
+        <li>🔞 Nada de contenido NSFW o ilegal.</li>
+        <li>📢 No promociones en canales no adecuados.</li>
+        <li>🎮 Usa los canales para su propósito.</li>
+        <li>⚠️ El incumplimiento puede llevar a sanciones.</li>
       </ul>
     </div>
 
-    <footer>
-      🔥MantaMods🔥. Una Vida Única e Inigualable.
-    </footer>
+    <div class="plantilla-box">
+🎮 Bienvenido a
+
+🚀・🔥MantaMods🔥  
+¿Amas el GTA y tunearlo al máximo?  
+Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
+
+🎯 ¿QUÉ ENCONTRARÁS AQUÍ?
+
+🤖  Bot Propio Con Sistemas Únicos.  
+🔫  Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.  
+🎨  Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Más.  
+🚗  Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Más.  
+📦  Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Más.  
+🛠️  Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.  
+🎉  Eventos & Sorteos: Participa Y Gana Mods Premium.  
+🤝  Alianzas: Conecta Con Otras Comunidades.  
+💬  Comunidad: Chat, Memes, Música, Sugerencias.  
+🧠  Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
+🎮  Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
+🛡  Postulaciones: Staff, Creador De Contenido.
+
+📌 ¿CÓMO UNIRTE?
+
+✅ Ve a canal de verificación  
+✅ Presiona el botón  
+🔔 ¡Y disfruta del servidor completo!
+
+🔗 Discord De 🔥MantaMods🔥:  
+📍 https://discord.gg/HqfjQcbDZr
+
+🌍 Foro De 🔥MantaMods🔥  
+📍 https://mantaralla0880.github.io/mantamods/
+
+💬 Gracias por ser parte de MantaMods.  
+Aquí no solo jugamos... CREAMOS ESTILO 💯  
+🔊 Tag: ||@everyone @here||
+    </div>
+
+    <!-- Widget de Discord -->
+    <div class="discord-widget">
+      <iframe src="https://discord.com/widget?id=1268028958939807744&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </div>
+
+    <footer>🔥MantaMods🔥. Una Vida Única e Inigualable.</footer>
   </div>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-
-    function toggleBox(id) {
-      const box = document.getElementById(id);
-      box.style.display = (box.style.display === "block") ? "none" : "block";
-    }
-
-    // Contador
-    const counter = document.getElementById("counter");
-    const final = parseInt(counter.dataset.count);
-    let count = 0;
-    const updateCount = () => {
-      count += Math.ceil(final / 100);
-      if (count >= final) {
-        count = final;
-        clearInterval(interval);
-      }
-      counter.textContent = `👥 Miembros: ${count}`;
-    };
-    const interval = setInterval(updateCount, 40);
-  </script>
 </body>
 </html>
