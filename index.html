@@ -140,6 +140,22 @@
       box-shadow: 0 0 25px #0ff;
     }
 
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-left: 8px;
+      border-radius: 50%;
+      background-color: red;
+      box-shadow: 0 0 10px red;
+      animation: blink 1.5s infinite alternate;
+    }
+
+    @keyframes blink {
+      from { opacity: 1; box-shadow: 0 0 8px red; }
+      to { opacity: 0.6; box-shadow: 0 0 15px red; }
+    }
+
     .rules-box, .plantilla-box {
       display: none;
       background: rgba(0, 0, 0, 0.9);
@@ -226,12 +242,20 @@
 
     function toggleRules() {
       const box = document.getElementById('rules-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      const indicator = document.getElementById('rules-indicator');
+      const isOpen = box.style.display === 'block';
+      box.style.display = isOpen ? 'none' : 'block';
+      indicator.style.backgroundColor = isOpen ? 'red' : 'limegreen';
+      indicator.style.boxShadow = isOpen ? '0 0 10px red' : '0 0 10px limegreen';
     }
 
     function togglePlantilla() {
       const box = document.getElementById('plantilla-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      const indicator = document.getElementById('plantilla-indicator');
+      const isOpen = box.style.display === 'block';
+      box.style.display = isOpen ? 'none' : 'block';
+      indicator.style.backgroundColor = isOpen ? 'red' : 'limegreen';
+      indicator.style.boxShadow = isOpen ? '0 0 10px red' : '0 0 10px limegreen';
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -244,10 +268,10 @@
   <div class="redes-section">
     <h2>Redes</h2>
     <div class="social">
-  <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a>
-  <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
-  <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
-</div>
+      <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a>
+      <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
+      <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
+    </div>
   </div>
 
   <div class="container">
@@ -266,8 +290,14 @@
       <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
       <div class="buttons-row">
-        <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥</button>
-        <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥</button>
+        <button class="rules-btn" onclick="toggleRules()">
+          📜 Reglas De 🔥MantaMods🔥
+          <span id="rules-indicator" class="status-indicator"></span>
+        </button>
+        <button class="plantilla-btn" onclick="togglePlantilla()">
+          📋 Plantilla De 🔥MantaMods🔥
+          <span id="plantilla-indicator" class="status-indicator"></span>
+        </button>
       </div>
 
       <div class="rules-box" id="rules-box">
@@ -282,42 +312,7 @@
       </div>
 
       <div class="plantilla-box" id="plantilla-box">
-        🎮 Bienvenido a
-
-        🚀・🔥MantaMods🔥  
-        ¿Amas el GTA y tunearlo al máximo?  
-        Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
-
-        🎯 ¿QUÉ ENCONTRARÁS AQUÍ?
-
-        🤖  Bot Propio Con Sistemas Únicos.  
-        🔫  Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.  
-        🎨  Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Más.  
-        🚗  Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Más.  
-        📦  Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Más.  
-        🛠️  Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.  
-        🎉  Eventos & Sorteos: Participa Y Gana Mods Premium.  
-        🤝  Alianzas: Conecta Con Otras Comunidades.  
-        💬  Comunidad: Chat, Memes, Música, Sugerencias.  
-        🧠  Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
-        🎮  Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
-        🛡  Postulaciones: Staff, Creador De Contenido.
-
-        📌 ¿CÓMO UNIRTE?
-
-        ✅ Ve a canal de verificación  
-        ✅ Presiona el botón  
-        🔔 ¡Y disfruta del servidor completo!
-
-        🔗 Discord De 🔥MantaMods🔥  
-        📍 https://discord.gg/HqfjQcbDZr
-
-        🌍 Foro De 🔥MantaMods🔥  
-        📍 https://mantaralla0880.github.io/mantamods/
-
-        💬 Gracias por ser parte de MantaMods.  
-        Aquí no solo jugamos... CREAMOS ESTILO 💯  
-        🔊 Tag: ||@everyone @here||
+        <!-- contenido plantilla aquí... -->
       </div>
     </div>
 
