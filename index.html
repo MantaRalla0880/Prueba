@@ -12,7 +12,6 @@
   <meta name="theme-color" content="#00ffff" />
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 
   <style>
     * {
@@ -32,10 +31,11 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: -1;
+      opacity: 0.25;
     }
 
     .container {
@@ -71,7 +71,7 @@
       font-size: 1em;
       border: none;
       border-radius: 12px;
-      margin: 15px 0;
+      margin: 10px 0;
       box-shadow: 0 0 15px #0ff;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -88,7 +88,13 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      margin-top: 15px;
+      margin-top: 20px;
+    }
+
+    .btn-inline-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
 
     .box-content {
@@ -152,9 +158,10 @@
 </head>
 <body>
 
+  <!-- Botón de inicio móvil -->
   <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
 
-  <!-- Video -->
+  <!-- Video de fondo -->
   <video id="bg-video" autoplay muted loop playsinline class="video-bg">
     <source src="Video2.mp4" type="video/mp4" />
   </video>
@@ -165,24 +172,27 @@
   </audio>
 
   <div class="container">
-    <header data-aos="fade-down">
+    <header>
       <img src="static.png" alt="Logo MantaMods" style="width: 120px; border-radius: 50%; box-shadow: 0 0 25px #0ff;">
       <h1 class="rgb-text">🔥MantaMods🔥</h1>
     </header>
 
-    <section data-aos="fade-up">
+    <section>
       <p>
         Bienvenido a la comunidad más dura de mods para SA-MP. <br/>
         Mods extremos, sistemas únicos, eventos 🔥 y el coro más activo de la RD.
       </p>
 
+      <!-- Botón principal -->
       <a class="btn" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
-      <div class="btn-group">
+      <!-- Botones secundarios -->
+      <div class="btn-inline-group">
         <button class="btn" onclick="toggleBox('rules-box')">📜 Reglas de la Comunidad</button>
         <button class="btn" onclick="toggleBox('plantilla-box')">📋 Plantilla Oficial</button>
       </div>
 
+      <!-- Caja de reglas -->
       <div id="rules-box" class="box-content">
         <ul>
           <li>✅ Respeto mutuo entre todos los miembros.</li>
@@ -194,6 +204,7 @@
         </ul>
       </div>
 
+      <!-- Caja de plantilla -->
       <div id="plantilla-box" class="box-content">
 🎮 Bienvenido a
 
@@ -230,10 +241,7 @@ Aquí no solo jugamos... CREAMOS ESTILO 💯
     </footer>
   </div>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-
     function toggleBox(id) {
       const box = document.getElementById(id);
       box.style.display = box.style.display === 'block' ? 'none' : 'block';
