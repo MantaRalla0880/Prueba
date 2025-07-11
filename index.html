@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔥MantaMods🔥 - Mods Para SA-MP</title>
 
-  <!-- Vista previa para Discord -->
   <meta property="og:title" content="🔥MantaMods🔥 - Mods Para SA-MP" />
   <meta property="og:description" content="Únete a nuestro Discord y mejora tu GTA con mods únicos. ¡Explora lo mejor de SA-MP con 🔥MantaMods🔥!" />
   <meta property="og:image" content="https://mantamods.github.io/static.png" />
   <meta property="og:url" content="https://mantamods.github.io/" />
   <meta name="theme-color" content="#00ffff" />
 
-  <!-- Fuentes y AOS -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 
@@ -66,23 +64,31 @@
       100% { background-position: 0% 50%; }
     }
 
-    .cta, .rules-btn, .plantilla-btn, .theme-toggle {
+    .btn {
       background: #0ff;
       color: #000;
       padding: 12px 28px;
       font-size: 1em;
       border: none;
       border-radius: 12px;
-      margin: 10px;
+      margin: 15px 0;
       box-shadow: 0 0 15px #0ff;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .cta:hover, .rules-btn:hover, .plantilla-btn:hover, .theme-toggle:hover {
+    .btn:hover {
       background: #00c9c9;
       box-shadow: 0 0 25px #0ff;
       transform: scale(1.05);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 15px;
     }
 
     .box-content {
@@ -106,47 +112,58 @@
       color: #ccc;
     }
 
-    .theme-toggle {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 100;
-    }
-
-    /* AOS Animaciones */
-    [data-aos] {
-      transition: all 0.8s ease-in-out !important;
-    }
-
-    /* Cursor personalizado */
     body {
       cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1391.cur'), auto;
     }
 
     audio {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      z-index: 999;
+      display: none;
+    }
+
+    #startBtn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 30px;
+      font-size: 1.2em;
+      z-index: 10;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #0ff;
+      cursor: pointer;
+      animation: pulseBtn 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseBtn {
+      0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #0ff; }
+      50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 20px #0ff; }
+      100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #0ff; }
+    }
+
+    @media (min-width: 768px) {
+      #startBtn {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Video de fondo -->
-  <video autoplay muted loop playsinline class="video-bg">
+  <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
+
+  <!-- Video -->
+  <video id="bg-video" autoplay muted loop playsinline class="video-bg">
     <source src="Video2.mp4" type="video/mp4" />
   </video>
 
   <!-- Música -->
-  <audio controls loop>
+  <audio id="music" loop>
     <source src="Musicas.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- Botón modo claro/oscuro -->
-  <button class="theme-toggle" onclick="toggleTheme()">🌓 Modo Claro/Oscuro</button>
-
-  <!-- Contenido principal -->
   <div class="container">
     <header data-aos="fade-down">
       <img src="static.png" alt="Logo MantaMods" style="width: 120px; border-radius: 50%; box-shadow: 0 0 25px #0ff;">
@@ -159,10 +176,12 @@
         Mods extremos, sistemas únicos, eventos 🔥 y el coro más activo de la RD.
       </p>
 
-      <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a><br/>
+      <a class="btn" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
-      <button class="rules-btn" onclick="toggleBox('rules-box')">📜 Reglas de la Comunidad</button>
-      <button class="plantilla-btn" onclick="toggleBox('plantilla-box')">📋 Plantilla Oficial</button>
+      <div class="btn-group">
+        <button class="btn" onclick="toggleBox('rules-box')">📜 Reglas de la Comunidad</button>
+        <button class="btn" onclick="toggleBox('plantilla-box')">📋 Plantilla Oficial</button>
+      </div>
 
       <div id="rules-box" class="box-content">
         <ul>
@@ -206,12 +225,11 @@ Aquí no solo jugamos... CREAMOS ESTILO 💯
       </div>
     </section>
 
-    <footer data-aos="fade-up">
+    <footer>
       🔥 MantaMods RD 🔥 | “Un Flow Diferente, Un Mod Distinto 🇩🇴”
     </footer>
   </div>
 
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
@@ -221,12 +239,19 @@ Aquí no solo jugamos... CREAMOS ESTILO 💯
       box.style.display = box.style.display === 'block' ? 'none' : 'block';
     }
 
-    function toggleTheme() {
-      const body = document.body;
-      body.style.background = body.style.background === 'white' ? '#000' : 'white';
-      body.style.color = body.style.color === 'black' ? '#fff' : 'black';
-    }
-  </script>
+    const music = document.getElementById('music');
+    const video = document.getElementById('bg-video');
 
+    function startMedia() {
+      music.play().catch(() => {});
+      video.play().catch(() => {});
+      document.getElementById('startBtn').style.display = 'none';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      video.play().catch(() => {});
+      music.play().catch(() => {});
+    });
+  </script>
 </body>
 </html>
