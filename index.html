@@ -339,19 +339,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   </div>
 
 <style>
-  .fixed-buttons {
+  #gtaVirgenBtn,
+  #macroBtn {
     position: fixed;
-    top: 15px;
     left: 15px;
-    z-index: 1001;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .fixed-buttons button {
-    padding: 10px 16px;
-    font-size: 0.95em;
+    z-index: 999;
+    padding: 12px 18px;
+    font-size: 1em;
     background: #0ff;
     color: #000;
     border: none;
@@ -359,19 +353,23 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     box-shadow: 0 0 10px #0ff;
     cursor: pointer;
     transition: transform 0.2s;
-    white-space: nowrap;
   }
 
-  .fixed-buttons button:hover {
-    transform: scale(1.05);
-    background: #00d9d9;
+  #gtaVirgenBtn {
+    top: 15px;
   }
 
-  .fixed-buttons button.hide {
+  #macroBtn {
+    top: 65px;
+  }
+
+  #gtaVirgenBtn.hide,
+  #macroBtn.hide {
     display: none;
   }
 
-  .fullscreen-interface {
+  #gtaVirgenContent,
+  #macroContent {
     display: none;
     position: fixed;
     top: 0; left: 0;
@@ -379,7 +377,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     height: 100vh;
     background: #000;
     color: #0ff;
-    z-index: 1000;
+    z-index: 998;
     padding: 30px 20px;
     overflow-y: auto;
     text-align: center;
@@ -387,8 +385,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     animation-fill-mode: both;
   }
 
-  .fadeZoomIn { animation-name: fadeZoomIn; }
-  .fadeZoomOut { animation-name: fadeZoomOut; }
+  .fadeZoomIn {
+    animation-name: fadeZoomIn;
+  }
+
+  .fadeZoomOut {
+    animation-name: fadeZoomOut;
+  }
 
   @keyframes fadeZoomIn {
     0% { opacity: 0; transform: scale(0.9) translateY(30px); }
@@ -400,46 +403,81 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     100% { opacity: 0; transform: scale(0.9) translateY(30px); }
   }
 
-  .fullscreen-interface h2 {
+  #gtaVirgenContent h2,
+  #macroContent h2 {
     font-size: 2em;
-    margin-top: 10px;
+    margin: 20px 0 10px;
   }
 
-  .fullscreen-interface a {
-    display: block;
-    margin: 15px auto;
-    color: #0ff;
-    font-size: 1.1em;
-    font-weight: bold;
-  }
-
-  .fullscreen-interface .logo {
+  .logo {
     width: 120px;
     border-radius: 50%;
     margin-bottom: 20px;
     box-shadow: 0 0 10px #0ff;
   }
 
+  .gta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+  }
+
   .gta-box {
-    max-width: 400px;
-    margin: 0 auto;
-    background: rgba(0,255,255,0.05);
+    background: rgba(0,255,255,0.08);
     border: 2px solid #0ff;
     border-radius: 12px;
     padding: 20px;
-    margin-top: 20px;
+    width: 280px;
     box-shadow: 0 0 15px #0ff;
+    transition: transform 0.2s;
+    text-align: center;
+  }
+
+  .gta-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #0ff;
+  }
+
+  .gta-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    color: #00faff;
+  }
+
+  .gta-box p {
+    font-size: 0.95em;
+    margin-bottom: 10px;
+  }
+
+  .gta-box a {
+    color: #0ff;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
   }
 
   .gta-box img {
     width: 100%;
+    height: auto;
     border-radius: 10px;
     margin-top: 10px;
     box-shadow: 0 0 10px #0ff;
   }
 
+  iframe.tutorial {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    margin-top: 20px;
+  }
+
   #volverBtn {
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 12px 20px;
     background: #0ff;
     color: #000;
@@ -454,29 +492,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     background: #00c9c9;
   }
 
-  iframe.tutorial {
-    width: 100%;
-    max-width: 560px;
-    height: 315px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #0ff;
-  }
-
   @media (max-width: 768px) {
-    .fixed-buttons {
-      top: 10px;
-      left: 10px;
-    }
-
-    .fixed-buttons button {
+    #gtaVirgenBtn,
+    #macroBtn {
       font-size: 0.85em;
-      padding: 8px 14px;
+      padding: 10px 14px;
     }
 
     .gta-box {
-      width: 95%;
+      width: 90%;
     }
 
     iframe.tutorial {
@@ -484,83 +508,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     }
   }
 </style>
-
-<!-- Botones Fijos -->
-<div class="fixed-buttons">
-  <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
-  <button id="macroBtn" onclick="mostrarMacro()">⚙️ Macro Para PC</button>
-</div>
-
-<!-- Interfaz Gta Virgen -->
-<div id="gtaVirgenContent" class="fullscreen-interface">
-  <img src="static.png" alt="Logo MantaMods" class="logo" />
-  <h2>🖥️ GTA Virgen - Versión Limpia</h2>
-  <div class="gta-box">
-    <p>Descarga aquí una versión limpia de GTA San Andreas para que puedas instalar tus mods sin problemas.</p>
-    <a href="https://www.mediafire.com/file/example1" target="_blank">🔗 Descargar GTA Virgen (.rar)</a>
-    <img src="Fotito.png" alt="Preview GTA Virgen">
-  </div>
-  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
-</div>
-
-<!-- Interfaz Macro -->
-<div id="macroContent" class="fullscreen-interface">
-  <img src="static.png" alt="Logo MantaMods" class="logo" />
-  <h2>⚙️ Macro Para PC</h2>
-  <p>Mira el siguiente video para aprender a usar la macro, y descárgala con el botón de abajo:</p>
-  <iframe class="tutorial" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-  <a href="https://www.mediafire.com/file/MACRO_LINK" target="_blank">📥 Descargar Macro</a>
-  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
-</div>
-
-<script>
-  function mostrarGtaVirgen() {
-    const cont = document.getElementById('gtaVirgenContent');
-    cont.classList.remove('fadeZoomOut');
-    cont.classList.add('fadeZoomIn');
-    cont.style.display = 'block';
-    document.querySelector('.container').style.display = 'none';
-    document.querySelector('.redes-section').style.display = 'none';
-    document.getElementById('gtaVirgenBtn').classList.add('hide');
-    document.getElementById('macroBtn').classList.add('hide');
-  }
-
-  function mostrarMacro() {
-    const cont = document.getElementById('macroContent');
-    cont.classList.remove('fadeZoomOut');
-    cont.classList.add('fadeZoomIn');
-    cont.style.display = 'block';
-    document.querySelector('.container').style.display = 'none';
-    document.querySelector('.redes-section').style.display = 'none';
-    document.getElementById('gtaVirgenBtn').classList.add('hide');
-    document.getElementById('macroBtn').classList.add('hide');
-  }
-
-  function volverAlForo() {
-    const gta = document.getElementById('gtaVirgenContent');
-    const macro = document.getElementById('macroContent');
-
-    if (gta.style.display === 'block') {
-      gta.classList.remove('fadeZoomIn');
-      gta.classList.add('fadeZoomOut');
-    }
-
-    if (macro.style.display === 'block') {
-      macro.classList.remove('fadeZoomIn');
-      macro.classList.add('fadeZoomOut');
-    }
-
-    setTimeout(() => {
-      gta.style.display = 'none';
-      macro.style.display = 'none';
-      document.querySelector('.container').style.display = '';
-      document.querySelector('.redes-section').style.display = '';
-      document.getElementById('gtaVirgenBtn').classList.remove('hide');
-      document.getElementById('macroBtn').classList.remove('hide');
-    }, 400);
-  }
-</script>
-
 
 </body>
 </html>
