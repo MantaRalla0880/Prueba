@@ -338,78 +338,52 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<!-- BOTONES FIJOS -->
-<div id="topLeftBtns">
+<!-- BOTONES ARRIBA IZQUIERDA (NO FIJOS) -->
+<div class="inline-btns-container">
   <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
   <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
 </div>
 
-<!-- ESTILO -->
 <style>
-  /* Botones fijos arriba izquierda */
-  #topLeftBtns {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 9999;
+  .inline-btns-container {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
     gap: 10px;
+    padding: 15px;
+    z-index: 10;
   }
 
-  #topLeftBtns button {
-    padding: 10px 16px;
-    font-size: 0.95em;
-    background: #00ffff;
+  .inline-btns-container button {
+    padding: 10px 14px;
+    font-size: 1em;
+    background: #0ff;
     color: #000;
-    font-weight: bold;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 0 10px #00ffff;
+    font-weight: bold;
+    box-shadow: 0 0 10px #0ff;
     cursor: pointer;
     transition: transform 0.2s, background 0.3s;
   }
 
-  #topLeftBtns button:hover {
-    background: #00e0e0;
+  .inline-btns-container button:hover {
     transform: scale(1.05);
+    background: #00e0e0;
   }
 
-  /* Interfaz full screen */
-  #gtaVirgenContent, #macroContent {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    color: #0ff;
-    z-index: 998;
-    padding: 30px 20px;
-    overflow-y: auto;
-    text-align: center;
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
+  @media (max-width: 600px) {
+    .inline-btns-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .inline-btns-container button {
+      font-size: 0.95em;
+      padding: 8px 12px;
+    }
   }
 
-  .fadeZoomIn {
-    animation-name: fadeZoomIn;
-  }
-
-  .fadeZoomOut {
-    animation-name: fadeZoomOut;
-  }
-
-  @keyframes fadeZoomIn {
-    0% { opacity: 0; transform: scale(0.9) translateY(30px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  @keyframes fadeZoomOut {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.9) translateY(30px); }
-  }
-
+  /* El resto de interfaces */
   .logo {
     width: 120px;
     border-radius: 50%;
@@ -478,20 +452,37 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   @media (max-width: 600px) {
-    #topLeftBtns {
-      flex-direction: row;
-      top: 10px;
-      left: 10px;
-    }
-
-    #topLeftBtns button {
-      font-size: 0.9em;
-      padding: 8px 12px;
-    }
-
     iframe {
       height: 250px;
     }
+  }
+
+  .content-section {
+    display: none;
+    background: #000;
+    color: #0ff;
+    padding: 30px 20px;
+    text-align: center;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
+
+  .fadeZoomIn {
+    animation-name: fadeZoomIn;
+  }
+
+  .fadeZoomOut {
+    animation-name: fadeZoomOut;
+  }
+
+  @keyframes fadeZoomIn {
+    0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  @keyframes fadeZoomOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.9) translateY(30px); }
   }
 </style>
 
@@ -500,14 +491,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
   <div class="gta-grid">
-    <!-- Ejemplo de caja -->
     <div class="gta-box">
       <h3>🔹 GTA Lite 500MB</h3>
       <p>Versión ligera ideal para PCs de bajos recursos.</p>
       <a href="#" target="_blank">Descargar 🔽</a>
       <img src="Fotito.png" alt="Preview GTA Lite">
     </div>
-    <!-- Agrega las otras 5 versiones aquí -->
+    <!-- Resto de cajas GTA aquí -->
   </div>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
@@ -516,9 +506,9 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
-  <p>Tutorial para aprender a usar la macro:</p>
+  <p>Video tutorial:</p>
   <iframe src="https://www.youtube.com/embed/kdZYUejztSY?si=1GlSG2qittrqxvP5" allowfullscreen></iframe>
-  <a href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
+  <a href="#" target="_blank">Descargar Macro 🔽</a>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
@@ -558,7 +548,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     });
   }
 </script>
-
 
 </body>
 </html>
