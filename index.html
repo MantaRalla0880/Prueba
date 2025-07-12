@@ -338,28 +338,27 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<<!-- BOTONES FIJOS -->
-<div id="menuBtns">
+<!-- BOTONES FIJOS ARRIBA IZQUIERDA -->
+<div id="botonesFijos">
   <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
   <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
 </div>
 
 <style>
-  /* Botones fijos arriba izquierda */
-  #menuBtns {
+  /* BOTONES FIJOS */
+  #botonesFijos {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 15px;
+    left: 15px;
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
+    gap: 10px;
   }
 
-  #menuBtns button {
-    padding: 10px 14px;
-    font-size: 1em;
+  #botonesFijos button {
+    padding: 10px 16px;
+    font-size: 0.9em;
     background: #0ff;
     color: #000;
     border: none;
@@ -367,25 +366,17 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     font-weight: bold;
     box-shadow: 0 0 10px #0ff;
     cursor: pointer;
-    white-space: nowrap;
   }
 
-  #menuBtns.hidden {
+  #botonesFijos.hidden {
     display: none !important;
   }
 
-  @media screen and (min-width: 600px) {
-    #menuBtns {
-      flex-direction: row;
-    }
-  }
-
-  /* Interfaz general */
+  /* INTERFACES */
   #gtaVirgenContent, #macroContent {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100vw;
     height: 100vh;
     background: #000;
@@ -425,8 +416,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
   .gta-grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 25px;
     margin-top: 30px;
   }
@@ -436,7 +427,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     border: 2px solid #0ff;
     border-radius: 12px;
     padding: 20px;
-    width: 300px;
+    width: 90%;
+    max-width: 400px;
     box-shadow: 0 0 15px #0ff;
     transition: transform 0.2s;
     text-align: center;
@@ -472,71 +464,89 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   iframe {
-  width: 95vw;
-  max-width: 1000px;
-  aspect-ratio: 16 / 9;
-  border: 2px solid #0ff;
-  border-radius: 10px;
-  margin: 30px auto;
-  display: block;
-  box-shadow: 0 0 15px #0ff;
-}
+    width: 95vw;
+    max-width: 1000px;
+    aspect-ratio: 16 / 9;
+    border: 2px solid #0ff;
+    border-radius: 10px;
+    margin: 30px auto;
+    display: block;
+    box-shadow: 0 0 15px #0ff;
+  }
 
+  @media (max-width: 768px) {
+    #botonesFijos {
+      flex-direction: row;
+      top: 10px;
+      left: 10px;
+    }
+
+    #botonesFijos button {
+      font-size: 0.85em;
+      padding: 8px 10px;
+    }
+
+    .gta-box {
+      width: 95%;
+    }
+  }
 </style>
 
 <!-- INTERFAZ GTA VIRGEN -->
-<div id="gtaVirgenContent" class="content-section">
+<div id="gtaVirgenContent">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
+
   <div class="gta-grid">
     <div class="gta-box">
       <h3>🔹 GTA Lite 500MB</h3>
-      <p>Versión ligera ideal para PCs de bajos recursos.</p>
+      <p>Ideal para PCs de bajos recursos.</p>
       <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
-      <img src="Fotito.png" alt="Preview GTA Lite">
+      <img src="Fotito.png" alt="GTA Lite">
     </div>
     <div class="gta-box">
       <h3>🔸 GTA Full 4GB</h3>
-      <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
+      <p>Con audio y vídeo completo, limpio.</p>
       <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+Full" alt="Preview GTA Full">
+      <img src="https://via.placeholder.com/300x160?text=Full+GTA" alt="GTA Full">
     </div>
     <div class="gta-box">
       <h3>🟢 GTA RP Base</h3>
-      <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
+      <p>Ideal para servidores RP.</p>
       <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+RP" alt="Preview GTA RP Base">
+      <img src="https://via.placeholder.com/300x160?text=RP+GTA" alt="GTA RP">
     </div>
     <div class="gta-box">
       <h3>🟠 GTA Clean MTA</h3>
-      <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
+      <p>Especial para MTA.</p>
       <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+MTA" alt="Preview GTA MTA">
+      <img src="https://via.placeholder.com/300x160?text=MTA+Clean" alt="MTA GTA">
     </div>
     <div class="gta-box">
       <h3>🟣 GTA Customizable</h3>
-      <p>Base limpia preparada para instalar mods fácilmente.</p>
+      <p>Listo para instalar mods.</p>
       <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+ModReady" alt="Preview GTA Custom">
+      <img src="https://via.placeholder.com/300x160?text=Custom+GTA" alt="Custom GTA">
     </div>
     <div class="gta-box">
       <h3>🔵 GTA Portable</h3>
-      <p>Corre desde USB sin instalación necesaria.</p>
+      <p>Corre sin instalación desde USB.</p>
       <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+Portable" alt="Preview GTA Portable">
+      <img src="https://via.placeholder.com/300x160?text=Portable+GTA" alt="Portable GTA">
     </div>
   </div>
+
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- INTERFAZ MACRO PARA PC -->
-<div id="macroContent" class="content-section">
+<!-- INTERFAZ MACRO -->
+<div id="macroContent">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
   <p>Tutorial para aprender a usar la macro:</p>
   <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
   <br>
-  <a class="descarga-link" href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
+  <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="color:#0ff;font-weight:bold;">Descargar Macro 🔽</a>
   <br>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
@@ -544,15 +554,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 <!-- SCRIPT -->
 <script>
   function ocultarTodo() {
-    document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
-    document.getElementById('macroContent').classList.remove('fadeZoomIn');
     document.getElementById('gtaVirgenContent').style.display = 'none';
     document.getElementById('macroContent').style.display = 'none';
   }
 
   function mostrarGtaVirgen() {
     ocultarTodo();
-    document.getElementById("menuBtns").classList.add("hidden");
+    document.getElementById('botonesFijos').classList.add('hidden');
     const cont = document.getElementById('gtaVirgenContent');
     cont.classList.remove('fadeZoomOut');
     cont.classList.add('fadeZoomIn');
@@ -561,7 +569,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
   function mostrarMacro() {
     ocultarTodo();
-    document.getElementById("menuBtns").classList.add("hidden");
+    document.getElementById('botonesFijos').classList.add('hidden');
     const cont = document.getElementById('macroContent');
     cont.classList.remove('fadeZoomOut');
     cont.classList.add('fadeZoomIn');
@@ -569,13 +577,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   function volverAlForo() {
-    const visibles = document.querySelectorAll('.content-section');
+    const visibles = document.querySelectorAll('#gtaVirgenContent, #macroContent');
     visibles.forEach(el => {
       el.classList.remove('fadeZoomIn');
       el.classList.add('fadeZoomOut');
       setTimeout(() => {
         el.style.display = 'none';
-        document.getElementById("menuBtns").classList.remove("hidden");
+        document.getElementById('botonesFijos').classList.remove('hidden');
       }, 400);
     });
   }
