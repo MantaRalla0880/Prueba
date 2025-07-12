@@ -338,26 +338,28 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<!-- BOTONES FIJOS IZQUIERDA -->
+<<!-- BOTONES FIJOS -->
 <div id="menuBtns">
   <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
   <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
 </div>
 
 <style>
+  /* Botones fijos arriba izquierda */
   #menuBtns {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    align-items: flex-start;
   }
 
   #menuBtns button {
     padding: 10px 14px;
-    font-size: 0.95em;
+    font-size: 1em;
     background: #0ff;
     color: #000;
     border: none;
@@ -372,17 +374,18 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     display: none !important;
   }
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 600px) {
     #menuBtns {
       flex-direction: row;
     }
   }
 
-  /* INTERFACES */
+  /* Interfaz general */
   #gtaVirgenContent, #macroContent {
     display: none;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background: #000;
@@ -469,12 +472,10 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   iframe {
-    width: 90%;
-    height: 400px;
-    max-width: 800px;
+    max-width: 100%;
     border: 2px solid #0ff;
     border-radius: 10px;
-    margin: 30px auto;
+    margin: 20px auto;
     display: block;
     box-shadow: 0 0 10px #0ff;
   }
@@ -525,7 +526,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- INTERFAZ MACRO -->
+<!-- INTERFAZ MACRO PARA PC -->
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
@@ -537,7 +538,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- SCRIPT FUNCIONAL -->
+<!-- SCRIPT -->
 <script>
   function ocultarTodo() {
     document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
