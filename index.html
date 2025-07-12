@@ -337,12 +337,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
       🔥MantaMods🔥 | “RD Un Flow Diferente, Un Mod Distinto Y Unico.”
     </footer>
   </div>
-<!-- Botón fijo arriba derecha -->
+
+<!-- Botón fijo arriba a la izquierda -->
 <style>
   #gtaVirgenBtn {
     position: fixed;
     top: 15px;
-    right: 15px;
+    left: 15px;
     z-index: 999;
     padding: 12px 18px;
     font-size: 1em;
@@ -363,19 +364,69 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     background: #000;
     color: #0ff;
     z-index: 998;
-    padding: 40px 20px;
+    padding: 60px 20px 40px;
     overflow-y: auto;
     text-align: center;
   }
 
   #gtaVirgenContent h2 {
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #0ff;
+  }
+
+  .gta-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .gta-card {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid #0ff;
+    border-radius: 15px;
+    padding: 20px;
+    width: 260px;
+    box-shadow: 0 0 15px #0ff;
+    transition: transform 0.3s ease;
+  }
+
+  .gta-card:hover {
+    transform: scale(1.05);
+  }
+
+  .gta-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+  }
+
+  .gta-card p {
+    font-size: 0.95em;
+    margin-bottom: 10px;
+  }
+
+  .gta-card a {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 8px 15px;
+    background: #0ff;
+    color: #000;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px #0ff;
+    transition: background 0.3s;
+  }
+
+  .gta-card a:hover {
+    background: #00cccc;
   }
 
   #volverBtn {
-    margin-top: 30px;
-    padding: 12px 20px;
+    margin-top: 40px;
+    padding: 12px 25px;
     background: #0ff;
     color: #000;
     border: none;
@@ -393,12 +444,24 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
 
 <div id="gtaVirgenContent">
-  <h2>🖥️ GTA Virgen - Instalación Limpia</h2>
-  <p>
-    Descarga aquí una versión limpia de GTA San Andreas para que puedas instalar tus mods sin problemas.<br><br>
-    🔗 <a href="https://www.mediafire.com/file/tu_gta_virgen.rar" target="_blank" style="color: #0ff;">Descargar GTA Virgen (.rar)</a><br>
-    📦 Instrucciones: Descomprime y copia en tu carpeta preferida. ¡Listo para tunear con 🔥MantaMods🔥!
-  </p>
+  <h2>🖥️ GTA Virgen - Descargas Limpias</h2>
+  <div class="gta-card-container">
+    <div class="gta-card">
+      <h3>GTA SA (Lite)</h3>
+      <p>Versión ligera ideal para PCs de bajos recursos.</p>
+      <a href="https://www.mediafire.com/file/GTA_LITE.rar" target="_blank">Descargar</a>
+    </div>
+    <div class="gta-card">
+      <h3>GTA SA (Full)</h3>
+      <p>Versión completa con todos los archivos originales.</p>
+      <a href="https://www.mediafire.com/file/GTA_FULL.rar" target="_blank">Descargar</a>
+    </div>
+    <div class="gta-card">
+      <h3>GTA SA + Cleo</h3>
+      <p>Incluye CLEO 4 ya instalado para usar scripts fácilmente.</p>
+      <a href="https://www.mediafire.com/file/GTA_CLEO.rar" target="_blank">Descargar</a>
+    </div>
+  </div>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
