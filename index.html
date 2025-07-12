@@ -415,28 +415,28 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   .gta-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
 
-  .gta-box {
-    background: rgba(0,255,255,0.08);
-    border: 2px solid #0ff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 280px;
-    box-shadow: 0 0 15px #0ff;
-    transition: transform 0.2s;
-    text-align: center;
-  }
+.gta-box {
+  background: rgba(0,255,255,0.08);
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 0 15px #0ff;
+  transition: transform 0.2s;
+  text-align: center;
+}
 
-  .gta-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #0ff;
-  }
+.gta-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #0ff;
+}
 
   .gta-box img {
     width: 100%;
@@ -477,36 +477,58 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
   </div>
 
-  <!-- INTERFAZ GTA VIRGEN -->
-  <div id="gtaVirgenContent" class="content-section">
-    <img src="static.png" alt="Logo MantaMods" class="logo" />
-    <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
+  <!-- Contenido GTA Virgen -->
+<div id="gtaVirgenContent" class="content-section">
+  <img src="static.png" alt="Logo MantaMods" class="logo" />
+  <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
 
-    <div class="gta-vertical-container">
-      <div class="gta-box">
-        <h3>🔹 GTA Lite 500MB</h3>
-        <p>Versión ligera ideal para PCs de bajos recursos.</p>
-        <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
-        <img src="Fotito.png" alt="Preview GTA Lite">
-      </div>
-
-      <div class="gta-box">
-        <h3>🔸 GTA Full 4GB</h3>
-        <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
-        <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=GTA+Full" alt="Preview GTA Full">
-      </div>
-
-      <div class="gta-box">
-        <h3>🟢 GTA RP Base</h3>
-        <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
-        <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=GTA+RP" alt="Preview GTA RP Base">
-      </div>
+  <div class="gta-grid">
+    <div class="gta-box">
+      <h3>🔹 GTA Lite 500MB</h3>
+      <p>Versión ligera ideal para PCs de bajos recursos.</p>
+      <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+Lite" alt="Preview GTA Lite">
     </div>
 
-    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+    <div class="gta-box">
+      <h3>🔸 GTA Full 4GB</h3>
+      <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
+      <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+Full" alt="Preview GTA Full">
+    </div>
+
+    <div class="gta-box">
+      <h3>🟢 GTA RP Base</h3>
+      <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
+      <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+RP" alt="Preview GTA RP Base">
+    </div>
+
+    <div class="gta-box">
+      <h3>🟠 GTA Clean MTA</h3>
+      <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
+      <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+MTA" alt="Preview GTA MTA">
+    </div>
+
+    <div class="gta-box">
+      <h3>🟣 GTA Customizable</h3>
+      <p>Base limpia preparada para instalar mods fácilmente.</p>
+      <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+ModReady" alt="Preview GTA Custom">
+    </div>
+
+    <div class="gta-box">
+      <h3>🔵 GTA Portable</h3>
+      <p>Corre desde USB sin instalación necesaria.</p>
+      <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+Portable" alt="Preview GTA Portable">
+    </div>
   </div>
+
+  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+</div>
+
 
   <!-- INTERFAZ MACRO -->
   <div id="macroContent" class="content-section">
