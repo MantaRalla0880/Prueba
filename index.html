@@ -338,52 +338,35 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<!-- BOTONES ARRIBA IZQUIERDA (NO FIJOS) -->
-<div class="inline-btns-container">
-  <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
-  <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
+<!-- BOTONES GTA VIRGEN + MACRO -->
+<div style="display: flex; gap: 10px; padding: 15px; flex-wrap: wrap;">
+  <button onclick="mostrarGtaVirgen()" style="padding: 10px 14px; font-size: 1em; background: #0ff; color: #000; border: none; border-radius: 8px; font-weight: bold; box-shadow: 0 0 10px #0ff; cursor: pointer;">
+    🖥️ GTA Virgen
+  </button>
+  <button onclick="mostrarMacro()" style="padding: 10px 14px; font-size: 1em; background: #0ff; color: #000; border: none; border-radius: 8px; font-weight: bold; box-shadow: 0 0 10px #0ff; cursor: pointer;">
+    ⚙️ Macro para PC
+  </button>
 </div>
 
+<!-- ESTILO INTERFACES -->
 <style>
-  .inline-btns-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 15px;
-    z-index: 10;
+  .content-section {
+    display: none;
+    width: 100vw;
+    min-height: 100vh;
+    background: #000;
+    color: #0ff;
+    padding: 30px 20px;
+    overflow-y: auto;
+    text-align: center;
+    animation: fadeZoomIn 0.5s both;
   }
 
-  .inline-btns-container button {
-    padding: 10px 14px;
-    font-size: 1em;
-    background: #0ff;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    box-shadow: 0 0 10px #0ff;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
+  @keyframes fadeZoomIn {
+    0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
   }
 
-  .inline-btns-container button:hover {
-    transform: scale(1.05);
-    background: #00e0e0;
-  }
-
-  @media (max-width: 600px) {
-    .inline-btns-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .inline-btns-container button {
-      font-size: 0.95em;
-      padding: 8px 12px;
-    }
-  }
-
-  /* El resto de interfaces */
   .logo {
     width: 120px;
     border-radius: 50%;
@@ -433,7 +416,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     cursor: pointer;
     font-size: 1em;
     box-shadow: 0 0 15px #0ff;
-    transition: transform 0.2s;
+    transition: transform 0.3s;
   }
 
   #volverBtn:hover {
@@ -441,48 +424,14 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     transform: scale(1.05);
   }
 
-  iframe {
+  .macro-video {
     width: 90%;
-    height: 420px;
+    max-width: 900px;
+    height: 500px;
+    margin: 20px auto;
     border: 2px solid #0ff;
     border-radius: 10px;
-    margin: 20px auto;
-    display: block;
-    box-shadow: 0 0 10px #0ff;
-  }
-
-  @media (max-width: 600px) {
-    iframe {
-      height: 250px;
-    }
-  }
-
-  .content-section {
-    display: none;
-    background: #000;
-    color: #0ff;
-    padding: 30px 20px;
-    text-align: center;
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
-  }
-
-  .fadeZoomIn {
-    animation-name: fadeZoomIn;
-  }
-
-  .fadeZoomOut {
-    animation-name: fadeZoomOut;
-  }
-
-  @keyframes fadeZoomIn {
-    0% { opacity: 0; transform: scale(0.9) translateY(30px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  @keyframes fadeZoomOut {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    box-shadow: 0 0 15px #0ff;
   }
 </style>
 
@@ -497,57 +446,70 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
       <a href="#" target="_blank">Descargar 🔽</a>
       <img src="Fotito.png" alt="Preview GTA Lite">
     </div>
-    <!-- Resto de cajas GTA aquí -->
+    <div class="gta-box">
+      <h3>🔸 GTA Full 4GB</h3>
+      <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+Full" alt="Preview GTA Full">
+    </div>
+    <div class="gta-box">
+      <h3>🟢 GTA RP Base</h3>
+      <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+RP" alt="Preview GTA RP Base">
+    </div>
+    <div class="gta-box">
+      <h3>🟠 GTA Clean MTA</h3>
+      <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+MTA" alt="Preview GTA MTA">
+    </div>
+    <div class="gta-box">
+      <h3>🟣 GTA Customizable</h3>
+      <p>Base limpia preparada para instalar mods fácilmente.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+ModReady" alt="Preview GTA Custom">
+    </div>
+    <div class="gta-box">
+      <h3>🔵 GTA Portable</h3>
+      <p>Corre desde USB sin instalación necesaria.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=Preview+Portable" alt="Preview GTA Portable">
+    </div>
   </div>
-  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+  <button id="volverBtn" onclick="volverAlForo()">⬅️ Volver al foro</button>
 </div>
 
 <!-- INTERFAZ MACRO PARA PC -->
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
-  <p>Video tutorial:</p>
-  <iframe src="https://www.youtube.com/embed/kdZYUejztSY?si=1GlSG2qittrqxvP5" allowfullscreen></iframe>
-  <a href="#" target="_blank">Descargar Macro 🔽</a>
-  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+  <p>Aquí puedes encontrar el mejor video para configurar tu macro para SA-MP.</p>
+  <iframe class="macro-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+  <button id="volverBtn" onclick="volverAlForo()">⬅️ Volver al foro</button>
 </div>
 
-<!-- SCRIPTS -->
+<!-- FUNCIONES -->
 <script>
-  function ocultarTodo() {
-    document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
-    document.getElementById('macroContent').classList.remove('fadeZoomIn');
-    document.getElementById('gtaVirgenContent').style.display = 'none';
-    document.getElementById('macroContent').style.display = 'none';
-  }
-
   function mostrarGtaVirgen() {
-    ocultarTodo();
-    const cont = document.getElementById('gtaVirgenContent');
-    cont.classList.remove('fadeZoomOut');
-    cont.classList.add('fadeZoomIn');
-    cont.style.display = 'block';
+    document.getElementById('gtaVirgenContent').style.display = 'block';
+    document.getElementById('macroContent').style.display = 'none';
+    document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function mostrarMacro() {
-    ocultarTodo();
-    const cont = document.getElementById('macroContent');
-    cont.classList.remove('fadeZoomOut');
-    cont.classList.add('fadeZoomIn');
-    cont.style.display = 'block';
+    document.getElementById('macroContent').style.display = 'block';
+    document.getElementById('gtaVirgenContent').style.display = 'none';
+    document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function volverAlForo() {
-    const visibles = document.querySelectorAll('.content-section');
-    visibles.forEach(el => {
-      el.classList.remove('fadeZoomIn');
-      el.classList.add('fadeZoomOut');
-      setTimeout(() => {
-        el.style.display = 'none';
-      }, 400);
-    });
+    document.getElementById('gtaVirgenContent').style.display = 'none';
+    document.getElementById('macroContent').style.display = 'none';
+    document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 </script>
+
 
 </body>
 </html>
