@@ -341,30 +341,32 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>MantaMods</title>
   <style>
-    /* Botones fijos arriba a la izquierda */
+    /* Botones normales arriba de la página */
     #menuBtns {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 9999;
+      width: 100%;
+      padding: 10px 20px;
       display: flex;
-      flex-direction: column;
       gap: 10px;
+      background: rgba(0, 255, 255, 0.1);
+      border-bottom: 1px solid #0ff;
+      box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
+      position: relative;
+      z-index: 10;
     }
 
     #menuBtns button {
-      padding: 10px 14px;
+      padding: 10px 16px;
       font-size: 1em;
       background: #0ff;
       color: #000;
       border: none;
       border-radius: 8px;
       font-weight: bold;
-      box-shadow: 0 0 10px #0ff;
       cursor: pointer;
+      box-shadow: 0 0 10px #0ff;
     }
 
     #menuBtns.hidden {
@@ -380,7 +382,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
       height: 100vh;
       background: #000;
       color: #0ff;
-      z-index: 998;
+      z-index: 999;
       padding: 30px 20px;
       overflow-y: auto;
       text-align: center;
@@ -455,10 +457,17 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
       cursor: pointer;
       font-size: 1em;
       box-shadow: 0 0 15px #0ff;
+      animation: pulseFade 1s ease-in-out;
     }
 
     #volverBtn:hover {
       background: #00c9c9;
+    }
+
+    @keyframes pulseFade {
+      0% { transform: scale(0.9); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
     }
 
     iframe {
@@ -473,12 +482,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     }
 
     @media (max-width: 768px) {
-      #menuBtns {
-        top: 10px;
-        left: 10px;
-        flex-direction: column;
-      }
-
       .gta-box {
         width: 90%;
       }
@@ -486,12 +489,18 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
       iframe {
         height: 250px;
       }
+
+      #menuBtns {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- BOTONES FIJOS -->
+<!-- BOTONES (ya no fijos) -->
 <div id="menuBtns">
   <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
   <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
@@ -502,47 +511,48 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
   <div class="gta-grid">
+    <!-- Repite esto para más versiones -->
     <div class="gta-box">
       <h3>🔹 GTA Lite 500MB</h3>
       <p>Versión ligera ideal para PCs de bajos recursos.</p>
-      <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
-      <img src="Fotito.png" alt="Preview GTA Lite">
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="Fotito.png" alt="Preview GTA Lite" />
     </div>
     <div class="gta-box">
       <h3>🔸 GTA Full 4GB</h3>
-      <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
-      <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+Full" alt="Preview GTA Full">
+      <p>Incluye audio y vídeos completos, sin modificaciones.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=GTA+Full" />
     </div>
     <div class="gta-box">
       <h3>🟢 GTA RP Base</h3>
-      <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
-      <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+RP" alt="Preview GTA RP Base">
+      <p>Diseñado para roleplay sin CLEO.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=GTA+RP" />
     </div>
     <div class="gta-box">
       <h3>🟠 GTA Clean MTA</h3>
-      <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
-      <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+MTA" alt="Preview GTA MTA">
+      <p>Optimizado para MTA.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=GTA+MTA" />
     </div>
     <div class="gta-box">
       <h3>🟣 GTA Customizable</h3>
-      <p>Base limpia preparada para instalar mods fácilmente.</p>
-      <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+ModReady" alt="Preview GTA Custom">
+      <p>Listo para instalar mods.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=GTA+Mods" />
     </div>
     <div class="gta-box">
       <h3>🔵 GTA Portable</h3>
-      <p>Corre desde USB sin instalación necesaria.</p>
-      <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=Preview+Portable" alt="Preview GTA Portable">
+      <p>Corre desde USB.</p>
+      <a href="#" target="_blank">Descargar 🔽</a>
+      <img src="https://via.placeholder.com/300x160?text=GTA+Portable" />
     </div>
   </div>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- INTERFAZ MACRO PARA PC -->
+<!-- INTERFAZ MACRO -->
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
