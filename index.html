@@ -338,7 +338,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<!-- Botón fijo arriba a la izquierda -->
+<!-- Botón fijo arriba a la izquierda + Interfaz GTA Virgen -->
 <style>
   #gtaVirgenBtn {
     position: fixed;
@@ -353,6 +353,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     border-radius: 8px;
     box-shadow: 0 0 10px #0ff;
     cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #gtaVirgenBtn:hover {
+    background: #00c9c9;
   }
 
   #gtaVirgenContent {
@@ -470,14 +475,17 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     document.getElementById('gtaVirgenContent').style.display = 'block';
     document.querySelector('.container').style.display = 'none';
     document.querySelector('.redes-section').style.display = 'none';
+    document.getElementById('gtaVirgenBtn').style.display = 'none';
   }
 
   function volverAlForo() {
     document.getElementById('gtaVirgenContent').style.display = 'none';
     document.querySelector('.container').style.display = '';
     document.querySelector('.redes-section').style.display = '';
+    document.getElementById('gtaVirgenBtn').style.display = 'block';
   }
 </script>
+
 
 </body>
 </html>
