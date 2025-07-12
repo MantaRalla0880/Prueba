@@ -377,33 +377,56 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     margin: 20px 0 10px;
   }
 
-  #gtaVirgenContent img {
+  #gtaVirgenContent img.logo {
     width: 120px;
     border-radius: 50%;
     margin-bottom: 20px;
     box-shadow: 0 0 10px #0ff;
   }
 
+  .gta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+  }
+
   .gta-box {
-    background: rgba(0,255,255,0.1);
+    background: rgba(0,255,255,0.08);
     border: 2px solid #0ff;
     border-radius: 12px;
     padding: 20px;
-    margin: 20px auto;
-    max-width: 400px;
+    width: 280px;
     box-shadow: 0 0 15px #0ff;
+    transition: transform 0.2s;
+  }
+
+  .gta-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #0ff;
+  }
+
+  .gta-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    color: #00faff;
+  }
+
+  .gta-box p {
+    font-size: 0.95em;
+    margin-bottom: 10px;
   }
 
   .gta-box a {
     color: #0ff;
     font-weight: bold;
     display: inline-block;
-    margin-top: 10px;
     word-break: break-word;
   }
 
   #volverBtn {
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 12px 20px;
     background: #0ff;
     color: #000;
@@ -420,12 +443,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
   @media (max-width: 768px) {
     #gtaVirgenBtn {
-      font-size: 0.9em;
+      font-size: 0.85em;
       padding: 10px 14px;
     }
 
     .gta-box {
-      padding: 15px;
+      width: 90%;
     }
   }
 </style>
@@ -433,15 +456,42 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
 
 <div id="gtaVirgenContent">
-  <img src="static.png" alt="Logo MantaMods" />
-  <h2>🖥️ GTA Virgen - Instalación Limpia</h2>
-  <div class="gta-box">
-    <p>
-      Descarga una versión limpia de GTA San Andreas para instalar tus mods sin problemas.
-    </p>
-    🔗 <a href="https://www.mediafire.com/file/tu_gta_virgen.rar" target="_blank">Descargar GTA Virgen (.rar)</a><br>
-    📦 Descomprime y copia en tu carpeta favorita. ¡Listo para tunear con 🔥MantaMods🔥!
+  <img src="static.png" alt="Logo MantaMods" class="logo" />
+  <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
+
+  <div class="gta-grid">
+    <div class="gta-box">
+      <h3>🔹 GTA Lite 500MB</h3>
+      <p>Versión super ligera ideal para PCs de bajos recursos.</p>
+      <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
+    </div>
+    <div class="gta-box">
+      <h3>🔸 GTA Full 4GB</h3>
+      <p>Versión completa del juego con audio, vídeos y todo intacto.</p>
+      <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
+    </div>
+    <div class="gta-box">
+      <h3>🟢 GTA RP Base</h3>
+      <p>Preparado para roleplay. Base limpia sin mods.</p>
+      <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
+    </div>
+    <div class="gta-box">
+      <h3>🟠 GTA Clean MTA</h3>
+      <p>Optimizado para MTA. Sin CLEO ni extras.</p>
+      <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
+    </div>
+    <div class="gta-box">
+      <h3>🟣 GTA Customizable</h3>
+      <p>Viene sin mods pero con carpetas preparadas para añadir fácilmente.</p>
+      <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
+    </div>
+    <div class="gta-box">
+      <h3>🔵 GTA Portable</h3>
+      <p>Versión portable, sin instalación. Corre desde USB.</p>
+      <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
+    </div>
   </div>
+
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
