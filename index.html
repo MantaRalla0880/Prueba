@@ -1,6 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+ <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #0ff;
+    }
+
+    /* BOTONES ARRIBA IZQUIERDA */
+    .botones-superiores {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      margin-left: 15px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .botones-superiores button {
+      padding: 10px 14px;
+      font-size: 1em;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #0ff;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .botones-superiores button:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .botones-superiores {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .botones-superiores button {
+        width: fit-content;
+      }
+    }
+
+    /* INTERFACES */
+    .content-section {
+      display: none;
+      width: 100%;
+      min-height: 100vh;
+      background: #000;
+      color: #0ff;
+      padding: 30px 20px;
+      text-align: center;
+      animation-duration: 0.5s;
+      animation-fill-mode: both;
+    }
+
+    .fadeZoomIn {
+      animation-name: fadeZoomIn;
+    }
+
+    .fadeZoomOut {
+      animation-name: fadeZoomOut;
+    }
+
+    @keyframes fadeZoomIn {
+      0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes fadeZoomOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    }
+
+    .logo {
+      width: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    .gta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .gta-box {
+      background: rgba(0,255,255,0.08);
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 15px #0ff;
+      transition: transform 0.2s;
+      text-align: center;
+    }
+
+    .gta-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .gta-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    #volverBtn {
+      margin-top: 40px;
+      padding: 12px 20px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 0 15px #0ff;
+      transition: transform 0.2s;
+    }
+
+    #volverBtn:hover {
+      background: #00c9c9;
+      transform: scale(1.05);
+    }
+
+    iframe {
+      width: 90%;
+      max-width: 800px;
+      height: 450px;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 10px #0ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BOTONES SUPERIORES -->
+  <div class="botones-superiores" id="botonesInicio">
+    <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
+    <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
+  </div>
+
+  <!-- INTERFAZ GTA VIRGEN -->
+  <div id="gtaVirgenContent" class="content-section">
+    <img src="static.png" alt="Logo MantaMods" class="logo" />
+    <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
+    <div class="gta-grid">
+      <div class="gta-box">
+        <h3>🔹 GTA Lite 500MB</h3>
+        <p>Ideal para PCs de bajos recursos.</p>
+        <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
+        <img src="Fotito.png" alt="Preview GTA Lite">
+      </div>
+      <div class="gta-box">
+        <h3>🔸 GTA Full 4GB</h3>
+        <p>Con audio y vídeos originales, sin mods.</p>
+        <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
+        <img src="https://via.placeholder.com/300x160?text=Full" alt="Preview GTA Full">
+      </div>
+      <div class="gta-box">
+        <h3>🟢 GTA RP Base</h3>
+        <p>Preparado para servidores RP.</p>
+        <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
+        <img src="https://via.placeholder.com/300x160?text=RP" alt="Preview GTA RP">
+      </div>
+      <div class="gta-box">
+        <h3>🟠 GTA Clean MTA</h3>
+        <p>Para jugar en MTA sin errores.</p>
+        <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
+        <img src="https://via.placeholder.com/300x160?text=MTA" alt="Preview GTA MTA">
+      </div>
+      <div class="gta-box">
+        <h3>🟣 GTA Customizable</h3>
+        <p>Lista para añadir tus propios mods.</p>
+        <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
+        <img src="https://via.placeholder.com/300x160?text=Custom" alt="Preview GTA Custom">
+      </div>
+      <div class="gta-box">
+        <h3>🔵 GTA Portable</h3>
+        <p>Funciona desde USB sin instalación.</p>
+        <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
+        <img src="https://via.placeholder.com/300x160?text=Portable" alt="Preview GTA Portable">
+      </div>
+    </div>
+    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+  </div>
+
+  <!-- INTERFAZ MACRO PARA PC -->
+  <div id="macroContent" class="content-section">
+    <img src="static.png" alt="Logo MantaMods" class="logo" />
+    <h2>⚙️ Macro para PC</h2>
+    <p>Tutorial para usar la macro desde el mismo foro:</p>
+    <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
+    <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
+    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    function ocultarTodo() {
+      document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
+      document.getElementById('macroContent').classList.remove('fadeZoomIn');
+      document.getElementById('gtaVirgenContent').style.display = 'none';
+      document.getElementById('macroContent').style.display = 'none';
+    }
+
+    function mostrarGtaVirgen() {
+      ocultarTodo();
+      document.getElementById('foroPrincipal').style.display = 'none';
+      const cont = document.getElementById('gtaVirgenContent');
+      cont.classList.remove('fadeZoomOut');
+      cont.classList.add('fadeZoomIn');
+      cont.style.display = 'block';
+    }
+
+    function mostrarMacro() {
+      ocultarTodo();
+      document.getElementById('foroPrincipal').style.display = 'none';
+      const cont = document.getElementById('macroContent');
+      cont.classList.remove('fadeZoomOut');
+      cont.classList.add('fadeZoomIn');
+      cont.style.display = 'block';
+    }
+
+    function volverAlForo() {
+      const visibles = document.querySelectorAll('.content-section');
+      visibles.forEach(el => {
+        el.classList.remove('fadeZoomIn');
+        el.classList.add('fadeZoomOut');
+        setTimeout(() => {
+          el.style.display = 'none';
+          document.getElementById('foroPrincipal').style.display = 'block';
+        }, 400);
+      });
+    }
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔥MantaMods🔥 - Mods Para SA-MP</title>
@@ -9,16 +259,17 @@
   <meta property="og:image" content="https://mantamods.github.io/static.png" />
   <meta property="og:url" content="https://mantamods.github.io/" />
   <meta name="theme-color" content="#00ffff" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #000;
       color: #33FF99;
       overflow-x: hidden;
     }
+
     .video-bg {
       position: fixed;
       top: 0; left: 0;
@@ -27,6 +278,156 @@
       object-fit: cover;
       z-index: -1;
     }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+
+    header img {
+      width: 140px;
+      border-radius: 50%;
+      margin-top: 10px;
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      margin: 10px 0;
+    }
+
+    @keyframes pulseGlow {
+      0% { filter: brightness(1) drop-shadow(0 0 10px #0ff); }
+      100% { filter: brightness(1.4) drop-shadow(0 0 25px #0ff); }
+    }
+
+    .redes-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .redes-section h2 {
+      font-size: 2.2em;
+      color: #00faff;
+      text-shadow: 0 0 10px #00faff, 0 0 20px #00faff;
+      margin-bottom: 10px;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .social a {
+      font-size: 2.1em;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .social a:hover {
+      transform: scale(1.2);
+    }
+
+    .section {
+      max-width: 800px;
+      margin-top: 20px;
+    }
+
+    .cta {
+      background: #0ff;
+      color: #000;
+      padding: 15px 40px;
+      font-size: 1.3em;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0ff;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin: 20px auto 10px;
+      display: inline-block;
+    }
+
+    .cta:hover {
+      background: #00c9c9;
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .buttons-row {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .rules-btn, .plantilla-btn {
+      background: #0ff;
+      color: #000;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #0ff;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rules-btn:hover, .plantilla-btn:hover {
+      background: #00c9c9;
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: red;
+      box-shadow: 0 0 5px red;
+    }
+
+    .rules-box, .plantilla-box {
+      display: none;
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 95vw;
+      margin: 20px auto;
+      color: #0ff;
+      white-space: pre-wrap;
+      font-size: 1em;
+      line-height: 1.6;
+      text-align: left;
+      max-height: 60vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      word-wrap: break-word;
+    }
+
+    .rgb-text {
+      animation: rgbCycle 5s linear infinite;
+    }
+
+    @keyframes rgbCycle {
+      0% { color: red; }
+      25% { color: orange; }
+      50% { color: lime; }
+      75% { color: cyan; }
+      100% { color: red; }
+    }
+
     #startBtn {
       position: absolute;
       top: 50%;
@@ -43,45 +444,21 @@
       cursor: pointer;
       animation: pulseBtn 1.5s infinite ease-in-out;
     }
+
     @keyframes pulseBtn {
       0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #0ff; }
       50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 20px #0ff; }
       100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #0ff; }
     }
+
     @media (min-width: 768px) {
       #startBtn { display: none; }
     }
-    /* Botones arriba */
-    .botones-superiores {
-      display: flex;
-      gap: 10px;
-      margin: 15px;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-    .botones-superiores button {
-      padding: 10px 14px;
-      font-size: 1em;
-      background: #0ff;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      box-shadow: 0 0 10px #0ff;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .botones-superiores button:hover {
-      transform: scale(1.05);
-    }
-    @media (max-width: 600px) {
-      .botones-superiores {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .botones-superiores button {
-        width: fit-content;
-      }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #ccc;
     }
   </style>
 </head>
@@ -91,44 +468,72 @@
     <source src="Video2.mp4" type="video/mp4" />
     Tu navegador no soporta video HTML5.
   </video>
+
   <audio id="music" loop autoplay>
     <source src="Musicas.mp3" type="audio/mpeg" />
   </audio>
-  <div class="botones-superiores" id="botonesInicio">
-    <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
-    <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
+
+  <script>
+    const music = document.getElementById('music');
+    const video = document.getElementById('bg-video');
+    function startMedia() {
+      music.play().catch(() => {});
+      video.play().catch(() => {});
+      document.getElementById('startBtn').style.display = 'none';
+    }
+
+    function toggleRules() {
+      const box = document.getElementById('rules-box');
+      const dot = document.getElementById('rules-dot');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+      dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+    }
+
+    function togglePlantilla() {
+      const box = document.getElementById('plantilla-box');
+      const dot = document.getElementById('plantilla-dot');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+      dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      video.play().catch(() => {});
+      music.play().catch(() => {});
+    });
+  </script>
+
+  <div class="redes-section">
+    <h2>Redes</h2>
+    <div class="social">
+      <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a>
+      <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
+      <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
+    </div>
   </div>
-  <div id="foroPrincipal" class="container">
+
+  <div class="container">
     <header>
-      <img src="static.png" alt="Logo MantaMods" style="width: 140px; border-radius: 50%; margin-top: 10px; animation: pulseGlow 2s infinite alternate;" />
-      <h1 style="font-size: 3em; color: #0ff; text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; margin: 10px 0;">🔥MantaMods🔥</h1>
+      <img src="static.png" alt="Logo MantaMods" />
+      <h1>🔥MantaMods🔥</h1>
     </header>
 
-    <div class="redes-section" style="text-align:center; margin-top: 20px;">
-      <h2 style="font-size: 2.2em; color: #00faff; text-shadow: 0 0 10px #00faff, 0 0 20px #00faff; margin-bottom: 10px;">Redes</h2>
-      <div class="social" style="display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; font-size: 2.1em;">
-        <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a>
-        <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
-        <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
-      </div>
-    </div>
-
-    <div class="section" style="max-width: 800px; margin-top: 20px; text-align: center;">
+    <div class="section">
       <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
       <p class="rgb-text">
         Únete a nuestro Discord para explorar mods y modificaciones extremas que harán imparable tu GTA. También puedes hacer panas nuevos y adentrarte en todos los sistemas que nuestro bot oficial te ofrece para una mejor experiencia.<br>
         ¡Aquí los mods son únicos!
       </p>
 
-      <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank" style="background: #0ff; color: #000; padding: 15px 40px; font-size: 1.3em; border: none; border-radius: 10px; box-shadow: 0 0 20px #0ff; cursor: pointer; display: inline-block; margin-top: 20px;">💬 ÚNETE AL DISCORD</a>
+      <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
-      <div class="buttons-row" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-        <button class="rules-btn" onclick="toggleRules()" style="background: #0ff; color: #000; padding: 12px 25px; font-size: 1.1em; border: none; border-radius: 10px; box-shadow: 0 0 15px #0ff; cursor: pointer; display: flex; align-items: center; gap: 8px;">📜 Reglas De 🔥MantaMods🔥 <span id="rules-dot" class="status-dot" style="width:10px; height:10px; border-radius:50%; background:red; box-shadow: 0 0 5px red;"></span></button>
-
-        <button class="plantilla-btn" onclick="togglePlantilla()" style="background: #0ff; color: #000; padding: 12px 25px; font-size: 1.1em; border: none; border-radius: 10px; box-shadow: 0 0 15px #0ff; cursor: pointer; display: flex; align-items: center; gap: 8px;">📋 Plantilla De 🔥MantaMods🔥 <span id="plantilla-dot" class="status-dot" style="width:10px; height:10px; border-radius:50%; background:red; box-shadow: 0 0 5px red;"></span></button>
+      <div class="buttons-row">
+        <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥 <span id="rules-dot" class="status-dot"></span></button>
+        <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥 <span id="plantilla-dot" class="status-dot"></span></button>
       </div>
 
-      <div class="rules-box" id="rules-box" style="display:none; background: rgba(0,0,0,0.9); border: 2px solid #0ff; border-radius: 10px; padding: 20px; max-width: 95vw; margin: 20px auto; color: #0ff; white-space: pre-wrap; font-size: 1em; line-height: 1.6; text-align: left; max-height: 60vh; overflow-y: auto;">
+      <div class="rules-box" id="rules-box">
         <ul>
           <li>✅ Respeto mutuo entre todos los miembros.</li>
           <li>🛑 Prohibido hacer spam o flood.</li>
@@ -139,177 +544,51 @@
         </ul>
       </div>
 
-      <div class="plantilla-box" id="plantilla-box" style="display:none; background: rgba(0,0,0,0.9); border: 2px solid #0ff; border-radius: 10px; padding: 20px; max-width: 95vw; margin: 20px auto; color: #0ff; white-space: pre-wrap; font-size: 1em; line-height: 1.6; text-align: left; max-height: 60vh; overflow-y: auto;">
-🎮 Bienvenido a  
-# `🚀`・🔥MantaMods🔥  
-¿Amas el GTA y tunearlo al máximo?  
+      <div class="plantilla-box" id="plantilla-box">
+🎮 Bienvenido a
+# `🚀`・🔥MantaMods🔥
+¿Amas el GTA y tunearlo al máximo?
 Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
 
-# `🎯`・¿QUÉ ENCONTRARÁS AQUÍ?  
-🤖 Bot Propio Con Sistemas Únicos.  
-🔫 Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.  
-🎨 Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Mucho Mas.  
-🚗 Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Mas.  
-📦 Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Mas.  
-🛠️ Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.  
-🎉 Eventos & Sorteos: Participa Y Gana Mods Premium.  
-🤝 Alianzas: Conecta Con Otras Comunidades.  
-💬 Comunidad: Chat, Memes, Música, Sugerencias.  
-🧠 Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.  
-🎮 Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.  
+# `🎯`・¿QUÉ ENCONTRARÁS AQUÍ?
+🤖 Bot Propio Con Sistemas Únicos.
+🔫 Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.
+🎨 Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Mucho Mas.
+🚗 Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Mas.
+📦 Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Mas.
+🛠️ Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.
+🎉 Eventos & Sorteos: Participa Y Gana Mods Premium.
+🤝 Alianzas: Conecta Con Otras Comunidades.
+💬 Comunidad: Chat, Memes, Música, Sugerencias.
+🧠 Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.
+🎮 Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.
 🛡 Postulaciones: Staff, Creador De Contenido.
 
-# `📌`・¿CÓMO UNIRTE?  
-✅ Ve a canal de verificación  
-✅ Presiona el botón  
+# `📌`・¿CÓMO UNIRTE?
+✅ Ve a canal de verificación
+✅ Presiona el botón
 🔔 ¡Y disfruta del servidor completo!
 
-🔗 Discord De 🔥MantaMods🔥  
-📍 https://discord.gg/HqfjQcbDZr  
-🌍 Foro De 🔥MantaMods🔥  
-📍 https://mantaralla0880.github.io/mantamods/  
+🔗 Discord De 🔥MantaMods🔥
+`📍` <a href="https://discord.gg/HqfjQcbDZr" target="_blank">https://discord.gg/HqfjQcbDZr</a>
 
-💬 Gracias por ser parte de MantaMods.  
-Aquí no solo jugamos... CREAMOS ESTILO 💯  
+🌍 Foro De 🔥MantaMods🔥
+`📍` <a href="https://mantaralla0880.github.io/mantamods/" target="_blank">https://mantaralla0880.github.io/mantamods/</a>
 
-🔊 Tag: ||@everyone @here||  
-<img src="https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243/MantaMods.gif" style="width: 100%; margin-top: 10px;" />
+`💬` Gracias por ser parte de MantaMods.
+Aquí no solo jugamos... CREAMOS ESTILO 💯
+
+`🔊` Tag: ||@everyone @here||
+https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243/MantaMods.gif
       </div>
     </div>
 
-    <footer style="margin-top: 40px; font-size: 0.9em; color: #ccc;">
+    <footer>
       🔥MantaMods🔥 | “RD Un Flow Diferente, Un Mod Distinto Y Unico.”
     </footer>
   </div>
-  <!-- INTERFAZ GTA VIRGEN -->
-  <div id="gtaVirgenContent" class="content-section">
-    <img src="static.png" alt="Logo MantaMods" class="logo" />
-    <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
-    <div class="gta-grid">
-      <div class="gta-box">
-        <h3>🔹 GTA Lite 500MB</h3>
-        <p>Ideal para PCs de bajos recursos.</p>
-        <a href="https://www.mediafire.com/file/example1" target="_blank" style="color: #0ff;">Descargar 🔽</a>
-        <img src="Fotito.png" alt="Preview GTA Lite">
-      </div>
-      <div class="gta-box">
-        <h3>🔸 GTA Full 4GB</h3>
-        <p>Con audio y vídeos originales, sin mods.</p>
-        <a href="https://www.mediafire.com/file/example2" target="_blank" style="color: #0ff;">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=Full" alt="Preview GTA Full">
-      </div>
-      <div class="gta-box">
-        <h3>🟢 GTA RP Base</h3>
-        <p>Preparado para servidores RP.</p>
-        <a href="https://www.mediafire.com/file/example3" target="_blank" style="color: #0ff;">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=RP" alt="Preview GTA RP">
-      </div>
-      <div class="gta-box">
-        <h3>🟠 GTA Clean MTA</h3>
-        <p>Para jugar en MTA sin errores.</p>
-        <a href="https://www.mediafire.com/file/example4" target="_blank" style="color: #0ff;">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=MTA" alt="Preview GTA MTA">
-      </div>
-      <div class="gta-box">
-        <h3>🟣 GTA Customizable</h3>
-        <p>Lista para añadir tus propios mods.</p>
-        <a href="https://www.mediafire.com/file/example5" target="_blank" style="color: #0ff;">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=Custom" alt="Preview GTA Custom">
-      </div>
-      <div class="gta-box">
-        <h3>🔵 GTA Portable</h3>
-        <p>Funciona desde USB sin instalación.</p>
-        <a href="https://www.mediafire.com/file/example6" target="_blank" style="color: #0ff;">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=Portable" alt="Preview GTA Portable">
-      </div>
-    </div>
-    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
-  </div>
 
-  <!-- INTERFAZ MACRO PARA PC -->
-  <div id="macroContent" class="content-section">
-    <img src="static.png" alt="Logo MantaMods" class="logo" />
-    <h2>⚙️ Macro para PC</h2>
-    <p>Tutorial para usar la macro desde el mismo foro:</p>
-    <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
-    <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block; margin-top:15px; color:#0ff; font-weight:bold;">🔽 Descargar Macro</a>
-    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
-  </div>
-  <!-- SCRIPTS -->
-  <script>
-    const music = document.getElementById('music');
-    const video = document.getElementById('bg-video');
-    const startBtn = document.getElementById('startBtn');
 
-    function startMedia() {
-      music.play().catch(() => {});
-      video.play().catch(() => {});
-      startBtn.style.display = 'none';
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      video.play().catch(() => {});
-      music.play().catch(() => {});
-    });
-
-    function ocultarTodo() {
-      document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
-      document.getElementById('macroContent').classList.remove('fadeZoomIn');
-      document.getElementById('gtaVirgenContent').style.display = 'none';
-      document.getElementById('macroContent').style.display = 'none';
-    }
-
-    function mostrarGtaVirgen() {
-      ocultarTodo();
-      const cont = document.getElementById('gtaVirgenContent');
-      cont.classList.remove('fadeZoomOut');
-      cont.classList.add('fadeZoomIn');
-      cont.style.display = 'block';
-      scrollToTop();
-    }
-
-    function mostrarMacro() {
-      ocultarTodo();
-      const cont = document.getElementById('macroContent');
-      cont.classList.remove('fadeZoomOut');
-      cont.classList.add('fadeZoomIn');
-      cont.style.display = 'block';
-      scrollToTop();
-    }
-
-    function volverAlForo() {
-      const visibles = document.querySelectorAll('.content-section');
-      visibles.forEach(el => {
-        el.classList.remove('fadeZoomIn');
-        el.classList.add('fadeZoomOut');
-        setTimeout(() => {
-          el.style.display = 'none';
-        }, 400);
-      });
-    }
-
-    function toggleRules() {
-      const box = document.getElementById('rules-box');
-      const dot = document.getElementById('rules-dot');
-      const visible = box.style.display === 'block';
-      box.style.display = visible ? 'none' : 'block';
-      dot.style.background = visible ? 'red' : 'lime';
-      dot.style.boxShadow = visible ? '0 0 5px red' : '0 0 5px lime';
-    }
-
-    function togglePlantilla() {
-      const box = document.getElementById('plantilla-box');
-      const dot = document.getElementById('plantilla-dot');
-      const visible = box.style.display === 'block';
-      box.style.display = visible ? 'none' : 'block';
-      dot.style.background = visible ? 'red' : 'lime';
-      dot.style.boxShadow = visible ? '0 0 5px red' : '0 0 5px lime';
-    }
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
 
 </body>
 </html>
