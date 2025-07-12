@@ -471,7 +471,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     box-shadow: 0 0 10px #0ff;
   }
 </style>
-<!-- INTERFAZ GTA VIRGEN -->
+  <!-- BOTONES FIJOS -->
+  <div class="top-buttons">
+    <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
+    <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
+  </div>
+
+  <!-- INTERFAZ GTA VIRGEN -->
   <div id="gtaVirgenContent" class="content-section">
     <img src="static.png" alt="Logo MantaMods" class="logo" />
     <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
@@ -523,57 +529,53 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
   </div>
 
-<!-- Interfaz Macro -->
-<div id="macroContent">
-  <img src="static.png" alt="Logo MantaMods" class="logo" />
-  <h2>⚙️ Macro Para PC</h2>
-  <p>Mira el video tutorial directamente desde aquí:</p>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tu_video_id" title="Tutorial Macro" allowfullscreen></iframe>
-  <p style="margin-top: 20px;">🔽 Descargar Macro:</p>
-  <a href="https://www.mediafire.com/file/macropc.rar" target="_blank" style="color:#0ff; font-weight:bold;">Descargar Macro (.RAR)</a>
-  <br><br>
-  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
-</div>
+  <!-- INTERFAZ MACRO -->
+  <div id="macroContent" class="content-section">
+    <img src="static.png" alt="Logo MantaMods" class="logo" />
+    <h2>⚙️ Macro para PC</h2>
+    <p>Tutorial para aprender a usar la macro:</p>
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    <br>
+    <a class="descarga-link" href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
+    <br>
+    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+  </div>
 
-<!-- Script -->
-<script>
-  function mostrarGtaVirgen() {
-    const cont = document.getElementById('gtaVirgenContent');
-    document.getElementById('macroContent').style.display = 'none';
-    cont.classList.remove('fadeZoomOut');
-    cont.classList.add('fadeZoomIn');
-    cont.style.display = 'block';
-    document.querySelector('.container')?.style.setProperty('display', 'none');
-    document.querySelector('.redes-section')?.style.setProperty('display', 'none');
-    document.getElementById('fixedButtons').style.display = 'none';
-  }
-
-  function mostrarMacro() {
-    const cont = document.getElementById('macroContent');
-    document.getElementById('gtaVirgenContent').style.display = 'none';
-    cont.classList.remove('fadeZoomOut');
-    cont.classList.add('fadeZoomIn');
-    cont.style.display = 'block';
-    document.querySelector('.container')?.style.setProperty('display', 'none');
-    document.querySelector('.redes-section')?.style.setProperty('display', 'none');
-    document.getElementById('fixedButtons').style.display = 'none';
-  }
-
-  function volverAlForo() {
-    document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
-    document.getElementById('macroContent').classList.remove('fadeZoomIn');
-    document.getElementById('gtaVirgenContent').classList.add('fadeZoomOut');
-    document.getElementById('macroContent').classList.add('fadeZoomOut');
-    setTimeout(() => {
+  <!-- SCRIPT -->
+  <script>
+    function ocultarTodo() {
+      document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
+      document.getElementById('macroContent').classList.remove('fadeZoomIn');
       document.getElementById('gtaVirgenContent').style.display = 'none';
       document.getElementById('macroContent').style.display = 'none';
-      document.querySelector('.container')?.style.setProperty('display', '');
-      document.querySelector('.redes-section')?.style.setProperty('display', '');
-      document.getElementById('fixedButtons').style.display = 'flex';
-    }, 400);
-  }
-</script>
+    }
 
+    function mostrarGtaVirgen() {
+      ocultarTodo();
+      const cont = document.getElementById('gtaVirgenContent');
+      cont.classList.remove('fadeZoomOut');
+      cont.classList.add('fadeZoomIn');
+      cont.style.display = 'block';
+    }
 
+    function mostrarMacro() {
+      ocultarTodo();
+      const cont = document.getElementById('macroContent');
+      cont.classList.remove('fadeZoomOut');
+      cont.classList.add('fadeZoomIn');
+      cont.style.display = 'block';
+    }
+
+    function volverAlForo() {
+      const visibles = document.querySelectorAll('.content-section');
+      visibles.forEach(el => {
+        el.classList.remove('fadeZoomIn');
+        el.classList.add('fadeZoomOut');
+        setTimeout(() => {
+          el.style.display = 'none';
+        }, 400);
+      });
+    }
+  </script>
 </body>
 </html>
