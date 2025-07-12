@@ -343,7 +343,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     position: fixed;
     top: 15px;
     left: 15px;
-    z-index: 999;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -371,7 +371,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     display: none;
   }
 
-  #gtaVirgenContent {
+  .fullscreen-interface {
     display: none;
     position: fixed;
     top: 0; left: 0;
@@ -379,7 +379,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     height: 100vh;
     background: #000;
     color: #0ff;
-    z-index: 998;
+    z-index: 1000;
     padding: 30px 20px;
     overflow-y: auto;
     text-align: center;
@@ -387,100 +387,41 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     animation-fill-mode: both;
   }
 
-  .fadeZoomIn {
-    animation-name: fadeZoomIn;
-  }
-
-  .fadeZoomOut {
-    animation-name: fadeZoomOut;
-  }
+  .fadeZoomIn { animation-name: fadeZoomIn; }
+  .fadeZoomOut { animation-name: fadeZoomOut; }
 
   @keyframes fadeZoomIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.9) translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
+    0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
   }
 
   @keyframes fadeZoomOut {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0.9) translateY(30px);
-    }
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.9) translateY(30px); }
   }
 
-  #gtaVirgenContent h2 {
+  .fullscreen-interface h2 {
     font-size: 2em;
-    margin: 20px 0 10px;
+    margin-top: 10px;
   }
 
-  #gtaVirgenContent img.logo {
+  .fullscreen-interface a {
+    display: block;
+    margin: 15px auto;
+    color: #0ff;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .fullscreen-interface .logo {
     width: 120px;
     border-radius: 50%;
     margin-bottom: 20px;
     box-shadow: 0 0 10px #0ff;
   }
 
-  .gta-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
-  }
-
-  .gta-box {
-    background: rgba(0,255,255,0.08);
-    border: 2px solid #0ff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 280px;
-    box-shadow: 0 0 15px #0ff;
-    transition: transform 0.2s;
-    text-align: center;
-  }
-
-  .gta-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #0ff;
-  }
-
-  .gta-box h3 {
-    margin-bottom: 10px;
-    font-size: 1.3em;
-    color: #00faff;
-  }
-
-  .gta-box p {
-    font-size: 0.95em;
-    margin-bottom: 10px;
-  }
-
-  .gta-box a {
-    color: #0ff;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-
-  .gta-box img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 0 10px #0ff;
-  }
-
   #volverBtn {
-    margin-top: 40px;
+    margin-top: 30px;
     padding: 12px 20px;
     background: #0ff;
     color: #000;
@@ -494,79 +435,25 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   #volverBtn:hover {
     background: #00c9c9;
   }
-
-  @media (max-width: 768px) {
-    .fixed-buttons {
-      left: 10px;
-      top: 10px;
-    }
-
-    .gta-box {
-      width: 90%;
-    }
-
-    .fixed-buttons button {
-      font-size: 0.85em;
-      padding: 8px 12px;
-    }
-  }
 </style>
 
-<!-- Botones fijos -->
 <div class="fixed-buttons">
   <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
-  <button onclick="window.open('https://www.mediafire.com/file/macrosparapc', '_blank')">⚙️ Macro Para PC</button>
+  <button id="macroBtn" onclick="mostrarMacro()">⚙️ Macro Para PC</button>
 </div>
 
-<!-- Contenido GTA Virgen -->
-<div id="gtaVirgenContent">
+<!-- Interfaz GTA Virgen (ya incluida anteriormente, asegúrate de tenerla) -->
+<!-- ... -->
+
+<!-- Interfaz MACRO -->
+<div id="macroContent" class="fullscreen-interface">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
-  <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
-
-  <div class="gta-grid">
-    <div class="gta-box">
-      <h3>🔹 GTA Lite 500MB</h3>
-      <p>Versión ligera ideal para PCs de bajos recursos.</p>
-      <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
-      <img src="Fotito.png" alt="Preview GTA Lite">
-    </div>
-
-    <div class="gta-box">
-      <h3>🔸 GTA Full 4GB</h3>
-      <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
-      <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Full" alt="Preview GTA Full">
-    </div>
-
-    <div class="gta-box">
-      <h3>🟢 GTA RP Base</h3>
-      <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
-      <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+RP" alt="Preview GTA RP Base">
-    </div>
-
-    <div class="gta-box">
-      <h3>🟠 GTA Clean MTA</h3>
-      <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
-      <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+MTA" alt="Preview GTA MTA">
-    </div>
-
-    <div class="gta-box">
-      <h3>🟣 GTA Customizable</h3>
-      <p>Base limpia pero preparada con carpetas para añadir mods fácilmente.</p>
-      <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+ModReady" alt="Preview GTA ModReady">
-    </div>
-
-    <div class="gta-box">
-      <h3>🔵 GTA Portable</h3>
-      <p>Corre desde un USB, sin necesidad de instalación.</p>
-      <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Portable" alt="Preview GTA Portable">
-    </div>
-  </div>
-
+  <h2>⚙️ Macro Para PC</h2>
+  <p>
+    Aprende a configurar y utilizar nuestra macro optimizada para SA-MP. Sigue el video tutorial y descarga la macro desde el botón:
+  </p>
+  <a href="https://www.youtube.com/watch?v=VIDEO_TUTORIAL" target="_blank">🎥 Ver Video Tutorial</a>
+  <a href="https://www.mediafire.com/file/MACRO_LINK" target="_blank">📦 Descargar Macro</a>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
@@ -579,17 +466,41 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     document.querySelector('.container').style.display = 'none';
     document.querySelector('.redes-section').style.display = 'none';
     document.getElementById('gtaVirgenBtn').classList.add('hide');
+    document.getElementById('macroBtn').classList.add('hide');
+  }
+
+  function mostrarMacro() {
+    const cont = document.getElementById('macroContent');
+    cont.classList.remove('fadeZoomOut');
+    cont.classList.add('fadeZoomIn');
+    cont.style.display = 'block';
+    document.querySelector('.container').style.display = 'none';
+    document.querySelector('.redes-section').style.display = 'none';
+    document.getElementById('gtaVirgenBtn').classList.add('hide');
+    document.getElementById('macroBtn').classList.add('hide');
   }
 
   function volverAlForo() {
-    const cont = document.getElementById('gtaVirgenContent');
-    cont.classList.remove('fadeZoomIn');
-    cont.classList.add('fadeZoomOut');
+    const gta = document.getElementById('gtaVirgenContent');
+    const macro = document.getElementById('macroContent');
+
+    if (gta.style.display === 'block') {
+      gta.classList.remove('fadeZoomIn');
+      gta.classList.add('fadeZoomOut');
+    }
+
+    if (macro.style.display === 'block') {
+      macro.classList.remove('fadeZoomIn');
+      macro.classList.add('fadeZoomOut');
+    }
+
     setTimeout(() => {
-      cont.style.display = 'none';
+      gta.style.display = 'none';
+      macro.style.display = 'none';
       document.querySelector('.container').style.display = '';
       document.querySelector('.redes-section').style.display = '';
       document.getElementById('gtaVirgenBtn').classList.remove('hide');
+      document.getElementById('macroBtn').classList.remove('hide');
     }, 400);
   }
 </script>
