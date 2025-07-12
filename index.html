@@ -420,6 +420,24 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     box-shadow: 0 0 10px #0ff;
   }
 
+  .gta-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background: rgba(0,255,255,0.05);
+    border: 2px solid #0ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 15px #0ff;
+  }
+
+  .gta-box img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px #0ff;
+  }
+
   #volverBtn {
     margin-top: 30px;
     padding: 12px 20px;
@@ -435,25 +453,63 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   #volverBtn:hover {
     background: #00c9c9;
   }
+
+  iframe.tutorial {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+  }
+
+  @media (max-width: 768px) {
+    .fixed-buttons {
+      top: 10px;
+      left: 10px;
+    }
+
+    .fixed-buttons button {
+      font-size: 0.85em;
+      padding: 8px 14px;
+    }
+
+    .gta-box {
+      width: 95%;
+    }
+
+    iframe.tutorial {
+      height: 220px;
+    }
+  }
 </style>
 
+<!-- Botones Fijos -->
 <div class="fixed-buttons">
   <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
   <button id="macroBtn" onclick="mostrarMacro()">⚙️ Macro Para PC</button>
 </div>
 
-<!-- Interfaz GTA Virgen (ya incluida anteriormente, asegúrate de tenerla) -->
-<!-- ... -->
+<!-- Interfaz Gta Virgen -->
+<div id="gtaVirgenContent" class="fullscreen-interface">
+  <img src="static.png" alt="Logo MantaMods" class="logo" />
+  <h2>🖥️ GTA Virgen - Versión Limpia</h2>
+  <div class="gta-box">
+    <p>Descarga aquí una versión limpia de GTA San Andreas para que puedas instalar tus mods sin problemas.</p>
+    <a href="https://www.mediafire.com/file/example1" target="_blank">🔗 Descargar GTA Virgen (.rar)</a>
+    <img src="Fotito.png" alt="Preview GTA Virgen">
+  </div>
+  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+</div>
 
-<!-- Interfaz MACRO -->
+<!-- Interfaz Macro -->
 <div id="macroContent" class="fullscreen-interface">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro Para PC</h2>
-  <p>
-    Aprende a configurar y utilizar nuestra macro optimizada para SA-MP. Sigue el video tutorial y descarga la macro desde el botón:
-  </p>
-  <a href="https://www.youtube.com/watch?v=VIDEO_TUTORIAL" target="_blank">🎥 Ver Video Tutorial</a>
-  <a href="https://www.mediafire.com/file/MACRO_LINK" target="_blank">📦 Descargar Macro</a>
+  <p>Mira el siguiente video para aprender a usar la macro, y descárgala con el botón de abajo:</p>
+  <iframe class="tutorial" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+  <a href="https://www.mediafire.com/file/MACRO_LINK" target="_blank">📥 Descargar Macro</a>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
@@ -504,6 +560,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     }, 400);
   }
 </script>
+
 
 </body>
 </html>
