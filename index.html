@@ -352,6 +352,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     border-radius: 8px;
     box-shadow: 0 0 10px #0ff;
     cursor: pointer;
+    transition: transform 0.2s;
   }
 
   #gtaVirgenBtn.hide {
@@ -370,6 +371,38 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     padding: 30px 20px;
     overflow-y: auto;
     text-align: center;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
+
+  .fadeZoomIn {
+    animation-name: fadeZoomIn;
+  }
+
+  .fadeZoomOut {
+    animation-name: fadeZoomOut;
+  }
+
+  @keyframes fadeZoomIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes fadeZoomOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.9) translateY(30px);
+    }
   }
 
   #gtaVirgenContent h2 {
@@ -462,8 +495,10 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 </style>
 
+<!-- Botón de acceso -->
 <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
 
+<!-- Contenido GTA Virgen -->
 <div id="gtaVirgenContent">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
@@ -515,19 +550,28 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
+<!-- Script -->
 <script>
   function mostrarGtaVirgen() {
-    document.getElementById('gtaVirgenContent').style.display = 'block';
+    const cont = document.getElementById('gtaVirgenContent');
+    cont.classList.remove('fadeZoomOut');
+    cont.classList.add('fadeZoomIn');
+    cont.style.display = 'block';
     document.querySelector('.container').style.display = 'none';
     document.querySelector('.redes-section').style.display = 'none';
     document.getElementById('gtaVirgenBtn').classList.add('hide');
   }
 
   function volverAlForo() {
-    document.getElementById('gtaVirgenContent').style.display = 'none';
-    document.querySelector('.container').style.display = '';
-    document.querySelector('.redes-section').style.display = '';
-    document.getElementById('gtaVirgenBtn').classList.remove('hide');
+    const cont = document.getElementById('gtaVirgenContent');
+    cont.classList.remove('fadeZoomIn');
+    cont.classList.add('fadeZoomOut');
+    setTimeout(() => {
+      cont.style.display = 'none';
+      document.querySelector('.container').style.display = '';
+      document.querySelector('.redes-section').style.display = '';
+      document.getElementById('gtaVirgenBtn').classList.remove('hide');
+    }, 400);
   }
 </script>
 
