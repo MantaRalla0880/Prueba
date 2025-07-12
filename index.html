@@ -471,8 +471,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     box-shadow: 0 0 10px #0ff;
   }
 </style>
-  <!-- BOTONES FIJOS -->
-  <div class="top-buttons">
+ <!-- BOTONES FIJOS -->
+  <div class="top-buttons" id="menuBtns">
     <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
     <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
   </div>
@@ -482,7 +482,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     <img src="static.png" alt="Logo MantaMods" class="logo" />
     <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
 
-    <div class="gta-scroll-container">
+    <div class="gta-vertical-container">
       <div class="gta-box">
         <h3>🔹 GTA Lite 500MB</h3>
         <p>Versión ligera ideal para PCs de bajos recursos.</p>
@@ -502,27 +502,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
         <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
         <img src="https://via.placeholder.com/300x160?text=GTA+RP" alt="Preview GTA RP Base">
-      </div>
-
-      <div class="gta-box">
-        <h3>🟠 GTA Clean MTA</h3>
-        <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
-        <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=GTA+MTA" alt="Preview GTA MTA">
-      </div>
-
-      <div class="gta-box">
-        <h3>🟣 GTA Customizable</h3>
-        <p>Base limpia pero preparada con carpetas para añadir mods fácilmente.</p>
-        <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=GTA+ModReady" alt="Preview GTA ModReady">
-      </div>
-
-      <div class="gta-box">
-        <h3>🔵 GTA Portable</h3>
-        <p>Corre desde un USB, sin necesidad de instalación.</p>
-        <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-        <img src="https://via.placeholder.com/300x160?text=GTA+Portable" alt="Preview GTA Portable">
       </div>
     </div>
 
@@ -552,6 +531,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
     function mostrarGtaVirgen() {
       ocultarTodo();
+      document.getElementById("menuBtns").classList.add("hidden");
       const cont = document.getElementById('gtaVirgenContent');
       cont.classList.remove('fadeZoomOut');
       cont.classList.add('fadeZoomIn');
@@ -560,6 +540,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
     function mostrarMacro() {
       ocultarTodo();
+      document.getElementById("menuBtns").classList.add("hidden");
       const cont = document.getElementById('macroContent');
       cont.classList.remove('fadeZoomOut');
       cont.classList.add('fadeZoomIn');
@@ -573,9 +554,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         el.classList.add('fadeZoomOut');
         setTimeout(() => {
           el.style.display = 'none';
+          document.getElementById("menuBtns").classList.remove("hidden");
         }, 400);
       });
     }
   </script>
+
 </body>
 </html>
