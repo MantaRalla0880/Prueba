@@ -9,6 +9,7 @@
   <meta property="og:image" content="https://mantamods.github.io/static.png" />
   <meta property="og:url" content="https://mantamods.github.io/" />
   <meta name="theme-color" content="#00ffff" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,114 +59,6 @@
       100% { filter: brightness(1.4) drop-shadow(0 0 25px #0ff); }
     }
 
-    .redes-section {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .redes-section h2 {
-      font-size: 2.2em;
-      color: #00faff;
-      text-shadow: 0 0 10px #00faff, 0 0 20px #00faff;
-      margin-bottom: 10px;
-    }
-
-    .social {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 20px;
-    }
-
-    .social a {
-      font-size: 2.1em;
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-
-    .social a:hover {
-      transform: scale(1.2);
-    }
-
-    .section {
-      max-width: 800px;
-      margin-top: 20px;
-    }
-
-    .cta {
-      background: #0ff;
-      color: #000;
-      padding: 15px 40px;
-      font-size: 1.3em;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #0ff;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      margin: 20px auto 10px;
-      display: inline-block;
-    }
-
-    .cta:hover {
-      background: #00c9c9;
-      box-shadow: 0 0 25px #0ff;
-    }
-
-    .buttons-row {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .rules-btn, .plantilla-btn {
-      background: #0ff;
-      color: #000;
-      padding: 12px 25px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #0ff;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .rules-btn:hover, .plantilla-btn:hover {
-      background: #00c9c9;
-      box-shadow: 0 0 25px #0ff;
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: red;
-      box-shadow: 0 0 5px red;
-    }
-
-    .rules-box, .plantilla-box {
-      display: none;
-      background: rgba(0, 0, 0, 0.9);
-      border: 2px solid #0ff;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 95vw;
-      margin: 20px auto;
-      color: #0ff;
-      white-space: pre-wrap;
-      font-size: 1em;
-      line-height: 1.6;
-      text-align: left;
-      max-height: 60vh;
-      overflow-y: auto;
-      overflow-x: hidden;
-      word-wrap: break-word;
-    }
-
     .rgb-text {
       animation: rgbCycle 5s linear infinite;
     }
@@ -178,52 +71,175 @@
       100% { color: red; }
     }
 
-    #startBtn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px 30px;
-      font-size: 1.2em;
-      z-index: 10;
+    #gtaVirgenBtn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+      padding: 10px 15px;
+      font-size: 0.95em;
       background: #0ff;
       color: #000;
       border: none;
       border-radius: 10px;
-      box-shadow: 0 0 15px #0ff;
+      box-shadow: 0 0 10px #0ff;
       cursor: pointer;
-      animation: pulseBtn 1.5s infinite ease-in-out;
     }
 
-    @keyframes pulseBtn {
-      0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #0ff; }
-      50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 20px #0ff; }
-      100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #0ff; }
+    @media (max-width: 768px) {
+      #gtaVirgenBtn {
+        font-size: 0.85em;
+        padding: 8px 12px;
+      }
     }
 
-    @media (min-width: 768px) {
-      #startBtn { display: none; }
+    #gtaVirgenContent {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      color: #0ff;
+      z-index: 998;
+      padding: 60px 20px 40px;
+      overflow-y: auto;
+      text-align: center;
+      animation: fadeZoomIn 0.6s ease-in-out;
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #ccc;
+    @keyframes fadeZoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .gta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+
+    .gta-card {
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 0 15px #0ff3;
+    }
+
+    .gta-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      color: #0ff;
+    }
+
+    .gta-card p {
+      font-size: 0.95em;
+      margin-bottom: 10px;
+    }
+
+    .gta-card a {
+      display: inline-block;
+      margin-top: 5px;
+      color: #0ff;
+      text-decoration: underline;
+    }
+
+    .gta-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #0ff4;
+    }
+
+    #volverBtn {
+      margin-top: 30px;
+      padding: 12px 20px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 0 15px #0ff;
+    }
+
+    #volverBtn:hover {
+      background: #00c9c9;
     }
   </style>
 </head>
 <body>
+  <button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
+
   <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
   <video id="bg-video" autoplay muted loop playsinline class="video-bg">
     <source src="Video2.mp4" type="video/mp4" />
     Tu navegador no soporta video HTML5.
   </video>
-
   <audio id="music" loop autoplay>
     <source src="Musicas.mp3" type="audio/mpeg" />
   </audio>
 
+  <div id="gtaVirgenContent">
+    <img src="static.png" alt="Logo" style="width: 100px; border-radius: 50%; margin-bottom: 20px;">
+    <h2>🖥️ GTA Virgen - Instalación Limpia</h2>
+    <p>Elige una versión limpia de GTA San Andreas lista para instalar mods:</p>
+
+    <div class="gta-grid" data-aos="fade-up">
+      <div class="gta-card">
+        <h3>GTA Virgen Básico</h3>
+        <p>Instalación limpia sin modificaciones.</p>
+        <a href="#">Descargar</a>
+        <img src="gta1.jpg" alt="GTA Virgen Básico">
+      </div>
+      <div class="gta-card">
+        <h3>GTA Lite 500MB</h3>
+        <p>Ideal para PCs de bajos recursos.</p>
+        <a href="#">Descargar</a>
+        <img src="gta2.jpg" alt="GTA Lite 500MB">
+      </div>
+      <div class="gta-card">
+        <h3>GTA Full Audio</h3>
+        <p>Incluye radios, voces y cinemáticas.</p>
+        <a href="#">Descargar</a>
+        <img src="gta3.jpg" alt="GTA Full Audio">
+      </div>
+      <div class="gta-card">
+        <h3>GTA Mod Ready</h3>
+        <p>Preparado para usar con mods.</p>
+        <a href="#">Descargar</a>
+        <img src="gta4.jpg" alt="GTA Mod Ready">
+      </div>
+      <div class="gta-card">
+        <h3>GTA Portable</h3>
+        <p>No requiere instalación, ejecutable directo.</p>
+        <a href="#">Descargar</a>
+        <img src="gta5.jpg" alt="GTA Portable">
+      </div>
+      <div class="gta-card">
+        <h3>GTA SA Steam</h3>
+        <p>Versión original de Steam, sin cracks.</p>
+        <a href="#">Descargar</a>
+        <img src="gta6.jpg" alt="GTA SA Steam">
+      </div>
+    </div>
+
+    <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    AOS.init();
+
     const music = document.getElementById('music');
     const video = document.getElementById('bg-video');
     function startMedia() {
@@ -232,20 +248,18 @@
       document.getElementById('startBtn').style.display = 'none';
     }
 
-    function toggleRules() {
-      const box = document.getElementById('rules-box');
-      const dot = document.getElementById('rules-dot');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-      dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
-      dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+    function mostrarGtaVirgen() {
+      document.getElementById('gtaVirgenContent').style.display = 'block';
+      document.querySelector('.container').style.display = 'none';
+      document.querySelector('.redes-section').style.display = 'none';
+      document.getElementById('gtaVirgenBtn').style.display = 'none';
     }
 
-    function togglePlantilla() {
-      const box = document.getElementById('plantilla-box');
-      const dot = document.getElementById('plantilla-dot');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-      dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
-      dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+    function volverAlForo() {
+      document.getElementById('gtaVirgenContent').style.display = 'none';
+      document.querySelector('.container').style.display = '';
+      document.querySelector('.redes-section').style.display = '';
+      document.getElementById('gtaVirgenBtn').style.display = 'block';
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -253,7 +267,6 @@
       music.play().catch(() => {});
     });
   </script>
-
   <div class="redes-section">
     <h2>Redes</h2>
     <div class="social">
@@ -337,199 +350,5 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
       🔥MantaMods🔥 | “RD Un Flow Diferente, Un Mod Distinto Y Unico.”
     </footer>
   </div>
-
-<style>
-  #gtaVirgenBtn {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 999;
-    padding: 12px 18px;
-    font-size: 1em;
-    background: #0ff;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #0ff;
-    cursor: pointer;
-  }
-
-  #gtaVirgenBtn.hide {
-    display: none;
-  }
-
-  #gtaVirgenContent {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    color: #0ff;
-    z-index: 998;
-    padding: 30px 20px;
-    overflow-y: auto;
-    text-align: center;
-  }
-
-  #gtaVirgenContent h2 {
-    font-size: 2em;
-    margin: 20px 0 10px;
-  }
-
-  #gtaVirgenContent img.logo {
-    width: 120px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px #0ff;
-  }
-
-  .gta-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
-  }
-
-  .gta-box {
-    background: rgba(0,255,255,0.08);
-    border: 2px solid #0ff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 280px;
-    box-shadow: 0 0 15px #0ff;
-    transition: transform 0.2s;
-    text-align: center;
-  }
-
-  .gta-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #0ff;
-  }
-
-  .gta-box h3 {
-    margin-bottom: 10px;
-    font-size: 1.3em;
-    color: #00faff;
-  }
-
-  .gta-box p {
-    font-size: 0.95em;
-    margin-bottom: 10px;
-  }
-
-  .gta-box a {
-    color: #0ff;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-
-  .gta-box img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 0 10px #0ff;
-  }
-
-  #volverBtn {
-    margin-top: 40px;
-    padding: 12px 20px;
-    background: #0ff;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1em;
-    box-shadow: 0 0 15px #0ff;
-  }
-
-  #volverBtn:hover {
-    background: #00c9c9;
-  }
-
-  @media (max-width: 768px) {
-    #gtaVirgenBtn {
-      font-size: 0.85em;
-      padding: 10px 14px;
-    }
-
-    .gta-box {
-      width: 90%;
-    }
-  }
-</style>
-
-<button id="gtaVirgenBtn" onclick="mostrarGtaVirgen()">🖥️ Gta Virgen</button>
-
-<div id="gtaVirgenContent">
-  <img src="static.png" alt="Logo MantaMods" class="logo" />
-  <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
-
-  <div class="gta-grid">
-    <div class="gta-box">
-      <h3>🔹 GTA Lite 500MB</h3>
-      <p>Versión ligera ideal para PCs de bajos recursos.</p>
-      <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
-      <img src="Fotito.png" alt="Preview GTA Lite">
-    </div>
-
-    <div class="gta-box">
-      <h3>🔸 GTA Full 4GB</h3>
-      <p>Incluye audio y vídeos completos, versión sin modificaciones.</p>
-      <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Full" alt="Preview GTA Full">
-    </div>
-
-    <div class="gta-box">
-      <h3>🟢 GTA RP Base</h3>
-      <p>Diseñado para roleplay, sin CLEO ni extras innecesarios.</p>
-      <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+RP" alt="Preview GTA RP Base">
-    </div>
-
-    <div class="gta-box">
-      <h3>🟠 GTA Clean MTA</h3>
-      <p>Optimizado exclusivamente para MTA, sin archivos conflictivos.</p>
-      <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+MTA" alt="Preview GTA MTA">
-    </div>
-
-    <div class="gta-box">
-      <h3>🟣 GTA Customizable</h3>
-      <p>Base limpia pero preparada con carpetas para añadir mods fácilmente.</p>
-      <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+ModReady" alt="Preview GTA ModReady">
-    </div>
-
-    <div class="gta-box">
-      <h3>🔵 GTA Portable</h3>
-      <p>Corre desde un USB, sin necesidad de instalación.</p>
-      <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Portable" alt="Preview GTA Portable">
-    </div>
-  </div>
-
-  <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
-</div>
-
-<script>
-  function mostrarGtaVirgen() {
-    document.getElementById('gtaVirgenContent').style.display = 'block';
-    document.querySelector('.container').style.display = 'none';
-    document.querySelector('.redes-section').style.display = 'none';
-    document.getElementById('gtaVirgenBtn').classList.add('hide');
-  }
-
-  function volverAlForo() {
-    document.getElementById('gtaVirgenContent').style.display = 'none';
-    document.querySelector('.container').style.display = '';
-    document.querySelector('.redes-section').style.display = '';
-    document.getElementById('gtaVirgenBtn').classList.remove('hide');
-  }
-</script>
-
 </body>
 </html>
