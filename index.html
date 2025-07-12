@@ -345,15 +345,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 </div>
 
 <style>
-  /* Estilo botones fijos arriba a la izquierda */
+  /* Botones fijos arriba izquierda */
   #menuBtns {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     z-index: 9999;
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
     align-items: flex-start;
   }
 
@@ -374,25 +374,18 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     display: none !important;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (min-width: 600px) {
     #menuBtns {
-      flex-direction: column;
-      gap: 8px;
-      top: 10px;
-      left: 10px;
-    }
-
-    #menuBtns button {
-      font-size: 0.9em;
-      padding: 8px 12px;
+      flex-direction: row;
     }
   }
 
-  /* Estilo general interfaces */
+  /* Interfaz general */
   #gtaVirgenContent, #macroContent {
     display: none;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background: #000;
@@ -533,12 +526,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- INTERFAZ MACRO -->
+<!-- INTERFAZ MACRO PARA PC -->
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
   <p>Tutorial para aprender a usar la macro:</p>
   <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
+  <br>
   <a class="descarga-link" href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
   <br>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
@@ -583,6 +577,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     });
   }
 </script>
+
 
 </body>
 </html>
