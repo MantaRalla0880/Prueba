@@ -338,238 +338,197 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>MantaMods</title>
-  <style>
-    /* Botones normales arriba de la página */
-    #menuBtns {
-      width: 100%;
-      padding: 10px 20px;
-      display: flex;
-      gap: 10px;
-      background: rgba(0, 255, 255, 0.1);
-      border-bottom: 1px solid #0ff;
-      box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
-      position: relative;
-      z-index: 10;
-    }
-
-    #menuBtns button {
-      padding: 10px 16px;
-      font-size: 1em;
-      background: #0ff;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px #0ff;
-    }
-
-    #menuBtns.hidden {
-      display: none !important;
-    }
-
-    /* Interfaces */
-    #gtaVirgenContent, #macroContent {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-      color: #0ff;
-      z-index: 999;
-      padding: 30px 20px;
-      overflow-y: auto;
-      text-align: center;
-      animation-duration: 0.5s;
-      animation-fill-mode: both;
-    }
-
-    .fadeZoomIn {
-      animation-name: fadeZoomIn;
-    }
-
-    .fadeZoomOut {
-      animation-name: fadeZoomOut;
-    }
-
-    @keyframes fadeZoomIn {
-      0% { opacity: 0; transform: scale(0.9) translateY(30px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    @keyframes fadeZoomOut {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.9) translateY(30px); }
-    }
-
-    .logo {
-      width: 120px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px #0ff;
-    }
-
-    .gta-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .gta-box {
-      background: rgba(0,255,255,0.08);
-      border: 2px solid #0ff;
-      border-radius: 12px;
-      padding: 20px;
-      width: 300px;
-      box-shadow: 0 0 15px #0ff;
-      transition: transform 0.2s;
-      text-align: center;
-    }
-
-    .gta-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #0ff;
-    }
-
-    .gta-box img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-top: 10px;
-      box-shadow: 0 0 10px #0ff;
-    }
-
-    #volverBtn {
-      margin-top: 40px;
-      padding: 12px 20px;
-      background: #0ff;
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 0 15px #0ff;
-      animation: pulseFade 1s ease-in-out;
-    }
-
-    #volverBtn:hover {
-      background: #00c9c9;
-    }
-
-    @keyframes pulseFade {
-      0% { transform: scale(0.9); opacity: 0; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
-    iframe {
-      width: 90%;
-      height: 400px;
-      max-width: 800px;
-      border: 2px solid #0ff;
-      border-radius: 10px;
-      margin: 20px auto;
-      display: block;
-      box-shadow: 0 0 10px #0ff;
-    }
-
-    @media (max-width: 768px) {
-      .gta-box {
-        width: 90%;
-      }
-
-      iframe {
-        height: 250px;
-      }
-
-      #menuBtns {
-        flex-direction: column;
-        gap: 8px;
-        align-items: flex-start;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<!-- BOTONES (ya no fijos) -->
-<div id="menuBtns">
+<!-- BOTONES FIJOS -->
+<div id="topLeftBtns">
   <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
   <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
 </div>
+
+<!-- ESTILO -->
+<style>
+  /* Botones fijos arriba izquierda */
+  #topLeftBtns {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #topLeftBtns button {
+    padding: 10px 16px;
+    font-size: 0.95em;
+    background: #00ffff;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffff;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+
+  #topLeftBtns button:hover {
+    background: #00e0e0;
+    transform: scale(1.05);
+  }
+
+  /* Interfaz full screen */
+  #gtaVirgenContent, #macroContent {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    color: #0ff;
+    z-index: 998;
+    padding: 30px 20px;
+    overflow-y: auto;
+    text-align: center;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
+
+  .fadeZoomIn {
+    animation-name: fadeZoomIn;
+  }
+
+  .fadeZoomOut {
+    animation-name: fadeZoomOut;
+  }
+
+  @keyframes fadeZoomIn {
+    0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  @keyframes fadeZoomOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.9) translateY(30px); }
+  }
+
+  .logo {
+    width: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px #0ff;
+  }
+
+  .gta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .gta-box {
+    background: rgba(0,255,255,0.08);
+    border: 2px solid #0ff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 15px #0ff;
+    transition: transform 0.2s;
+    text-align: center;
+  }
+
+  .gta-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #0ff;
+  }
+
+  .gta-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px #0ff;
+  }
+
+  #volverBtn {
+    margin-top: 40px;
+    padding: 12px 20px;
+    background: #0ff;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 0 0 15px #0ff;
+    transition: transform 0.2s;
+  }
+
+  #volverBtn:hover {
+    background: #00c9c9;
+    transform: scale(1.05);
+  }
+
+  iframe {
+    width: 90%;
+    height: 420px;
+    border: 2px solid #0ff;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 0 10px #0ff;
+  }
+
+  @media (max-width: 600px) {
+    #topLeftBtns {
+      flex-direction: row;
+      top: 10px;
+      left: 10px;
+    }
+
+    #topLeftBtns button {
+      font-size: 0.9em;
+      padding: 8px 12px;
+    }
+
+    iframe {
+      height: 250px;
+    }
+  }
+</style>
 
 <!-- INTERFAZ GTA VIRGEN -->
 <div id="gtaVirgenContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
   <div class="gta-grid">
-    <!-- Repite esto para más versiones -->
+    <!-- Ejemplo de caja -->
     <div class="gta-box">
       <h3>🔹 GTA Lite 500MB</h3>
       <p>Versión ligera ideal para PCs de bajos recursos.</p>
       <a href="#" target="_blank">Descargar 🔽</a>
-      <img src="Fotito.png" alt="Preview GTA Lite" />
+      <img src="Fotito.png" alt="Preview GTA Lite">
     </div>
-    <div class="gta-box">
-      <h3>🔸 GTA Full 4GB</h3>
-      <p>Incluye audio y vídeos completos, sin modificaciones.</p>
-      <a href="#" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Full" />
-    </div>
-    <div class="gta-box">
-      <h3>🟢 GTA RP Base</h3>
-      <p>Diseñado para roleplay sin CLEO.</p>
-      <a href="#" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+RP" />
-    </div>
-    <div class="gta-box">
-      <h3>🟠 GTA Clean MTA</h3>
-      <p>Optimizado para MTA.</p>
-      <a href="#" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+MTA" />
-    </div>
-    <div class="gta-box">
-      <h3>🟣 GTA Customizable</h3>
-      <p>Listo para instalar mods.</p>
-      <a href="#" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Mods" />
-    </div>
-    <div class="gta-box">
-      <h3>🔵 GTA Portable</h3>
-      <p>Corre desde USB.</p>
-      <a href="#" target="_blank">Descargar 🔽</a>
-      <img src="https://via.placeholder.com/300x160?text=GTA+Portable" />
-    </div>
+    <!-- Agrega las otras 5 versiones aquí -->
   </div>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- INTERFAZ MACRO -->
+<!-- INTERFAZ MACRO PARA PC -->
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
   <p>Tutorial para aprender a usar la macro:</p>
-  <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
-  <br>
-  <a class="descarga-link" href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
-  <br>
+  <iframe src="https://www.youtube.com/embed/kdZYUejztSY?si=1GlSG2qittrqxvP5" allowfullscreen></iframe>
+  <a href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- SCRIPT -->
+<!-- SCRIPTS -->
 <script>
   function ocultarTodo() {
+    document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
+    document.getElementById('macroContent').classList.remove('fadeZoomIn');
     document.getElementById('gtaVirgenContent').style.display = 'none';
     document.getElementById('macroContent').style.display = 'none';
-    document.getElementById('menuBtns').classList.add('hidden');
   }
 
   function mostrarGtaVirgen() {
@@ -589,11 +548,17 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   function volverAlForo() {
-    document.getElementById('gtaVirgenContent').style.display = 'none';
-    document.getElementById('macroContent').style.display = 'none';
-    document.getElementById('menuBtns').classList.remove('hidden');
+    const visibles = document.querySelectorAll('.content-section');
+    visibles.forEach(el => {
+      el.classList.remove('fadeZoomIn');
+      el.classList.add('fadeZoomOut');
+      setTimeout(() => {
+        el.style.display = 'none';
+      }, 400);
+    });
   }
 </script>
+
 
 </body>
 </html>
