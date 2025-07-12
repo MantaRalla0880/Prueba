@@ -338,14 +338,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     </footer>
   </div>
 
-<!-- BOTONES FIJOS -->
+<!-- BOTONES FIJOS IZQUIERDA -->
 <div id="menuBtns">
   <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
   <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
 </div>
 
 <style>
-  /* Botones fijos */
   #menuBtns {
     position: fixed;
     top: 15px;
@@ -358,7 +357,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
   #menuBtns button {
     padding: 10px 14px;
-    font-size: 1em;
+    font-size: 0.95em;
     background: #0ff;
     color: #000;
     border: none;
@@ -366,13 +365,20 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     font-weight: bold;
     box-shadow: 0 0 10px #0ff;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   #menuBtns.hidden {
     display: none !important;
   }
 
-  /* Interfaces generales */
+  @media (min-width: 768px) {
+    #menuBtns {
+      flex-direction: row;
+    }
+  }
+
+  /* INTERFACES */
   #gtaVirgenContent, #macroContent {
     display: none;
     position: fixed;
@@ -463,46 +469,14 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   }
 
   iframe {
-    width: 90vw;
-    max-width: 720px;
-    height: 405px;
+    width: 90%;
+    height: 400px;
+    max-width: 800px;
     border: 2px solid #0ff;
     border-radius: 10px;
-    margin: 20px auto;
+    margin: 30px auto;
     display: block;
     box-shadow: 0 0 10px #0ff;
-  }
-
-  .descarga-link {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 16px;
-    font-size: 1em;
-    font-weight: bold;
-    background: #0ff;
-    color: #000;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #0ff;
-    text-decoration: none;
-  }
-
-  /* Estilos responsive para móvil */
-  @media screen and (max-width: 768px) {
-    #menuBtns {
-      bottom: 15px;
-      left: 15px;
-      top: auto;
-      flex-direction: column;
-    }
-
-    #menuBtns button {
-      font-size: 0.9em;
-      padding: 8px 12px;
-    }
-
-    iframe {
-      height: 220px;
-    }
   }
 </style>
 
@@ -551,16 +525,19 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
-<!-- INTERFAZ MACRO PARA PC -->
+<!-- INTERFAZ MACRO -->
 <div id="macroContent" class="content-section">
   <img src="static.png" alt="Logo MantaMods" class="logo" />
   <h2>⚙️ Macro para PC</h2>
   <p>Tutorial para aprender a usar la macro:</p>
   <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
+  <br>
   <a class="descarga-link" href="https://www.mediafire.com/file/example_macro" target="_blank">Descargar Macro 🔽</a>
+  <br>
   <button id="volverBtn" onclick="volverAlForo()">🔙 Volver al foro</button>
 </div>
 
+<!-- SCRIPT FUNCIONAL -->
 <script>
   function ocultarTodo() {
     document.getElementById('gtaVirgenContent').classList.remove('fadeZoomIn');
