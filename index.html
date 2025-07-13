@@ -21,6 +21,8 @@
         color: #00FFFF;
         overflow-x: hidden;
         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
+        /* Permitir scroll del body por defecto */
+        overflow-y: auto;
     }
 
     /* BOTONES ARRIBA IZQUIERDA */
@@ -79,28 +81,21 @@
 
     /* INTERFACES */
     .content-section {
-        /* Eliminar position: fixed; y ajustes de altura para permitir scroll en el body */
         display: none;
         width: 100%;
         background: rgba(0, 0, 0, 0.9);
         color: #00FFFF;
         padding: 20px;
         text-align: center;
-        /* position: fixed; REMOVED */
-        /* top: 0; REMOVED */
-        /* left: 0; REMOVED */
-        /* min-height: 100vh; REMOVED (o ajustado si es necesario para un contenedor específico) */
-        overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura de esta sección */
+        /* CAMBIO: No fixed/absolute para que el body maneje el scroll */
+        /* Eliminamos min-height: 100vh; de aquí */
         box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease, transform 0.4s ease;
-        /* Ajuste: Para que ocupe todo el viewport cuando esté activo */
-        position: absolute; /* Usar absolute para que se superponga, pero sin fijarse al viewport */
-        top: 0;
-        left: 0;
-        min-height: 100%; /* Ocupa el 100% de la altura de su padre (body en este caso) */
-        z-index: 15; /* Asegura que esté por encima del foro principal */
+        /* Asegura que ocupe todo el ancho disponible */
+        position: relative; /* Permite que el contenido fluya normalmente */
+        z-index: 10; /* Asegura que esté sobre el video de fondo */
     }
 
     .content-section.active-visible {
@@ -108,8 +103,7 @@
         opacity: 1;
         transform: scale(1) translateY(0);
         pointer-events: auto;
-        /* Ajustar overflow del body cuando una sección está activa */
-        /* (Esto se manejará con JS para que el body no haga scroll si la sección es más pequeña que la ventana) */
+        min-height: 100vh; /* Asegura que al menos ocupe la altura del viewport */
     }
 
     .content-section.active-hidden {
@@ -221,8 +215,12 @@
         box-shadow: none;
     }
 
-    #volverBtnGta, #volverBtnMacro {
-        margin-top: 25px;
+    /* ESTILO PARA EL BOTÓN VOLVER AL FORO - SIEMPRE VISIBLE */
+    .volver-btn-fixed {
+        position: fixed;
+        bottom: 20px; /* Distancia desde abajo */
+        left: 50%; /* Centrar horizontalmente */
+        transform: translateX(-50%); /* Ajustar para centrado perfecto */
         padding: 10px 16px;
         background: rgba(0, 255, 255, 0.1);
         color: #00FFFF;
@@ -230,16 +228,17 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: 0.95em;
-        box-shadow: none;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
-        margin-bottom: 20px; /* Añadir margen inferior para que no quede pegado al borde */
+        z-index: 100; /* Asegura que esté por encima de todo */
+        display: none; /* Oculto por defecto, se muestra con JS */
     }
 
-    #volverBtnGta:hover, #volverBtnMacro:hover {
+    .volver-btn-fixed:hover {
         background: #00FFFF;
         color: #000;
-        transform: scale(1.03) translateY(-2px);
-        box-shadow: 0 0 10px #00FFFF;
+        transform: translateX(-50%) scale(1.03) translateY(-2px);
+        box-shadow: 0 0 15px #00FFFF;
     }
 
     iframe {
@@ -682,7 +681,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <div class="author">- MacroUser</div>
                 </div>
                 <div class="review-card">
-                    <div class="rating">⭐⭐⭐⭐}</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
                     <p>"El diseño de la página es muy chulo, me encanta el toque neón y el video de fondo."</p>
                     <div class="author">- NeonGamer</div>
                 </div>
@@ -697,7 +696,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <div class="author">- ModMaster</div>
                 </div>
                 <div class="review-card">
-                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="rating">⭐⭐⭐⭐}</div>
                     <p>"Faltan algunos mods para versiones específicas de GTA, pero en general, muy satisfecho."</p>
                     <div class="author">- VersionHunter</div>
                 </div>
@@ -713,6 +712,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             🔥MantaMods🔥 | "¡RD dándole ese sazon a tu juego, con mods que están a otro nivel!"
         </footer>
     </div>
+
+    <button id="volverBtnFixed" class="volver-btn-fixed" onclick="volverAlForo()">🔙 Volver al foro</button>
 
     <div id="gtaVirgenContent" class="content-section">
         <img src="static.png" alt="Logo MantaMods" class="logo" />
@@ -813,8 +814,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 </div>
             </div>
         </div>
-
-        <button id="volverBtnGta" onclick="volverAlForo()">🔙 Volver al foro</button>
+        <div style="height: 80px;"></div> 
     </div>
 
     <div id="macroContent" class="content-section">
@@ -823,7 +823,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <p>Tutorial para usar la macro desde el mismo foro:</p>
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
         <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
-        <button id="volverBtnMacro" onclick="volverAlForo()">🔙 Volver al foro</button>
+        <div style="height: 80px;"></div> 
     </div>
 
     <script>
@@ -832,6 +832,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
         const contentSections = document.querySelectorAll('.content-section');
+        const volverBtnFixed = document.getElementById('volverBtnFixed'); // Nuevo: Referencia al botón fijo
         const body = document.body; // Referencia al body
 
         const reviewsSlider = document.getElementById('reviewsSlider');
@@ -877,7 +878,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
-            body.classList.remove('no-scroll'); // Restaurar scroll del body
+            // No necesitamos quitar 'no-scroll' aquí si el body siempre puede hacer scroll
+            // body.classList.remove('no-scroll'); 
             requestAnimationFrame(() => {
                 sectionElement.addEventListener('transitionend', function handler() {
                     sectionElement.style.display = 'none';
@@ -890,31 +892,28 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function showSectionSmoothly(sectionElement) {
             if (!sectionElement) return;
+            // Ocultar foro principal y botones superiores
+            foroPrincipal.classList.add('hidden-forum');
+            botonesInicio.classList.add('hidden');
+            
+            // Mostrar la sección objetivo
             sectionElement.style.display = 'block';
-            // Ocultar scroll del body si la sección activa NO necesita scroll propio (es decir, cabe en la pantalla)
-            // Si la sección es más alta que la ventana, su propio overflow-y: auto se encargará
-            // Aquí, la sección activa siempre debería permitir scroll, así que no necesitamos esconder el scroll del body
-            // body.classList.add('no-scroll'); // Considerar si esto es realmente necesario. Probablemente no con position: absolute.
-
             requestAnimationFrame(() => {
                 sectionElement.classList.add('active-visible');
-                // Al mostrar una nueva sección, desplazar la ventana al principio
-                window.scrollTo(0, 0);
+                // Desplazar la ventana al principio de la nueva sección
+                window.scrollTo(0, 0); 
+                // Mostrar el botón de volver
+                volverBtnFixed.style.display = 'block';
             });
         }
 
         function mostrarInterfaz(interfazId) {
             const targetSection = document.getElementById(interfazId);
 
-            hideSectionSmoothly(foroPrincipal, () => {
-                // Al ocultar el foro principal, lo hacemos realmente invisible y no ocupando espacio
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
-                
-                hideSectionSmoothly(currentActiveSection, () => {
-                    showSectionSmoothly(targetSection);
-                    currentActiveSection = targetSection;
-                });
+            // Ocultar la sección actualmente activa si existe
+            hideSectionSmoothly(currentActiveSection, () => {
+                showSectionSmoothly(targetSection);
+                currentActiveSection = targetSection;
             });
         }
 
@@ -922,16 +921,16 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             hideSectionSmoothly(currentActiveSection, () => {
                 currentActiveSection = null; // Reiniciar la sección activa
                 
-                foroPrincipal.classList.remove('hidden-forum'); // Mostrar el foro (remover clases de ocultamiento)
-                // Asegurarse de que el foro principal esté visible (flex) antes de la transición
+                // Mostrar el foro principal
+                foroPrincipal.classList.remove('hidden-forum'); 
                 foroPrincipal.style.display = 'flex'; 
                 
                 requestAnimationFrame(() => {
-                    foroPrincipal.classList.add('active-visible'); // Animación de entrada
-                    body.classList.remove('no-scroll'); // Asegurarse de que el scroll del body esté habilitado
+                    foroPrincipal.classList.add('active-visible'); 
                     window.scrollTo(0, 0); // Volver al inicio del foro
                 });
                 botonesInicio.classList.remove('hidden'); // Mostrar los botones superiores
+                volverBtnFixed.style.display = 'none'; // Ocultar el botón de volver
             });
         }
 
