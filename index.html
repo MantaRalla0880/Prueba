@@ -9,39 +9,29 @@
     <meta property="og:image" content="https://mantamods.github.io/static.png" />
     <meta property="og:url" content="https://mantamods.github.io/" />
     <meta name="theme-color" content="#00ffff" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap'); /* Ajuste de pesos de fuente */
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif; /* Fuente principal más sencilla */
         background: #000;
-        color: #33FF99;
+        color: #00FFFF; /* Color principal más limpio */
         overflow-x: hidden;
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair; /* Cursor más sutil */
     }
 
-    /* Overlay de ruido/glitch */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABjFqzyAAAABlBMVEVHcExra2tSUlJgbKrbAAAAAXRSTlMAQObYZgAAABFJREFUCNdjYKAAMjAwMDQxMEkAK2i4JkF+G0AAAAAASUVORK5CYII=') repeat;
-        opacity: 0.05;
-        pointer-events: none;
-        z-index: 10;
-    }
+    /* Eliminar overlay de ruido para un look más limpio */
+    /* body::before { display: none; } */
 
-    /* BOTONES ARRIBA IZQUIERDA */
+    /* BOTONES ARRIBA IZQUIERDA - Más discretos */
     .botones-superiores {
         display: flex;
-        gap: 10px;
-        margin-top: 15px;
-        margin-left: 15px;
+        gap: 8px; /* Reducir espacio entre botones */
+        margin-top: 10px; /* Reducir margen */
+        margin-left: 10px; /* Reducir margen */
         justify-content: flex-start;
         flex-wrap: wrap;
         position: relative;
@@ -51,175 +41,185 @@
 
     .botones-superiores.hidden {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-10px); /* Menor desplazamiento */
         pointer-events: none;
     }
 
     .botones-superiores button {
-        padding: 10px 14px;
-        font-size: 1em;
-        background: #00FFFF;
-        color: #000;
-        border: none;
-        border-radius: 8px;
-        font-weight: bold;
-        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
+        padding: 8px 12px; /* Reducir padding */
+        font-size: 0.9em; /* Reducir tamaño de fuente */
+        background: rgba(0, 255, 255, 0.1); /* Fondo semitransparente para un look minimalista */
+        color: #00FFFF;
+        border: 1px solid #00FFFF; /* Borde más sutil */
+        border-radius: 6px; /* Bordes menos redondeados */
+        font-weight: 500; /* Peso de fuente más ligero */
+        box-shadow: none; /* Eliminar sombras para look minimalista */
         cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.3s;
+        transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
     }
 
     .botones-superiores button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6);
+        transform: scale(1.03); /* Menor escala al pasar el ratón */
+        background: #00FFFF;
+        color: #000;
+        box-shadow: 0 0 8px #00FFFF; /* Sombra sutil al pasar el ratón */
     }
 
     @media (max-width: 600px) {
         .botones-superiores {
-            flex-direction: column;
-            align-items: flex-start;
+            flex-direction: row; /* Mantener en fila si es posible, o ajustar con wrap */
+            justify-content: center;
+            width: 100%;
+            margin-left: 0;
+            padding: 5px;
         }
         .botones-superiores button {
-            width: fit-content;
+            width: auto;
+            flex-grow: 1; /* Para que ocupen el espacio disponible */
+            max-width: 48%; /* Dos por fila */
         }
     }
 
-    /* INTERFACES (Optimizado: Usar opacidad y visibilidad) */
+    /* INTERFACES (Optimizadas para minimalismo) */
     .content-section {
-        display: none; /* Se mantiene para que no ocupe espacio cuando está oculto */
+        display: none;
         width: 100%;
-        background: #000;
+        background: rgba(0, 0, 0, 0.9); /* Fondo ligeramente transparente */
         color: #00FFFF;
-        padding: 30px 20px;
+        padding: 20px; /* Reducir padding */
         text-align: center;
-        /* Las animaciones fadeZoomIn/Out se manejarán con clases */
-        position: fixed; /* Usar fixed para que cubra la pantalla sin problemas de flujo */
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 15;
         overflow-y: auto;
-        min-height: 100vh; /* Asegura que cubra al menos la altura del viewport */
-        height: 100%; /* Para que el scroll funcione si el contenido excede min-height */
+        min-height: 100vh;
         box-sizing: border-box;
-        opacity: 0; /* Controlaremos la visibilidad con opacidad para transiciones suaves */
-        pointer-events: none; /* No clickable when hidden */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.4s ease; /* Transiciones más rápidas */
     }
 
     .content-section.active-visible {
-        display: block; /* Solo se hace block cuando está activa para la animación */
-        animation-name: fadeZoomIn;
-        animation-duration: 0.5s;
-        animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
-        pointer-events: auto; /* Clickable when visible */
+        display: block;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        pointer-events: auto;
     }
 
     .content-section.active-hidden {
-        animation-name: fadeZoomOut;
-        animation-duration: 0.5s;
-        animation-fill-mode: forwards;
-        pointer-events: none;
+        opacity: 0;
+        transform: scale(0.95) translateY(10px); /* Menor desplazamiento */
     }
 
-    @keyframes fadeZoomIn {
-        0% { opacity: 0; transform: scale(0.9) translateY(30px); }
-        100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    @keyframes fadeZoomOut {
-        0% { opacity: 1; transform: scale(1); }
-        100% { opacity: 0; transform: scale(0.9) translateY(30px); }
-    }
-
-    /* Contenedor principal del foro */
+    /* Contenedor principal del foro - Más compacto */
     .container {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding: 40px 20px 60px;
+        padding: 20px; /* Reducir padding */
         text-align: center;
         box-sizing: border-box;
         width: 100%;
         position: relative;
         z-index: 0;
-        transition: opacity 0.5s ease, transform 0.5s ease; /* Añadida transición para el contenedor principal */
-        opacity: 1; /* Por defecto visible */
-        pointer-events: auto; /* Por defecto interactuable */
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .container.hidden-forum {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-10px); /* Menor desplazamiento */
         pointer-events: none;
     }
 
     .logo {
-        width: 120px;
+        width: 100px; /* Reducir tamaño del logo */
         border-radius: 50%;
-        margin-bottom: 20px;
-        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
+        margin-bottom: 15px; /* Reducir margen */
+        box-shadow: 0 0 10px #00FFFF; /* Sombra más sutil */
+    }
+
+    /* Estilos para las nuevas categorías */
+    .category-section {
+        margin-bottom: 30px; /* Espacio entre categorías */
+        width: 100%;
+        max-width: 700px; /* Limitar ancho como el resto del contenido */
+    }
+
+    .category-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.8em; /* Tamaño para títulos de categoría */
+        color: #00FFFF;
+        text-shadow: 0 0 8px #00FFFF, 0 0 15px rgba(0, 255, 255, 0.3);
+        margin-bottom: 15px; /* Espacio debajo del título de categoría */
+        text-align: center;
     }
 
     .gta-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 25px;
-        margin-top: 30px;
+        gap: 15px; /* Reducir espacio entre elementos */
+        margin-top: 0; /* Eliminar margen superior ya que la categoría lo maneja */
     }
 
     .gta-box {
-        background: rgba(0,255,255,0.08);
-        border: 2px solid #00FFFF;
-        border-radius: 12px;
-        padding: 20px;
-        width: 300px;
-        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.3);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(0, 255, 255, 0.05); /* Fondo más transparente */
+        border: 1px solid #00FFFF; /* Borde más delgado */
+        border-radius: 8px; /* Menos redondeado */
+        padding: 15px; /* Reducir padding */
+        width: 280px; /* Reducir ancho */
+        box-shadow: none; /* Eliminar sombras */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         text-align: center;
     }
 
     .gta-box:hover {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 0 25px #00FFFF, 0 8px 15px rgba(0,255,255,0.5);
+        transform: translateY(-4px) scale(1.02); /* Menor transformación */
+        box-shadow: 0 0 10px #00FFFF; /* Sombra sutil al pasar el ratón */
     }
 
     .gta-box img {
         width: 100%;
         height: auto;
-        border-radius: 10px;
-        margin-top: 10px;
-        box-shadow: 0 0 10px #00FFFF;
+        border-radius: 8px; /* Menos redondeado */
+        margin-top: 8px; /* Reducir margen */
+        box-shadow: none; /* Eliminar sombras */
     }
 
     #volverBtnGta, #volverBtnMacro {
-        margin-top: 40px;
-        padding: 12px 20px;
-        background: #00FFFF;
-        color: #000;
-        border: none;
-        border-radius: 10px;
+        margin-top: 25px; /* Reducir margen */
+        padding: 10px 16px; /* Reducir padding */
+        background: rgba(0, 255, 255, 0.1); /* Fondo semitransparente */
+        color: #00FFFF;
+        border: 1px solid #00FFFF; /* Borde más sutil */
+        border-radius: 8px; /* Menos redondeado */
         cursor: pointer;
-        font-size: 1em;
-        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
-        transition: transform 0.2s, background 0.3s ease, box-shadow 0.3s ease;
+        font-size: 0.95em; /* Reducir tamaño de fuente */
+        box-shadow: none; /* Eliminar sombras */
+        transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     #volverBtnGta:hover, #volverBtnMacro:hover {
-        background: #00c9c9;
-        transform: scale(1.05) translateY(-3px);
-        box-shadow: 0 0 20px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6);
+        background: #00FFFF;
+        color: #000;
+        transform: scale(1.03) translateY(-2px); /* Menor transformación */
+        box-shadow: 0 0 10px #00FFFF; /* Sombra sutil */
     }
 
     iframe {
-        width: 90%;
-        max-width: 800px;
-        height: 450px;
-        border: 2px solid #00FFFF;
-        border-radius: 10px;
-        margin: 20px auto;
+        width: 95%; /* Ajustar al 95% del contenedor */
+        max-width: 700px; /* Reducir ancho máximo */
+        height: 400px; /* Reducir altura */
+        border: 1px solid #00FFFF; /* Borde más delgado */
+        border-radius: 8px; /* Menos redondeado */
+        margin: 15px auto; /* Reducir margen */
         display: block;
-        box-shadow: 0 0 15px #00FFFF;
+        box-shadow: none; /* Eliminar sombras */
     }
 
     .video-bg {
@@ -231,9 +231,8 @@
         z-index: -1;
     }
 
-    /* Ajustes para el contenido dentro del contenedor principal */
     .container > * {
-        max-width: 800px;
+        max-width: 700px; /* Reducir ancho máximo del contenido */
         margin-left: auto;
         margin-right: auto;
         width: 100%;
@@ -241,65 +240,64 @@
     }
 
     .container header {
-        margin-bottom: 20px;
+        margin-bottom: 15px; /* Reducir margen */
     }
 
     header img {
-        width: 140px;
+        width: 110px; /* Reducir tamaño del logo */
         border-radius: 50%;
-        margin-top: 10px;
-        animation: pulseGlow 2s infinite alternate;
+        margin-top: 8px; /* Reducir margen */
+        animation: pulseGlow 1.8s infinite alternate; /* Animación más sutil */
     }
 
     header h1 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 3.5em;
+        font-size: 2.8em; /* Reducir tamaño de fuente */
         color: #00FFFF;
-        text-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6);
-        margin: 10px 0;
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.4); /* Sombra más sutil */
+        margin: 8px 0; /* Reducir margen */
     }
 
     @keyframes pulseGlow {
-        0% { filter: brightness(1) drop-shadow(0 0 15px #00FFFF); }
-        100% { filter: brightness(1.4) drop-shadow(0 0 35px #00FFFF); }
+        0% { filter: brightness(1) drop-shadow(0 0 10px #00FFFF); }
+        100% { filter: brightness(1.2) drop-shadow(0 0 25px #00FFFF); } /* Brillo y sombra más sutiles */
     }
 
-    /* Centrado de la sección de redes */
     .redes-section {
         text-align: center;
-        margin-bottom: 10px;
-        padding-top: 20px;
+        margin-bottom: 5px; /* Reducir margen */
+        padding-top: 15px; /* Reducir padding */
     }
 
     .redes-section h2 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.5em;
+        font-size: 2em; /* Reducir tamaño de fuente */
         color: #00FFFF;
-        text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
-        margin-bottom: 10px;
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra más sutil */
+        margin-bottom: 8px; /* Reducir margen */
     }
 
     .social {
         display: flex;
         justify-content: center;
-        gap: 25px;
-        margin-bottom: 20px;
+        gap: 15px; /* Reducir espacio entre iconos */
+        margin-bottom: 15px; /* Reducir margen */
     }
 
     .social a {
-        font-size: 2.3em;
+        font-size: 2em; /* Reducir tamaño de iconos */
         text-decoration: none;
-        transition: transform 0.2s ease-out, filter 0.3s;
-        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        transition: transform 0.2s ease-out, filter 0.2s; /* Transición más rápida */
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2)); /* Sombra más sutil */
     }
 
     .social a:hover {
-        transform: scale(1.3) translateY(-5px);
-        filter: drop-shadow(0 0 10px #00FFFF);
+        transform: scale(1.2) translateY(-3px); /* Menor transformación */
+        filter: drop-shadow(0 0 8px #00FFFF); /* Sombra sutil al pasar el ratón */
     }
 
     .section {
-        margin-top: 20px;
+        margin-top: 15px; /* Reducir margen */
     }
 
     .cta {
@@ -317,18 +315,19 @@
         font-family: 'Orbitron', sans-serif;
         text-transform: uppercase;
     }
+
     .cta:hover {
         background: #00c9c9;
-        box-shadow: 0 0 25px #00FFFF, 0 0 50px rgba(0, 255, 255, 0.7);
-        transform: scale(1.03);
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.6); /* Sombra sutil al pasar el ratón */
+        transform: scale(1.02); /* Menor escala */
     }
 
     .buttons-row {
         display: flex;
-        gap: 15px;
+        gap: 10px; /* Reducir espacio */
         justify-content: center;
         flex-wrap: wrap;
-        margin-top: 10px;
+        margin-top: 8px; /* Reducir margen */
     }
 
     .rules-btn, .plantilla-btn {
@@ -348,41 +347,43 @@
     }
 
     .rules-btn:hover, .plantilla-btn:hover {
-        background: #00c9c9;
-        box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6);
-        transform: translateY(-3px);
+        background: #00FFFF;
+        color: #000;
+        box-shadow: 0 0 10px #00FFFF; /* Sombra sutil */
+        transform: translateY(-2px); /* Menor desplazamiento */
     }
 
     .status-dot {
-        width: 12px;
-        height: 12px;
+        width: 10px; /* Reducir tamaño del punto */
+        height: 10px;
         border-radius: 50%;
         background: red;
-        box-shadow: 0 0 6px red;
+        box-shadow: 0 0 5px red; /* Sombra más sutil */
     }
 
     .rules-box, .plantilla-box {
         display: none;
-        background: rgba(0, 0, 0, 0.95);
-        border: 2px solid #00FFFF;
-        border-radius: 10px;
-        padding: 20px;
-        max-width: 95vw;
-        margin: 20px auto;
+        background: rgba(0, 0, 0, 0.9); /* Fondo ligeramente transparente */
+        border: 1px solid #00FFFF; /* Borde más delgado */
+        border-radius: 8px; /* Menos redondeado */
+        padding: 15px; /* Reducir padding */
+        max-width: 90vw; /* Ajustar ancho máximo */
+        margin: 15px auto; /* Reducir margen */
         color: #00FFFF;
         white-space: pre-wrap;
-        font-size: 1.05em;
-        line-height: 1.6;
+        font-size: 0.95em; /* Reducir tamaño de fuente */
+        line-height: 1.5; /* Espaciado de línea más compacto */
         text-align: left;
-        max-height: 60vh;
+        max-height: 50vh; /* Reducir altura máxima */
         overflow-y: auto;
         overflow-x: hidden;
         word-wrap: break-word;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        box-shadow: none; /* Eliminar sombras */
     }
 
     .rgb-text {
         animation: rgbCycle 5s linear infinite;
+        font-weight: 600; /* Un poco más de peso para la legibilidad */
     }
 
     @keyframes rgbCycle {
@@ -398,38 +399,38 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        padding: 25px 40px;
-        font-size: 1.5em;
+        padding: 20px 35px; /* Reducir padding */
+        font-size: 1.3em; /* Reducir tamaño de fuente */
         z-index: 30;
         background: #00FFFF;
         color: #000;
         border: none;
-        border-radius: 12px;
-        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5);
+        border-radius: 10px; /* Menos redondeado */
+        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4); /* Sombra más sutil */
         cursor: pointer;
-        animation: pulseBtn 1.5s infinite ease-in-out;
+        animation: pulseBtn 1.2s infinite ease-in-out; /* Animación más sutil */
         font-family: 'Orbitron', sans-serif;
     }
 
     @keyframes pulseBtn {
-        0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
-        50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 30px #00FFFF; }
-        100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
+        0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #00FFFF; }
+        50% { transform: translate(-50%, -50%) scale(1.03); box-shadow: 0 0 20px #00FFFF; } /* Menor escala y sombra */
+        100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #00FFFF; }
     }
 
     @media (min-width: 768px) {
         #startBtn { display: none; }
     }
 
-    /* RESEÑAS SECTION */
+    /* RESEÑAS SECTION - Más compacto */
     .reviews-section {
-        margin-top: 50px;
-        padding: 20px;
-        background: rgba(0, 255, 255, 0.05);
-        border-radius: 15px;
-        border: 1px solid #00FFFF;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        max-width: 900px;
+        margin-top: 30px; /* Reducir margen */
+        padding: 15px; /* Reducir padding */
+        background: rgba(0, 255, 255, 0.03); /* Fondo más transparente */
+        border-radius: 10px; /* Menos redondeado */
+        border: 1px solid #00FFFF; /* Borde más delgado */
+        box-shadow: none; /* Eliminar sombras */
+        max-width: 800px; /* Reducir ancho máximo */
         width: 95%;
         position: relative;
         display: flex;
@@ -439,10 +440,10 @@
     
     .reviews-section h2 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.5em;
+        font-size: 2em; /* Reducir tamaño de fuente */
         color: #00FFFF;
-        text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
-        margin-bottom: 25px;
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra más sutil */
+        margin-bottom: 20px; /* Reducir margen */
         width: 100%;
         text-align: center;
         flex-shrink: 0;
@@ -450,8 +451,8 @@
 
     .reviews-slider {
         display: flex;
-        gap: 25px;
-        padding-bottom: 10px;
+        gap: 15px; /* Reducir espacio */
+        padding-bottom: 8px; /* Reducir padding */
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
@@ -460,20 +461,19 @@
         flex-shrink: 0;
     }
     
-    /* Styles for when dragging */
     .reviews-slider.active-grab {
         cursor: grabbing;
     }
 
     .reviews-slider::-webkit-scrollbar {
-        height: 8px;
+        height: 6px; /* Scrollbar más delgado */
         background-color: transparent;
     }
     
     .reviews-slider::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 255, 255, 0.5);
-        border-radius: 10px;
-        border: 1px solid #00FFFF;
+        background-color: rgba(0, 255, 255, 0.3); /* Scrollbar más sutil */
+        border-radius: 8px;
+        border: none; /* Eliminar borde */
     }
 
     .reviews-slider {
@@ -482,45 +482,51 @@
     }
 
     .review-card {
-        background: rgba(0, 255, 255, 0.12);
-        border: 1px solid #00FFFF;
-        border-radius: 12px;
-        padding: 25px;
-        min-width: 320px;
+        background: rgba(0, 255, 255, 0.08); /* Fondo más transparente */
+        border: 1px solid #00FFFF; /* Borde más delgado */
+        border-radius: 10px; /* Menos redondeado */
+        padding: 20px; /* Reducir padding */
+        min-width: 280px; /* Reducir ancho mínimo */
         flex: 0 0 auto;
         text-align: left;
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 25px rgba(0, 255, 255, 0.1);
+        box-shadow: none; /* Eliminar sombras */
+        transition: transform 0.2s ease;
+    }
+
+    .review-card:hover {
+        transform: translateY(-3px); /* Menor transformación */
     }
 
     .review-card p {
-        font-size: 1.05em;
-        line-height: 1.6;
-        margin-bottom: 15px;
+        font-size: 1em; /* Ajustar tamaño de fuente */
+        line-height: 1.5; /* Espaciado de línea más compacto */
+        margin-bottom: 12px; /* Reducir margen */
         color: #E0FFFF;
     }
 
     .review-card .author {
-        font-weight: bold;
+        font-weight: 600; /* Peso de fuente ligeramente mayor */
         color: #00FFFF;
-        font-size: 0.95em;
-        text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        font-size: 0.9em; /* Ajustar tamaño de fuente */
+        text-shadow: none; /* Eliminar sombras */
     }
 
     .review-card .rating {
         color: gold;
-        margin-bottom: 8px;
-        text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+        margin-bottom: 6px; /* Reducir margen */
+        text-shadow: none; /* Eliminar sombras */
+        font-size: 1.1em; /* Ajustar tamaño de fuente */
     }
 
     footer {
         margin-top: auto;
-        font-size: 0.9em;
-        color: #999;
-        padding-top: 40px;
+        font-size: 0.8em; /* Reducir tamaño de fuente */
+        color: #777; /* Color más discreto */
+        padding-top: 25px; /* Reducir padding */
+        padding-bottom: 15px; /* Añadir padding inferior */
         width: 100%;
     }
 </style>
-</head>
 <body>
     <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
     <video id="bg-video" autoplay muted loop playsinline class="video-bg">
@@ -541,9 +547,7 @@
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
-                <a href="http://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a> <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
-                <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
-            </div>
+                <a href="https://www.youtube.com/@TuNombreDeUsuarioOCanal" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a> <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a> <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a> </div>
         </div>
 
         <header>
@@ -586,7 +590,7 @@ Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
 🤖 Bot Propio Con Sistemas Únicos.
 🔫 Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.
 🎨 Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Mucho Mas.
-🚗 Vehículos & Skins: Autos, Motos, Patrullas, Skins RP, Y Mas.
+🚗 Vehículos & Skins: Autos, Motos, Patrulas, Skins RP, Y Mas.
 📦 Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Mas.
 🛠️ Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.
 🎉 Eventos & Sorteos: Participa Y Gana Mods Premium.
@@ -678,45 +682,68 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
     <div id="gtaVirgenContent" class="content-section">
         <img src="static.png" alt="Logo MantaMods" class="logo" />
-        <h2>🖥️ GTA Virgen - Versiones Limpias</h2>
-        <div class="gta-grid">
-            <div class="gta-box">
-                <h3>🔹 GTA Lite 500MB</h3>
-                <p>Ideal para PCs de bajos recursos.</p>
-                <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
-                <img src="Fotito.png" alt="Preview GTA Lite">
-            </div>
-            <div class="gta-box">
-                <h3>🔸 GTA Full 4GB</h3>
-                <p>Con audio y vídeos originales, sin mods.</p>
-                <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-                <img src="https://via.placeholder.com/300x160?text=Full" alt="Preview GTA Full">
-            </div>
-            <div class="gta-box">
-                <h3>🟢 GTA RP Base</h3>
-                <p>Preparado para servidores RP.</p>
-                <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-                <img src="https://via.placeholder.com/300x160?text=RP" alt="Preview GTA RP">
-            </div>
-            <div class="gta-box">
-                <h3>🟠 GTA Clean MTA</h3>
-                <p>Para jugar en MTA sin errores.</p>
-                <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-                <img src="https://via.placeholder.com/300x160?text=MTA" alt="Preview GTA MTA">
-            </div>
-            <div class="gta-box">
-                <h3>🟣 GTA Customizable</h3>
-                <p>Lista para añadir tus propios mods.</p>
-                <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-                <img src="https://via.placeholder.com/300x160?text=Custom" alt="Preview GTA Custom">
-            </div>
-            <div class="gta-box">
-                <h3>🔵 GTA Portable</h3>
-                <p>Funciona desde USB sin instalación.</p>
-                <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-                <img src="https://via.placeholder.com/300x160?text=Portable" alt="Preview GTA Portable">
+        <h2>🖥️ GTA Virgen - Versiones Limpias por Categorías</h2>
+
+        <div class="category-section">
+            <h3>🎮 GTA para PCs de Bajos Recursos</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🔹 GTA Lite 500MB</h3>
+                    <p>Ideal para PCs de bajos recursos.</p>
+                    <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
+                    <img src="Fotito.png" alt="Preview GTA Lite">
+                </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <h3>💻 GTA para PCs de Medios Recursos</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🔸 GTA Full 4GB</h3>
+                    <p>Con audio y vídeos originales, sin mods.</p>
+                    <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Full" alt="Preview GTA Full">
+                </div>
+                <div class="gta-box">
+                    <h3>🟢 GTA RP Base</h3>
+                    <p>Preparado para servidores RP.</p>
+                    <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=RP" alt="Preview GTA RP">
+                </div>
             </div>
         </div>
+
+        <div class="category-section">
+            <h3>🚀 GTA para PCs de Altos Recursos</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🟠 GTA Clean MTA</h3>
+                    <p>Para jugar en MTA sin errores.</p>
+                    <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=MTA" alt="Preview GTA MTA">
+                </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <h3>🛠️ Otros Tipos de GTA Base</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🟣 GTA Customizable</h3>
+                    <p>Lista para añadir tus propios mods.</p>
+                    <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Custom" alt="Preview GTA Custom">
+                </div>
+                <div class="gta-box">
+                    <h3>🔵 GTA Portable</h3>
+                    <p>Funciona desde USB sin instalación.</p>
+                    <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Portable" alt="Preview GTA Portable">
+                </div>
+                </div>
+        </div>
+
         <button id="volverBtnGta" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
 
@@ -724,7 +751,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <img src="static.png" alt="Logo MantaMods" class="logo" />
         <h2>⚙️ Macro para PC</h2>
         <p>Tutorial para usar la macro desde el mismo foro:</p>
-        <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe> <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
         <button id="volverBtnMacro" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
 
@@ -733,27 +761,21 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const video = document.getElementById('bg-video');
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
-        // Obtener todas las secciones de contenido para una gestión más fácil
         const contentSections = document.querySelectorAll('.content-section');
 
-        // Lógica del slider de reseñas (manteniendo tu implementación original)
         const reviewsSlider = document.getElementById('reviewsSlider');
         let isDown = false;
         let startX;
         let scrollLeft;
 
-        // Función para iniciar medios (música y video)
         function startMedia() {
             music.play().catch(e => console.error("Error al reproducir música:", e));
             video.play().catch(e => console.error("Error al reproducir video:", e));
-            document.getElementById('startBtn').style.display = 'none'; // Oculta el botón
-            // Aseguramos que el foro principal esté visible si el usuario tuvo que hacer clic
+            document.getElementById('startBtn').style.display = 'none';
             foroPrincipal.classList.remove('hidden-forum');
-            botonesInicio.classList.remove('hidden'); // Asegura que los botones de inicio estén visibles
+            botonesInicio.classList.remove('hidden');
         }
 
-        // Si la pantalla es grande, intentar iniciar medios inmediatamente (sin el botón)
-        // Esto puede ser bloqueado por el navegador si no ha habido interacción previa.
         if (window.innerWidth >= 768) {
             startMedia();
         }
@@ -774,12 +796,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
-        // Nueva lógica para mostrar/ocultar interfaces de forma suave
-        let currentActiveSection = null; // Para llevar un registro de la sección activa
+        let currentActiveSection = null;
 
         function hideSectionSmoothly(sectionElement, callback) {
             if (!sectionElement || !sectionElement.classList.contains('active-visible')) {
-                if (callback) callback(); // Si no está visible, simplemente ejecuta el callback
+                if (callback) callback();
                 return;
             }
             sectionElement.classList.remove('active-visible');
@@ -794,40 +815,33 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function showSectionSmoothly(sectionElement) {
             if (!sectionElement) return;
-            sectionElement.style.display = 'block'; // Asegura que esté en display block para la animación
+            sectionElement.style.display = 'block';
             sectionElement.classList.add('active-visible');
         }
 
         function mostrarInterfaz(interfazId) {
             const targetSection = document.getElementById(interfazId);
 
-            // 1. Ocultar foroPrincipal con animación
             hideSectionSmoothly(foroPrincipal, () => {
-                foroPrincipal.classList.add('hidden-forum'); // Esconde el foro principal después de la animación
-                botonesInicio.classList.add('hidden'); // Oculta los botones superiores inmediatamente
+                foroPrincipal.classList.add('hidden-forum');
+                botonesInicio.classList.add('hidden');
 
-                // 2. Ocultar la sección activa actual (si existe)
                 hideSectionSmoothly(currentActiveSection, () => {
-                    // 3. Mostrar la nueva sección
                     showSectionSmoothly(targetSection);
-                    currentActiveSection = targetSection; // Actualiza la sección activa
+                    currentActiveSection = targetSection;
                 });
             });
         }
 
         function volverAlForo() {
-            // Ocultar la sección actualmente visible
             hideSectionSmoothly(currentActiveSection, () => {
-                currentActiveSection = null; // No hay sección activa
-                // Mostrar el foro principal
-                foroPrincipal.classList.remove('hidden-forum'); // Quita la clase hidden-forum
-                foroPrincipal.style.display = 'flex'; // Asegura que el foro sea flexbox
-                // Mostrar los botones superiores
+                currentActiveSection = null;
+                foroPrincipal.classList.remove('hidden-forum');
+                foroPrincipal.style.display = 'flex';
                 botonesInicio.classList.remove('hidden');
             });
         }
 
-        // Funciones para los botones del menú superior
         function mostrarGtaVirgen() {
             mostrarInterfaz('gtaVirgenContent');
         }
@@ -836,7 +850,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             mostrarInterfaz('macroContent');
         }
 
-        // Lógica del slider de reseñas (manteniendo tu implementación original)
         reviewsSlider.addEventListener('mousedown', (e) => {
             isDown = true;
             reviewsSlider.classList.add('active-grab');
@@ -862,7 +875,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
 
-        // Touch events for mobile
         reviewsSlider.addEventListener('touchstart', (e) => {
             isDown = true;
             reviewsSlider.classList.add('active-grab');
@@ -877,7 +889,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         reviewsSlider.addEventListener('touchmove', (e) => {
             if (!isDown) return;
-            // e.preventDefault(); // Prevents default scroll, but might interfere with native scrolling. Removed for passive listener.
             const x = e.touches[0].pageX - reviewsSlider.offsetLeft;
             const walk = (x - startX) * 1.5;
             reviewsSlider.scrollLeft = scrollLeft - walk;
