@@ -97,6 +97,24 @@
         padding-bottom: 60px; /* Espacio para el botón de volver */
     }
 
+ .fadeZoomIn {
+      animation-name: fadeZoomIn;
+    }
+
+    .fadeZoomOut {
+      animation-name: fadeZoomOut;
+    }
+
+    @keyframes fadeZoomIn {
+      0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes fadeZoomOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    }
+
     .content-section.active-visible {
         display: block;
         opacity: 1;
