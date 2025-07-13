@@ -49,11 +49,11 @@
             font-weight: bold;
             box-shadow: 0 0 10px #0ff;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s; /* Existing transition */
         }
 
         .botones-superiores button:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Existing hover */
         }
 
         @media (max-width: 600px) {
@@ -126,13 +126,13 @@
             padding: 20px;
             width: 300px;
             box-shadow: 0 0 15px #0ff;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Enhanced transition */
             text-align: center;
         }
 
         .gta-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #0ff;
+            transform: translateY(-8px) scale(1.03); /* Lift and slightly scale */
+            box-shadow: 0 0 25px #0ff, 0 8px 15px rgba(0,255,255,0.3); /* Add a vertical shadow */
         }
 
         .gta-box img {
@@ -153,12 +153,13 @@
             cursor: pointer;
             font-size: 1em;
             box-shadow: 0 0 15px #0ff;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background 0.3s ease, box-shadow 0.3s ease; /* Added for smoother hover */
         }
 
         #volverBtnGta:hover, #volverBtnMacro:hover {
             background: #00c9c9;
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-3px); /* Lift slightly on hover */
+            box-shadow: 0 0 20px #0ff;
         }
 
         iframe {
@@ -183,11 +184,11 @@
 
         /* Contenedor principal del foro */
         .container {
-            min-height: 100vh; /* Asegura que ocupe la altura completa de la ventana */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra horizontalmente */
-            justify-content: center; /* Centra verticalmente los elementos flex */
+            align-items: center;
+            justify-content: center;
             padding: 40px 20px 60px;
             text-align: center;
             box-sizing: border-box;
@@ -198,14 +199,14 @@
 
         /* Ajustes para el contenido dentro del contenedor principal */
         .container > * {
-            max-width: 800px; /* Limita el ancho del contenido para que no se extienda demasiado */
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            width: 100%; /* Asegura que los elementos puedan ocupar el ancho máximo disponible */
+            width: 100%;
         }
 
         .container header {
-            margin-bottom: 20px; /* Espacio entre redes y logo */
+            margin-bottom: 20px;
         }
 
         header img {
@@ -229,8 +230,9 @@
 
         /* Centrado de la sección de redes */
         .redes-section {
-            text-align: center; /* Asegura el texto centrado */
-            margin-bottom: 10px; /* Espacio debajo de redes */
+            text-align: center;
+            margin-bottom: 10px;
+            padding-top: 20px; /* Add some padding at the top */
         }
 
         .redes-section h2 {
@@ -242,7 +244,7 @@
 
         .social {
             display: flex;
-            justify-content: center; /* Centra los íconos */
+            justify-content: center;
             gap: 25px;
             margin-bottom: 20px;
         }
@@ -250,11 +252,11 @@
         .social a {
             font-size: 2.1em;
             text-decoration: none;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease-out; /* Smooth transition for hover */
         }
 
         .social a:hover {
-            transform: scale(1.2);
+            transform: scale(1.3) translateY(-5px); /* Jump effect */
         }
 
         .section {
@@ -270,7 +272,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px #0ff;
             cursor: pointer;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Added transform */
             margin: 20px auto 10px;
             display: inline-block;
         }
@@ -278,6 +280,7 @@
         .cta:hover {
             background: #00c9c9;
             box-shadow: 0 0 25px #0ff;
+            transform: scale(1.02); /* Slight scale on hover */
         }
 
         .buttons-row {
@@ -297,7 +300,7 @@
             border-radius: 10px;
             box-shadow: 0 0 15px #0ff;
             cursor: pointer;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Added transform */
             display: flex;
             align-items: center;
             gap: 8px;
@@ -306,6 +309,7 @@
         .rules-btn:hover, .plantilla-btn:hover {
             background: #00c9c9;
             box-shadow: 0 0 25px #0ff;
+            transform: translateY(-3px); /* Lift slightly on hover */
         }
 
         .status-dot {
@@ -372,6 +376,92 @@
 
         @media (min-width: 768px) {
             #startBtn { display: none; }
+        }
+
+        /* RESEÑAS SECTION */
+        .reviews-section {
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            max-width: 900px;
+            width: 95%;
+            overflow: hidden; /* For slider */
+            position: relative;
+        }
+
+        .reviews-section h2 {
+            font-size: 2.5em;
+            color: #00faff;
+            text-shadow: 0 0 10px #00faff;
+            margin-bottom: 25px;
+        }
+
+        .reviews-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 20px; /* Space between reviews */
+            justify-content: flex-start; /* Align items to start for sliding */
+        }
+
+        .review-card {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00c9c9;
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 300px; /* Minimum width for each review card */
+            flex: 0 0 auto; /* Do not grow, do not shrink, base on content */
+            text-align: left;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .review-card p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            color: #e0ffff;
+        }
+
+        .review-card .author {
+            font-weight: bold;
+            color: #0ff;
+            font-size: 0.9em;
+        }
+
+        .review-card .rating {
+            color: gold;
+            margin-bottom: 5px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 10px;
+            pointer-events: none; /* Allows clicks to pass through to actual content if needed */
+        }
+
+        .slider-nav button {
+            background: rgba(0, 255, 255, 0.3);
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 10;
+            pointer-events: auto; /* Re-enable clicks for buttons */
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .slider-nav button:hover {
+            background: #0ff;
+            transform: scale(1.1);
         }
 
         footer {
@@ -476,6 +566,41 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             </div>
         </div>
 
+        <div class="reviews-section">
+            <h2>Lo que dicen nuestros usuarios</h2>
+            <div class="reviews-slider" id="reviewsSlider">
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"¡MantaMods es increíble! Encontré todos los mods que necesitaba y la comunidad es súper amigable."</p>
+                    <div class="author">- GamerProRD</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Los tutoriales me ayudaron muchísimo a instalar los mods. ¡Mi GTA nunca se vio tan bien!"</p>
+                    <div class="author">- Modder23</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <p>"Buena variedad de mods, aunque me gustaría ver más actualizaciones frecuentes."</p>
+                    <div class="author">- SA-MPFanatic</div>
+                </div>
+                 <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"El soporte es rápido y eficiente. Tenía un problema con un mod y me lo solucionaron al instante."</p>
+                    <div class="author">- SoporteCrack</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"La macro para PC es una maravilla, ¡me ahorra mucho tiempo y es fácil de usar gracias al video!"</p>
+                    <div class="author">- MacroUser</div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button onclick="moveSlider(-1)">&#8249;</button>
+                <button onclick="moveSlider(1)">&#8250;</button>
+            </div>
+        </div>
+
         <footer>
             🔥MantaMods🔥 | “RD Un Flow Diferente, Un Mod Distinto Y Unico.”
         </footer>
@@ -539,6 +664,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const video = document.getElementById('bg-video');
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
+
+        // Review Slider Variables
+        const reviewsSlider = document.getElementById('reviewsSlider');
+        let currentReviewIndex = 0;
+        let reviewWidth = 0; // Will be calculated dynamically
 
         function startMedia() {
             music.play().catch(() => {});
@@ -618,10 +748,61 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 foroPrincipal.classList.remove('fadeZoomOut');
                 foroPrincipal.classList.add('fadeZoomIn');
                 foroPrincipal.style.display = 'flex';
+                resetSlider(); // Reset slider position when returning to main forum
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        // Review Slider Functions
+        function calculateReviewWidth() {
+            if (reviewsSlider.children.length > 0) {
+                // Get the width of the first review card, including its right margin/gap
+                const firstReview = reviewsSlider.children[0];
+                const style = window.getComputedStyle(firstReview);
+                const marginRight = parseFloat(style.marginRight || '0');
+                const gap = parseFloat(window.getComputedStyle(reviewsSlider).getPropertyValue('gap') || '0');
+                reviewWidth = firstReview.offsetWidth + Math.max(marginRight, gap);
+            }
+        }
+
+        function updateSliderPosition() {
+            reviewsSlider.style.transform = `translateX(${-currentReviewIndex * reviewWidth}px)`;
+        }
+
+        function moveSlider(direction) {
+            const totalReviews = reviewsSlider.children.length;
+            
+            // Calculate how many reviews fit in the slider view
+            const sliderWidth = reviewsSlider.offsetWidth;
+            const reviewsInView = Math.floor(sliderWidth / reviewWidth);
+
+            if (direction === 1) { // Next
+                if (currentReviewIndex + reviewsInView < totalReviews) {
+                    currentReviewIndex++;
+                } else {
+                    currentReviewIndex = 0; // Loop back to start
+                }
+            } else { // Previous
+                if (currentReviewIndex > 0) {
+                    currentReviewIndex--;
+                } else {
+                    // Loop to end, showing the last visible set of reviews
+                    currentReviewIndex = totalReviews - reviewsInView;
+                    if (currentReviewIndex < 0) currentReviewIndex = 0; // Ensure it's not negative if reviewsInView > totalReviews
+                }
+            }
+            updateSliderPosition();
+        }
+
+        function resetSlider() {
+            currentReviewIndex = 0;
+            updateSliderPosition();
+        }
+
+        // Initialize slider on load and resize
+        window.addEventListener('load', () => {
+            calculateReviewWidth();
+            updateSliderPosition(); // Set initial position
+            
             video.play().catch(() => {});
             music.play().catch(() => {});
 
@@ -630,6 +811,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             } else {
                 document.getElementById('startBtn').style.display = 'none';
             }
+        });
+
+        window.addEventListener('resize', () => {
+            calculateReviewWidth(); // Recalculate width on resize
+            updateSliderPosition(); // Adjust position based on new width
         });
     </script>
 </body>
