@@ -21,8 +21,7 @@
         color: #00FFFF;
         overflow-x: hidden;
         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
-        /* Permitir scroll del body por defecto */
-        overflow-y: auto;
+        overflow-y: auto; /* Permitir scroll del body */
     }
 
     /* BOTONES ARRIBA IZQUIERDA */
@@ -36,8 +35,7 @@
         position: relative;
         z-index: 20;
         transition: opacity 0.5s ease, transform 0.5s ease;
-        /* CAMBIO: Mostrar por defecto */
-        opacity: 1; 
+        opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
@@ -128,8 +126,6 @@
         transition: opacity 0.5s ease, transform 0.5s ease;
         opacity: 1;
         pointer-events: auto;
-        /* CAMBIO: Mostrar por defecto, sin hidden-forum inicial */
-        /* Eliminamos la clase hidden-forum al cargar la página */
     }
 
     .container.hidden-forum {
@@ -425,8 +421,7 @@
     }
 
     #startBtn {
-        /* CAMBIO: Ocultar por defecto para que no estorbe */
-        display: none; 
+        display: none; /* Oculto por defecto */
         position: absolute;
         top: 50%;
         left: 50%;
@@ -835,7 +830,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const botonesInicio = document.getElementById('botonesInicio');
         const contentSections = document.querySelectorAll('.content-section');
         const volverBtnFixed = document.getElementById('volverBtnFixed'); 
-        const startBtn = document.getElementById('startBtn'); // Referencia al botón de inicio
+        const startBtn = document.getElementById('startBtn');
         const body = document.body;
 
         const reviewsSlider = document.getElementById('reviewsSlider');
@@ -907,8 +902,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             sectionElement.style.display = 'block';
             requestAnimationFrame(() => {
                 sectionElement.classList.add('active-visible');
-                // Desplazar la ventana al principio de la nueva sección
-                window.scrollTo(0, 0); 
+                // DESPLAZAR AL INICIO DE LA PÁGINA CUANDO SE ABRE UNA INTERFAZ
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Desplazamiento suave
+                });
                 // Mostrar el botón de volver
                 volverBtnFixed.style.display = 'block';
             });
@@ -934,7 +932,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 
                 requestAnimationFrame(() => {
                     foroPrincipal.classList.add('active-visible'); 
-                    window.scrollTo(0, 0); // Volver al inicio del foro
+                    // Desplazar al inicio del foro
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth' // Desplazamiento suave
+                    });
                 });
                 botonesInicio.classList.remove('hidden'); // Mostrar los botones superiores
                 volverBtnFixed.style.display = 'none'; // Ocultar el botón de volver
