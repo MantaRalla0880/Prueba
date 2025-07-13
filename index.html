@@ -17,7 +17,7 @@
             font-family: 'Poppins', sans-serif;
             background: #000;
             color: #33FF99;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll for the entire page */
         }
 
         /* BOTONES ARRIBA IZQUIERDA */
@@ -186,9 +186,9 @@
         .container {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Changed to column to stack elements vertically */
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Changed to flex-start to push content to top, footer to bottom naturally */
             padding: 40px 20px 60px;
             text-align: center;
             box-sizing: border-box;
@@ -203,6 +203,7 @@
             margin-left: auto;
             margin-right: auto;
             width: 100%;
+            flex-shrink: 0; /* Prevent content from shrinking */
         }
 
         .container header {
@@ -388,51 +389,52 @@
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             max-width: 900px;
             width: 95%;
-            overflow-x: auto; /* Enable horizontal scrolling */
-            scroll-snap-type: x mandatory; /* Snap to individual items */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            cursor: grab; /* Indicate draggable */
-            position: relative;
-            display: flex; /* Ensure flex container directly scrolls */
-            flex-wrap: nowrap; /* Prevent wrapping to new line */
+            position: relative; /* Needed for absolute positioning of h2 if desired, but not strictly for this layout */
+            display: flex; /* Make reviews-section a flex container */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center items horizontally within this section */
         }
         
-        /* Styles for when dragging */
-        .reviews-section.active-grab {
-            cursor: grabbing;
-        }
-
-        .reviews-section::-webkit-scrollbar {
-            height: 8px; /* Make scrollbar visible but thin for desktop */
-            background-color: transparent;
-        }
-        
-        .reviews-section::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 255, 255, 0.3); /* Color of the thumb */
-            border-radius: 10px;
-        }
-
-        .reviews-section {
-            -ms-overflow-style: auto;  /* IE and Edge - changed to auto to show scrollbar */
-            scrollbar-width: thin;  /* Firefox - changed to thin to show scrollbar */
-        }
-
         .reviews-section h2 {
             font-size: 2.5em;
             color: #00faff;
             text-shadow: 0 0 10px #00faff;
             margin-bottom: 25px;
-            width: 100%; /* Ensure heading takes full width above slider */
+            width: 100%; /* Ensure heading takes full width */
             text-align: center;
-            flex-shrink: 0; /* Prevent heading from shrinking in flex container */
+            flex-shrink: 0; /* Prevent heading from shrinking */
         }
 
         .reviews-slider {
             display: flex;
             gap: 20px; /* Space between reviews */
             padding-bottom: 10px; /* Space for potential scrollbar if not hidden */
-            /* Removed transition: transform... as we're now directly manipulating scrollLeft */
-            /* Removed justify-content: flex-start; as reviews-section is the flex container */
+            overflow-x: auto; /* Enable horizontal scrolling for the slider itself */
+            scroll-snap-type: x mandatory; /* Snap to individual items */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            cursor: grab; /* Indicate draggable */
+            width: 100%; /* Ensure the slider takes full width within its parent */
+            flex-shrink: 0; /* Prevent slider from shrinking */
+        }
+        
+        /* Styles for when dragging */
+        .reviews-slider.active-grab {
+            cursor: grabbing;
+        }
+
+        .reviews-slider::-webkit-scrollbar {
+            height: 8px; /* Make scrollbar visible but thin for desktop */
+            background-color: transparent;
+        }
+        
+        .reviews-slider::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 255, 255, 0.3); /* Color of the thumb */
+            border-radius: 10px;
+        }
+
+        .reviews-slider {
+            -ms-overflow-style: auto;  /* IE and Edge - changed to auto to show scrollbar */
+            scrollbar-width: thin;  /* Firefox - changed to thin to show scrollbar */
         }
 
         .review-card {
@@ -466,9 +468,11 @@
         }
 
         footer {
-            margin-top: 40px;
+            margin-top: auto; /* Push footer to the bottom */
             font-size: 0.9em;
             color: #ccc;
+            padding-top: 40px; /* Add some padding above the footer */
+            width: 100%; /* Ensure footer takes full width */
         }
     </style>
 </head>
@@ -498,11 +502,13 @@
             </div>
         </div>
         
+
         <header>
             <img src="static.png" alt="Logo MantaMods" />
             <h1>🔥MantaMods🔥</h1>
         </header>
         
+
         <div class="section">
             <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
             <p class="rgb-text">
@@ -619,10 +625,11 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <p>"Me gusta que tengan una sección para GTA Virgen, es muy útil para empezar de cero."</p>
                     <div class="author">- CleanStart</div>
-                </div
+                </div>
             </div>
-            </div>
+        </div>
         
+
         <footer>
             🔥MantaMods🔥 | “RD Un Flow Diferente, Un Mod Distinto Y Unico.”
         </footer>
@@ -688,7 +695,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const botonesInicio = document.getElementById('botonesInicio');
 
         // Review Slider Variables for Drag/Swipe
-        const reviewsSection = document.getElementById('reviewsSection'); // The scrollable container
+        const reviewsSlider = document.getElementById('reviewsSlider'); // Changed to reviewsSlider
         let isDown = false;
         let startX;
         let scrollLeft;
@@ -774,53 +781,53 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
         }
 
-        // Drag/Swipe functionality for reviews-section
-        reviewsSection.addEventListener('mousedown', (e) => {
+        // Drag/Swipe functionality for reviews-slider (the one with overflow-x)
+        reviewsSlider.addEventListener('mousedown', (e) => {
             isDown = true;
-            reviewsSection.classList.add('active-grab'); // Optional: change cursor
-            startX = e.pageX - reviewsSection.offsetLeft;
-            scrollLeft = reviewsSection.scrollLeft;
-            reviewsSection.style.scrollBehavior = 'auto'; // Disable smooth scroll during drag
+            reviewsSlider.classList.add('active-grab'); // Optional: change cursor
+            startX = e.pageX - reviewsSlider.offsetLeft;
+            scrollLeft = reviewsSlider.scrollLeft;
+            reviewsSlider.style.scrollBehavior = 'auto'; // Disable smooth scroll during drag
         });
 
-        reviewsSection.addEventListener('mouseleave', () => {
+        reviewsSlider.addEventListener('mouseleave', () => {
             isDown = false;
-            reviewsSection.classList.remove('active-grab');
-            reviewsSection.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll after drag
+            reviewsSlider.classList.remove('active-grab');
+            reviewsSlider.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll after drag
         });
 
-        reviewsSection.addEventListener('mouseup', () => {
+        reviewsSlider.addEventListener('mouseup', () => {
             isDown = false;
-            reviewsSection.classList.remove('active-grab');
-            reviewsSection.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll after drag
+            reviewsSlider.classList.remove('active-grab');
+            reviewsSlider.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll after drag
         });
 
-        reviewsSection.addEventListener('mousemove', (e) => {
+        reviewsSlider.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
-            const x = e.pageX - reviewsSection.offsetLeft;
+            const x = e.pageX - reviewsSlider.offsetLeft;
             const walk = (x - startX) * 1.5; // Multiplier for faster scroll
-            reviewsSection.scrollLeft = scrollLeft - walk;
+            reviewsSlider.scrollLeft = scrollLeft - walk;
         });
 
         // For touch devices (mobile)
-        reviewsSection.addEventListener('touchstart', (e) => {
+        reviewsSlider.addEventListener('touchstart', (e) => {
             isDown = true;
-            startX = e.touches[0].pageX - reviewsSection.offsetLeft;
-            scrollLeft = reviewsSection.scrollLeft;
-            reviewsSection.style.scrollBehavior = 'auto';
+            startX = e.touches[0].pageX - reviewsSlider.offsetLeft;
+            scrollLeft = reviewsSlider.scrollLeft;
+            reviewsSlider.style.scrollBehavior = 'auto';
         });
 
-        reviewsSection.addEventListener('touchend', () => {
+        reviewsSlider.addEventListener('touchend', () => {
             isDown = false;
-            reviewsSection.style.scrollBehavior = 'smooth';
+            reviewsSlider.style.scrollBehavior = 'smooth';
         });
 
-        reviewsSection.addEventListener('touchmove', (e) => {
+        reviewsSlider.addEventListener('touchmove', (e) => {
             if (!isDown) return;
-            const x = e.touches[0].pageX - reviewsSection.offsetLeft;
+            const x = e.touches[0].pageX - reviewsSlider.offsetLeft;
             const walk = (x - startX) * 1.5;
-            reviewsSection.scrollLeft = scrollLeft - walk;
+            reviewsSlider.scrollLeft = scrollLeft - walk;
         });
 
 
