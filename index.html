@@ -10,17 +10,18 @@
     <meta property="og:url" content="https://mantamods.github.io/" />
     <meta name="theme-color" content="#00ffff" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@600;800&display=swap'); /* Agregada Orbitron */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: #E0FFFF; /* Un blanco azulado para el texto principal, para un look más frío */
-            overflow-x: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
+            font-family: 'Poppins', sans-serif; /* Fuente principal */
+            background: #000; /* Fondo negro puro */
+            color: #33FF99; /* Verde neón para texto general (si aplica) */
+            overflow-x: hidden; /* Previene scroll horizontal en la página */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair; /* Cursor personalizado tipo "mira" */
         }
 
+        /* Overlay de ruido/glitch */
         body::before {
             content: '';
             position: fixed;
@@ -28,19 +29,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABjFqzyAAAABlBMVEVHcExra2tSUlJgbKrbAAAAAXRSTlMAQObYZgAAABFJREFUCNdjYKAAMjAwMDQxMEkAK2i4JkF+G0AAAAAASUVORK5CYII=') repeat;
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 10;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABjFqzyAAAABlBMVEVHcExra2tSUlJgbKrbAAAAAXRSTlMAQObYZgAAABFJREFUCNdjYKAAMjAwMDQxMEkAK2i4JkF+G0AAAAAASUVORK5CYII=') repeat; /* Patrón de ruido/glitch sutil */
+            opacity: 0.05; /* Muy sutil */
+            pointer-events: none; /* No interfiere con clics */
+            z-index: 10; /* Por encima de todo, pero por debajo de elementos interactivos */
         }
 
-        /* Colores de acento dominicanos para glow */
-        :root {
-            --neon-blue: #00FFFF; /* Cian principal */
-            --dr-red: #FF0000; /* Rojo de la bandera dominicana */
-            --dr-blue: #0000FF; /* Azul de la bandera dominicana */
-        }
-
+        /* BOTONES ARRIBA IZQUIERDA */
         .botones-superiores {
             display: flex;
             gap: 10px;
@@ -49,7 +44,7 @@
             justify-content: flex-start;
             flex-wrap: wrap;
             position: relative;
-            z-index: 20;
+            z-index: 20; /* Z-index alto para estar sobre el overlay y contenido */
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
@@ -62,26 +57,38 @@
         .botones-superiores button {
             padding: 10px 14px;
             font-size: 1em;
-            background: var(--neon-blue);
+            background: #00FFFF; /* Cian puro */
             color: #000;
             border: none;
             border-radius: 8px;
             font-weight: bold;
-            box-shadow: 0 0 15px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4); /* Sombra neón más intensa */
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
+            transition: transform 0.2s, box-shadow 0.3s; /* Transición para sombra */
         }
 
         .botones-superiores button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px var(--neon-blue), 0 0 35px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6); /* Sombra aún más intensa en hover */
         }
 
+        @media (max-width: 600px) {
+            .botones-superiores {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .botones-superiores button {
+                width: fit-content;
+            }
+        }
+
+        /* INTERFACES */
         .content-section {
             display: none;
             width: 100%;
             background: #000;
-            color: var(--neon-blue);
+            color: #00FFFF; /* Cian para texto en secciones */
             padding: 30px 20px;
             text-align: center;
             animation-duration: 0.5s;
@@ -89,7 +96,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 15;
+            z-index: 15; /* Asegura que esté sobre el video y el overlay */
             overflow-y: auto;
             min-height: 100vh;
             box-sizing: border-box;
@@ -117,7 +124,7 @@
             width: 120px;
             border-radius: 50%;
             margin-bottom: 20px;
-            box-shadow: 0 0 15px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5); /* Glow más intenso */
         }
 
         .gta-grid {
@@ -130,19 +137,18 @@
 
         .gta-box {
             background: rgba(0,255,255,0.08);
-            border: 2px solid var(--neon-blue);
+            border: 2px solid #00FFFF; /* Borde cian puro */
             border-radius: 12px;
             padding: 20px;
             width: 300px;
-            box-shadow: 0 0 15px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.3); /* Glow más intenso */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
         }
 
         .gta-box:hover {
             transform: translateY(-8px) scale(1.03);
-            /* Mezcla de colores de la bandera en el glow del hover */
-            box-shadow: 0 0 25px var(--dr-blue), 0 8px 15px rgba(0, 0, 255, 0.5), inset 0 0 10px var(--dr-red);
+            box-shadow: 0 0 25px #00FFFF, 0 8px 15px rgba(0,255,255,0.5); /* Glow aún más intenso en hover */
         }
 
         .gta-box img {
@@ -150,36 +156,37 @@
             height: auto;
             border-radius: 10px;
             margin-top: 10px;
-            box-shadow: 0 0 10px var(--neon-blue);
+            box-shadow: 0 0 10px #00FFFF; /* Sombra de imagen también neón */
         }
 
         #volverBtnGta, #volverBtnMacro {
             margin-top: 40px;
             padding: 12px 20px;
-            background: var(--neon-blue);
+            background: #00FFFF; /* Cian puro */
             color: #000;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-size: 1em;
-            box-shadow: 0 0 15px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4); /* Glow intenso */
             transition: transform 0.2s, background 0.3s ease, box-shadow 0.3s ease;
         }
 
         #volverBtnGta:hover, #volverBtnMacro:hover {
-            background: #00c9c9;
-            box-shadow: 0 0 20px var(--neon-blue), 0 0 30px rgba(0, 255, 255, 0.6);
+            background: #00c9c9; /* Cian un poco más oscuro en hover */
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 0 20px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6); /* Glow aún más intenso en hover */
         }
 
         iframe {
             width: 90%;
             max-width: 800px;
             height: 450px;
-            border: 2px solid var(--neon-blue);
+            border: 2px solid #00FFFF; /* Borde cian */
             border-radius: 10px;
             margin: 20px auto;
             display: block;
-            box-shadow: 0 0 15px var(--neon-blue);
+            box-shadow: 0 0 15px #00FFFF; /* Glow intenso */
         }
 
         .video-bg {
@@ -191,6 +198,7 @@
             z-index: -1;
         }
 
+        /* Contenedor principal del foro */
         .container {
             min-height: 100vh;
             display: flex;
@@ -205,6 +213,7 @@
             z-index: 0;
         }
 
+        /* Ajustes para el contenido dentro del contenedor principal */
         .container > * {
             max-width: 800px;
             margin-left: auto;
@@ -225,18 +234,19 @@
         }
 
         header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5em;
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue), 0 0 30px rgba(0, 255, 255, 0.6);
+            font-family: 'Orbitron', sans-serif; /* Fuente más "dura" para el título */
+            font-size: 3.5em; /* Tamaño un poco más grande */
+            color: #00FFFF; /* Cian puro */
+            text-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6); /* Sombra neón más intensa */
             margin: 10px 0;
         }
 
         @keyframes pulseGlow {
-            0% { filter: brightness(1) drop-shadow(0 0 15px var(--neon-blue)); }
-            100% { filter: brightness(1.4) drop-shadow(0 0 35px var(--neon-blue)); }
+            0% { filter: brightness(1) drop-shadow(0 0 15px #00FFFF); } /* Glow más intenso */
+            100% { filter: brightness(1.4) drop-shadow(0 0 35px #00FFFF); } /* Glow aún más intenso */
         }
 
+        /* Centrado de la sección de redes */
         .redes-section {
             text-align: center;
             margin-bottom: 10px;
@@ -244,10 +254,10 @@
         }
 
         .redes-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            color: var(--neon-blue);
-            text-shadow: 0 0 12px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.5);
+            font-family: 'Orbitron', sans-serif; /* Fuente más "dura" */
+            font-size: 2.5em; /* Tamaño más grande */
+            color: #00FFFF; /* Cian puro */
+            text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5); /* Sombra neón más intensa */
             margin-bottom: 10px;
         }
 
@@ -259,47 +269,41 @@
         }
 
         .social a {
-            font-size: 2.3em;
+            font-size: 2.3em; /* Iconos un poco más grandes */
             text-decoration: none;
             transition: transform 0.2s ease-out, filter 0.3s;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Sombra sutil para iconos */
         }
 
         .social a:hover {
             transform: scale(1.3) translateY(-5px);
-            /* Glow con un toque del rojo o azul de la bandera */
-            filter: drop-shadow(0 0 10px var(--dr-red)); /* Rojo para YouTube */
+            filter: drop-shadow(0 0 10px #00FFFF); /* Glow al pasar el mouse */
         }
-        /* Overrides específicos para los iconos sociales si queremos colores dominicanos */
-        .social a[title="YouTube"]:hover { filter: drop-shadow(0 0 10px var(--dr-red)); }
-        .social a[title="Kick"]:hover { filter: drop-shadow(0 0 10px var(--neon-blue)); } /* Mantenemos cian para Kick, o podrías usar verde limón si quieres */
-        .social a[title="Twitch"]:hover { filter: drop-shadow(0 0 10px var(--dr-blue)); } /* Azul para Twitch */
-
 
         .section {
             margin-top: 20px;
         }
 
         .cta {
-            background: var(--neon-blue);
+            background: #00FFFF; /* Cian puro */
             color: #000;
-            padding: 18px 45px;
-            font-size: 1.4em;
+            padding: 18px 45px; /* Más padding para un botón más grande */
+            font-size: 1.4em; /* Fuente más grande */
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 0 20px var(--neon-blue), 0 0 40px rgba(0, 255, 255, 0.5);
+            border-radius: 12px; /* Bordes un poco más suaves */
+            box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5); /* Glow muy intenso */
             cursor: pointer;
             transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
             margin: 20px auto 10px;
             display: inline-block;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif; /* Fuente "dura" para el CTA */
+            text-transform: uppercase; /* Mayúsculas para más impacto */
         }
 
         .cta:hover {
             background: #00c9c9;
-            box-shadow: 0 0 25px var(--neon-blue), 0 0 50px rgba(0, 255, 255, 0.7);
-            transform: scale(1.03);
+            box-shadow: 0 0 25px #00FFFF, 0 0 50px rgba(0, 255, 255, 0.7); /* Glow aún más intenso en hover */
+            transform: scale(1.03); /* Ligeramente más grande */
         }
 
         .buttons-row {
@@ -311,65 +315,65 @@
         }
 
         .rules-btn, .plantilla-btn {
-            background: var(--neon-blue);
+            background: #00FFFF; /* Cian puro */
             color: #000;
-            padding: 15px 30px;
-            font-size: 1.15em;
+            padding: 15px 30px; /* Más padding */
+            font-size: 1.15em; /* Fuente un poco más grande */
             border: none;
             border-radius: 10px;
-            box-shadow: 0 0 15px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4); /* Glow intenso */
             cursor: pointer;
             transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', sans-serif; /* Fuente "dura" */
         }
 
         .rules-btn:hover, .plantilla-btn:hover {
             background: #00c9c9;
-            box-shadow: 0 0 20px var(--neon-blue), 0 0 35px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6); /* Glow aún más intenso en hover */
             transform: translateY(-3px);
         }
 
         .status-dot {
-            width: 12px;
-            height: 12px;
+            width: 12px; /* Punto más grande */
+            height: 12px; /* Punto más grande */
             border-radius: 50%;
             background: red;
-            box-shadow: 0 0 6px red;
+            box-shadow: 0 0 6px red; /* Sombra un poco más fuerte */
         }
 
         .rules-box, .plantilla-box {
             display: none;
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.95); /* Fondo más opaco */
+            border: 2px solid #00FFFF; /* Borde cian */
             border-radius: 10px;
             padding: 20px;
             max-width: 95vw;
             margin: 20px auto;
-            color: var(--neon-blue);
+            color: #00FFFF; /* Texto cian */
             white-space: pre-wrap;
-            font-size: 1.05em;
+            font-size: 1.05em; /* Fuente ligeramente más grande */
             line-height: 1.6;
             text-align: left;
             max-height: 60vh;
             overflow-y: auto;
             overflow-x: hidden;
             word-wrap: break-word;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); /* Sombra intensa para las cajas */
         }
 
         .rgb-text {
             animation: rgbCycle 5s linear infinite;
         }
-        /* Ajuste para rgbCycle para que incluya los colores de la bandera si se desea */
+
         @keyframes rgbCycle {
-            0% { color: var(--dr-red); }    /* Rojo */
-            25% { color: var(--neon-blue); } /* Cian original */
-            50% { color: var(--dr-blue); }   /* Azul */
-            75% { color: var(--neon-blue); } /* Cian original */
-            100% { color: var(--dr-red); }   /* Rojo */
+            0% { color: red; }
+            25% { color: orange; }
+            50% { color: lime; }
+            75% { color: cyan; }
+            100% { color: red; }
         }
 
         #startBtn {
@@ -377,36 +381,37 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 25px 40px;
-            font-size: 1.5em;
-            z-index: 30;
-            background: var(--neon-blue);
+            padding: 25px 40px; /* Botón más grande */
+            font-size: 1.5em; /* Fuente más grande */
+            z-index: 30; /* Asegura que esté por encima de todo */
+            background: #00FFFF; /* Cian puro */
             color: #000;
             border: none;
             border-radius: 12px;
-            box-shadow: 0 0 20px var(--neon-blue), 0 0 40px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5); /* Glow muy intenso */
             cursor: pointer;
             animation: pulseBtn 1.5s infinite ease-in-out;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', sans-serif; /* Fuente "dura" */
         }
 
         @keyframes pulseBtn {
-            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px var(--neon-blue); }
-            50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 30px var(--neon-blue); }
-            100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px var(--neon-blue); }
+            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
+            50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 30px #00FFFF; }
+            100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
         }
 
         @media (min-width: 768px) {
             #startBtn { display: none; }
         }
 
+        /* RESEÑAS SECTION */
         .reviews-section {
             margin-top: 50px;
             padding: 20px;
-            background: rgba(0, 255, 255, 0.05);
+            background: rgba(0, 255, 255, 0.05); /* Fondo sutil */
             border-radius: 15px;
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid #00FFFF; /* Borde cian */
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra intensa */
             max-width: 900px;
             width: 95%;
             position: relative;
@@ -416,10 +421,10 @@
         }
         
         .reviews-section h2 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', sans-serif; /* Fuente "dura" */
             font-size: 2.5em;
-            color: var(--neon-blue);
-            text-shadow: 0 0 12px var(--neon-blue), 0 0 25px rgba(0, 255, 255, 0.5);
+            color: #00FFFF; /* Cian puro */
+            text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5); /* Sombra neón intensa */
             margin-bottom: 25px;
             width: 100%;
             text-align: center;
@@ -428,7 +433,7 @@
 
         .reviews-slider {
             display: flex;
-            gap: 25px;
+            gap: 25px; /* Espacio entre reseñas un poco más grande */
             padding-bottom: 10px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -438,6 +443,7 @@
             flex-shrink: 0;
         }
         
+        /* Styles for when dragging */
         .reviews-slider.active-grab {
             cursor: grabbing;
         }
@@ -448,9 +454,9 @@
         }
         
         .reviews-slider::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 255, 255, 0.5);
+            background-color: rgba(0, 255, 255, 0.5); /* Cian translúcido */
             border-radius: 10px;
-            border: 1px solid var(--neon-blue);
+            border: 1px solid #00FFFF; /* Borde sutil para el thumb */
         }
 
         .reviews-slider {
@@ -459,44 +465,42 @@
         }
 
         .review-card {
-            background: rgba(0, 255, 255, 0.12);
-            border: 1px solid var(--neon-blue);
-            border-radius: 12px;
-            padding: 25px;
-            min-width: 320px;
+            background: rgba(0, 255, 255, 0.12); /* Fondo ligeramente más visible */
+            border: 1px solid #00FFFF; /* Borde cian puro */
+            border-radius: 12px; /* Bordes un poco más suaves */
+            padding: 25px; /* Más padding */
+            min-width: 320px; /* Ancho mínimo ligeramente mayor */
             flex: 0 0 auto;
             text-align: left;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 25px rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 25px rgba(0, 255, 255, 0.1); /* Sombra más definida */
         }
 
         .review-card p {
-            font-size: 1.05em;
+            font-size: 1.05em; /* Fuente ligeramente más grande */
             line-height: 1.6;
-            margin-bottom: 15px;
-            color: #E0FFFF;
+            margin-bottom: 15px; /* Más espacio */
+            color: #E0FFFF; /* Texto más brillante */
         }
 
         .review-card .author {
             font-weight: bold;
-            color: var(--neon-blue);
-            font-size: 0.95em;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            color: #00FFFF; /* Cian puro */
+            font-size: 0.95em; /* Fuente un poco más grande */
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Sombra para el autor */
         }
 
         .review-card .rating {
             color: gold;
-            margin-bottom: 8px;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+            margin-bottom: 8px; /* Más espacio */
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6); /* Sombra para las estrellas */
         }
 
         footer {
             margin-top: auto;
-            font-size: 0.95em; /* Ligeramente más grande para que la frase se lea mejor */
-            color: #999;
+            font-size: 0.9em;
+            color: #999; /* Color más oscuro para el footer */
             padding-top: 40px;
             width: 100%;
-            font-family: 'Poppins', sans-serif; /* Mantenemos Poppins para el footer */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1); /* Sombra sutil para legibilidad */
         }
     </style>
 </head>
@@ -532,9 +536,10 @@
         </header>
 
         <div class="section">
-            <h2 class="rgb-text">¡MantaMods: Donde el flow dominicano le mete presión a tu GTA!</h2>
+            <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
             <p class="rgb-text">
-                Actívate con nuestra comunidad y descarga los mods más duros de la isla. Conviértete en el MVP de SA-MP, y dale un toque único a tu juego. ¡Aquí la vaina es seria y con calidad de RD!
+                Únete a nuestro Discord para explorar mods y modificaciones extremas que harán imparable tu GTA. También puedes hacer panas nuevos y adentrarte en todos los sistemas que nuestro bot oficial te ofrece para una mejor experiencia.<br>
+                ¡Aquí los mods son únicos!
             </p>
 
             <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
@@ -605,15 +610,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 <div class="review-card">
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <p>"Los tutoriales me ayudaron muchísimo a instalar los mods. ¡Mi GTA nunca se vio tan bien!"</p>
-                    <div class="review-card">
-                    <div class="rating">⭐⭐⭐⭐⭐</div>
-                    <p>"¡MantaMods es la para! Mi GTA ahora tiene la fuerza de un motor V8, con el flow de aquí."</p>
-                    <div class="author">- El Duro Del Barrio</div>
-                </div>
-                <div class="review-card">
-                    <div class="rating">⭐⭐⭐⭐⭐</div>
-                    <p>"¡Con esta gente no hay break! Los mods son de otra liga, de verdad, una calidad brutal."</p>
-                    <div class="author">- La Makina Cibernética</div>
+                    <div class="author">- Modder23</div>
                 </div>
                 <div class="review-card">
                     <div class="rating">⭐⭐⭐⭐</div>
@@ -659,7 +656,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         </div>
 
         <footer>
-            🔥MantaMods🔥 | "¡RD dándole power a tu juego, con mods que están a otro nivel!"
+            🔥MantaMods🔥 | "¡RD dándole ese sazon a tu juego, con mods que están a otro nivel!"
         </footer>
     </div>
 
@@ -722,6 +719,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
 
+        // Review Slider Variables for Drag/Swipe
         const reviewsSlider = document.getElementById('reviewsSlider');
         let isDown = false;
         let startX;
@@ -808,6 +806,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
         }
 
+        // Drag/Swipe functionality for reviews-slider (the one with overflow-x)
         reviewsSlider.addEventListener('mousedown', (e) => {
             isDown = true;
             reviewsSlider.classList.add('active-grab');
@@ -836,6 +835,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
 
+        // For touch devices (mobile)
         reviewsSlider.addEventListener('touchstart', (e) => {
             isDown = true;
             startX = e.touches[0].pageX - reviewsSlider.offsetLeft;
@@ -854,6 +854,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             const walk = (x - startX) * 1.5;
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
+
 
         window.addEventListener('DOMContentLoaded', () => {
             video.play().catch(() => {});
