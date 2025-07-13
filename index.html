@@ -1,107 +1,1084 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Interfaz Animada</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 20px; /* Space for the animated elements below */
-        }
-
-        h1 {
-            color: #0056b3;
-            margin-bottom: 20px;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        .animated-section {
-            background-color: #e9f7ff;
-            border: 1px solid #cceeff;
-            padding: 25px;
-            margin-top: 20px;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            text-align: left; /* Adjust text alignment for content */
-        }
-
-        /* ------------------------------------- */
-        /* CSS para la Animación Fade-in Slide-up */
-        /* ------------------------------------- */
-
-        @keyframes fadeInSlideUp {
-            from {
-                opacity: 0; /* Starts completely transparent */
-                transform: translateY(20px); /* Starts 20px below its final position */
-            }
-            to {
-                opacity: 1; /* Ends fully opaque */
-                transform: translateY(0); /* Ends at its original position */
-            }
-        }
-
-        .animated-section {
-            animation: fadeInSlideUp 0.6s ease-out forwards;
-            /* Si quieres un efecto escalonado (staggered) para múltiples elementos */
-            /* Puedes añadir animation-delay aquí o con JavaScript */
-            /* Por ejemplo, para el primer elemento no hay delay, para el segundo 0.1s, etc. */
-            /* animation-delay: 0s; */ /* Esto sería el valor predeterminado */
-        }
-
-        /* Ejemplo de cómo aplicar un delay escalonado usando solo CSS para algunos elementos */
-        /* No es escalable para muchos, pero útil para unos pocos conocidos */
-        .animated-section:nth-child(1) { animation-delay: 0s; } /* El primer elemento */
-        .animated-section:nth-child(2) { animation-delay: 0.2s; } /* El segundo se retrasa 0.2s */
-        .animated-section:nth-child(3) { animation-delay: 0.4s; } /* El tercero se retrasa 0.4s */
-        .animated-section:nth-child(4) { animation-delay: 0.6s; } /* Y así sucesivamente */
-
-
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🔥MantaMods🔥 - Mods Para SA-MP</title>
+    <meta property="og:title" content="🔥MantaMods🔥 - Mods Para SA-MP" />
+    <meta property="og:description" content="Únete a nuestro Discord y mejora tu GTA con mods únicos. ¡Explora lo mejor de SA-MP con 🔥MantaMods🔥!" />
+    <meta property="og:image" content="https://mantamods.github.io/static.png" />
+    <meta property="og:url" content="https://mantamods.github.io/" />
+    <meta name="theme-color" content="#00ffff" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&family=Montserrat:wght@400;600&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #000;
+        color: #00FFFF;
+        overflow-x: hidden;
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
+    }
+
+    /* Animaciones generales */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes bounceIn {
+        0%, 20%, 40%, 60%, 80%, 100% {
+            transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+        20% { transform: scale3d(1.1, 1.1, 1.1); }
+        40% { transform: scale3d(0.9, 0.9, 0.9); }
+        60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+        80% { transform: scale3d(0.97, 0.97, 0.97); }
+        100% { opacity: 1; transform: scale3d(1, 1, 1); }
+    }
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
+    @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* BOTONES ARRIBA IZQUIERDA */
+    .botones-superiores {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        margin-left: 10px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 20;
+        opacity: 0; /* Oculto inicialmente para la animación */
+        animation: slideInLeft 0.8s ease forwards 0.5s; /* Retraso para que aparezca después de la página */
+    }
+
+    .botones-superiores.hidden {
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+    }
+
+    .botones-superiores button {
+        padding: 8px 12px;
+        font-size: 0.9em;
+        background: rgba(0, 255, 255, 0.1);
+        color: #00FFFF;
+        border: 1px solid #00FFFF;
+        border-radius: 6px;
+        font-weight: 500;
+        box-shadow: none;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para estos botones */
+    }
+
+    .botones-superiores button:hover {
+        transform: scale(1.03);
+        background: #00FFFF;
+        color: #000;
+        box-shadow: 0 0 8px #00FFFF;
+    }
+
+    @media (max-width: 600px) {
+        .botones-superiores {
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            margin-left: 0;
+            padding: 5px;
+        }
+        .botones-superiores button {
+            width: auto;
+            flex-grow: 1;
+            max-width: 48%;
+        }
+    }
+
+    /* INTERFACES */
+    .content-section {
+        display: none;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        color: #00FFFF;
+        padding: 20px;
+        text-align: center;
+        z-index: 15;
+        overflow-y: auto;
+        min-height: 100vh;
+        box-sizing: border-box;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .content-section.active-visible {
+        display: block;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        pointer-events: auto;
+        animation: fadeIn 0.5s ease-out; /* Animación al mostrar la sección */
+    }
+
+    .content-section.active-hidden {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+
+    /* Contenedor principal del foro */
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+        text-align: center;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        z-index: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0; /* Oculto inicialmente para animación */
+        pointer-events: auto;
+        animation: fadeInUp 1s ease forwards; /* Animación al cargar el foro */
+    }
+
+    .container.hidden-forum {
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+    }
+
+    .logo {
+        width: 100px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        box-shadow: 0 0 10px #00FFFF;
+    }
+
+    /* Estilos para las nuevas categorías */
+    .category-section {
+        margin-bottom: 30px;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0; /* Oculto inicialmente para animación */
+        animation: slideInDown 0.8s ease forwards; /* Animación al cargar */
+    }
+    .category-section:nth-of-type(2) { animation-delay: 0.2s; } /* Retraso para animaciones secuenciales */
+    .category-section:nth-of-type(3) { animation-delay: 0.4s; }
+    .category-section:nth-of-type(4) { animation-delay: 0.6s; }
+
+
+    .category-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.8em;
+        color: #00FFFF;
+        text-shadow: 0 0 8px #00FFFF, 0 0 15px rgba(0, 255, 255, 0.3);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .gta-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 0;
+    }
+
+    .gta-box {
+        background: rgba(0, 255, 255, 0.05);
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        padding: 15px;
+        width: calc((700px - 2 * 10px) / 3);
+        min-width: 180px;
+        box-shadow: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-align: center;
+        opacity: 0; /* Oculto inicialmente para la animación */
+        animation: zoomIn 0.6s ease forwards; /* Animación para cada caja */
+    }
+    /* Añadir retrasos a las gta-box para una animación escalonada */
+    .gta-grid .gta-box:nth-child(1) { animation-delay: 0.7s; }
+    .gta-grid .gta-box:nth-child(2) { animation-delay: 0.8s; }
+    .gta-grid .gta-box:nth-child(3) { animation-delay: 0.9s; }
+    .gta-grid .gta-box:nth-child(4) { animation-delay: 1.0s; }
+    .gta-grid .gta-box:nth-child(5) { animation-delay: 1.1s; }
+    .gta-grid .gta-box:nth-child(6) { animation-delay: 1.2s; }
+    .gta-grid .gta-box:nth-child(7) { animation-delay: 1.3s; }
+    .gta-grid .gta-box:nth-child(8) { animation-delay: 1.4s; }
+    .gta-grid .gta-box:nth-child(9) { animation-delay: 1.5s; }
+
+
+    @media (max-width: 768px) {
+        .gta-box {
+            width: calc(50% - 10px);
+        }
+    }
+    @media (max-width: 480px) {
+        .gta-box {
+            width: 100%;
+        }
+    }
+
+    .gta-box:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 0 10px #00FFFF;
+    }
+
+    .gta-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 8px;
+        box-shadow: none;
+    }
+
+    #volverBtnGta, #volverBtnMacro {
+        margin-top: 25px;
+        padding: 10px 16px;
+        background: rgba(0, 255, 255, 0.1);
+        color: #00FFFF;
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95em;
+        box-shadow: none;
+        transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        margin: 25px auto;
+        z-index: 100;
+        display: none;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para el botón de volver */
+    }
+
+    #volverBtnGta:hover, #volverBtnMacro:hover {
+        background: #00FFFF;
+        color: #000;
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 0 10px #00FFFF;
+    }
+
+    iframe {
+        width: 95%;
+        max-width: 700px;
+        height: 400px;
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        margin: 15px auto;
+        display: block;
+        box-shadow: none;
+    }
+
+    .video-bg {
+        position: fixed;
+        top: 0; left: 0;
+        min-width: 100vw;
+        min-height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    .container > * {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .container header {
+        margin-bottom: 15px;
+    }
+
+    header img {
+        width: 110px;
+        border-radius: 50%;
+        margin-top: 8px;
+        animation: pulseGlow 1.8s infinite alternate;
+    }
+
+    header h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.8em;
+        color: #00FFFF;
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.4);
+        margin: 8px 0;
+    }
+
+    @keyframes pulseGlow {
+        0% { filter: brightness(1) drop-shadow(0 0 10px #00FFFF); }
+        100% { filter: brightness(1.2) drop-shadow(0 0 25px #00FFFF); }
+    }
+
+    .redes-section {
+        text-align: center;
+        margin-bottom: 5px;
+        padding-top: 15px;
+        opacity: 0; /* Oculto inicialmente para animación */
+        animation: slideInUp 0.8s ease forwards 0.2s; /* Animación al cargar con retraso */
+    }
+
+    .redes-section h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2em;
+        color: #00FFFF;
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3);
+        margin-bottom: 8px;
+    }
+
+    .social {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .social a {
+        font-size: 2em;
+        text-decoration: none;
+        transition: transform 0.2s ease-out, filter 0.2s;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+        color: #00FFFF; /* Color base de los iconos */
+    }
+
+    .social a:hover {
+        transform: scale(1.2) translateY(-3px);
+        /* filter: drop-shadow(0 0 8px #00FFFF); */ /* Esto es sobrescrito por los específicos */
+    }
+
+    /* Colores específicos para cada red social al pasar el mouse */
+    .social a[title="YouTube"]:hover {
+        color: #FF0000; /* YouTube Red */
+        filter: drop-shadow(0 0 8px #FF0000);
+    }
+    .social a[title="Kick"]:hover {
+        color: #00FF00; /* Kick Green */
+        filter: drop-shadow(0 0 8px #00FF00);
+    }
+    .social a[title="Twitch"]:hover {
+        color: #9146FF; /* Twitch Purple */
+        filter: drop-shadow(0 0 8px #9146FF);
+    }
+
+
+    .section {
+        margin-top: 15px;
+    }
+
+    .cta {
+        background: #00FFFF;
+        color: #000;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4);
+        cursor: pointer;
+        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        margin: 15px auto 8px;
+        display: inline-block;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para este botón */
+        text-transform: uppercase;
+        animation: bounceIn 1s ease forwards 0.8s; /* Animación de rebote al cargar */
+        opacity: 0; /* Oculto inicialmente */
+    }
+
+    .cta:hover {
+        background: #00c9c9;
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.6);
+        transform: scale(1.02);
+    }
+
+    .buttons-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    .rules-btn, .plantilla-btn {
+        background: rgba(0, 255, 255, 0.1);
+        color: #00FFFF;
+        padding: 12px 20px;
+        font-size: 1em;
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        box-shadow: none;
+        cursor: pointer;
+        transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para estos botones */
+        opacity: 0; /* Oculto inicialmente */
+        animation: slideInUp 0.8s ease forwards 1s; /* Animación al cargar con retraso */
+    }
+    .plantilla-btn {
+        animation-delay: 1.2s; /* Retraso para el segundo botón */
+    }
+
+    .rules-btn:hover, .plantilla-btn:hover {
+        background: #00FFFF;
+        color: #000;
+        box-shadow: 0 0 10px #00FFFF;
+        transform: translateY(-2px);
+    }
+
+    .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: red;
+        box-shadow: 0 0 5px red;
+    }
+
+    .rules-box, .plantilla-box {
+        display: none;
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        padding: 15px;
+        max-width: 90vw;
+        margin: 15px auto;
+        color: #00FFFF;
+        white-space: pre-wrap;
+        font-size: 0.95em;
+        line-height: 1.5;
+        text-align: left;
+        max-height: 50vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        box-shadow: none;
+    }
+
+    .rgb-text {
+        animation: rgbCycle 5s linear infinite;
+        font-weight: 600;
+    }
+
+    @keyframes rgbCycle {
+        0% { color: red; }
+        25% { color: orange; }
+        50% { color: lime; }
+        75% { color: cyan; }
+        100% { color: red; }
+    }
+
+    #startBtn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 35px;
+        font-size: 1.3em;
+        z-index: 30;
+        background: #00FFFF;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4);
+        cursor: pointer;
+        animation: pulseBtn 1.2s infinite ease-in-out;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    @keyframes pulseBtn {
+        0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #00FFFF; }
+        50% { transform: translate(-50%, -50%) scale(1.03); box-shadow: 0 0 20px #00FFFF; }
+        100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #00FFFF; }
+    }
+
+    @media (min-width: 768px) {
+        #startBtn { display: none; }
+    }
+
+    /* RESEÑAS SECTION */
+    .reviews-section {
+        margin-top: 30px;
+        padding: 15px;
+        background: rgba(0, 255, 255, 0.03);
+        border-radius: 10px;
+        border: 1px solid #00FFFF;
+        box-shadow: none;
+        max-width: 800px;
+        width: 95%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0; /* Oculto para animación */
+        animation: fadeInUp 0.8s ease forwards 1.4s; /* Animación al cargar con retraso */
+    }
+    
+    .reviews-section h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2em;
+        color: #00FFFF;
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3);
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .reviews-slider {
+        display: flex;
+        gap: 15px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        cursor: grab;
+        width: 100%;
+        flex-shrink: 0;
+    }
+    
+    .reviews-slider.active-grab {
+        cursor: grabbing;
+    }
+
+    .reviews-slider::-webkit-scrollbar {
+        height: 6px;
+        background-color: transparent;
+    }
+    
+    .reviews-slider::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 255, 255, 0.3);
+        border-radius: 8px;
+        border: none;
+    }
+
+    .reviews-slider {
+        -ms-overflow-style: auto;
+        scrollbar-width: thin;
+    }
+
+    .review-card {
+        background: rgba(0, 255, 255, 0.08);
+        border: 1px solid #00FFFF;
+        border-radius: 10px;
+        padding: 20px;
+        min-width: 280px;
+        flex: 0 0 auto;
+        text-align: left;
+        box-shadow: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        animation: float 3s ease-in-out infinite; /* Animación de flotar */
+    }
+
+    .review-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .review-card p {
+        font-size: 1em;
+        line-height: 1.5;
+        margin-bottom: 12px;
+        color: #E0FFFF;
+    }
+
+    .review-card .author {
+        font-weight: 600;
+        color: #00FFFF;
+        font-size: 0.9em;
+        text-shadow: none;
+    }
+
+    .review-card .rating {
+        color: gold;
+        margin-bottom: 6px;
+        text-shadow: none;
+        font-size: 1.1em;
+    }
+
+    footer {
+        margin-top: auto;
+        font-size: 0.8em;
+        color: #777;
+        padding-top: 25px;
+        padding-bottom: 15px;
+        width: 100%;
+        opacity: 0; /* Oculto para animación */
+        animation: fadeIn 1s ease forwards 1.6s; /* Animación al cargar con retraso */
+    }
+</style>
 <body>
+    <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
+    <video id="bg-video" autoplay muted loop playsinline class="video-bg">
+        <source src="Video2.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+    </video>
 
-    <div class="container">
-        <h1>¡Bienvenido a Mi Interfaz!</h1>
-        <p>Esta es una interfaz de ejemplo para demostrar una animación de entrada suave. Observa cómo los elementos de abajo aparecen con un efecto elegante.</p>
+    <audio id="music" loop autoplay>
+        <source src="Musicas.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="botones-superiores" id="botonesInicio">
+        <button onclick="mostrarGtaVirgen()">🖥️ GTA Virgen</button>
+        <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
     </div>
 
-    <div class="animated-section">
-        <h2>Sección Animada 1</h2>
-        <p>Este es el contenido de la primera sección que se anima al cargar la página.</p>
+    <div id="foroPrincipal" class="container">
+        <div class="redes-section">
+            <h2>Redes</h2>
+            <div class="social">
+    <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+    <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a>
+    <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a>
+</div>
+        </div>
+
+        <header>
+            <img src="static.png" alt="Logo MantaMods" />
+            <h1>🔥MantaMods🔥</h1>
+        </header>
+
+        <div class="section">
+            <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
+            <p class="rgb-text">
+                Únete a nuestro Discord para explorar mods y modificaciones extremas que harán imparable tu GTA. También puedes hacer panas nuevos y adentrarte en todos los sistemas que nuestro bot oficial te ofrece para una mejor experiencia.<br>
+                ¡Aquí los mods son únicos!
+            </p>
+
+            <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
+
+            <div class="buttons-row">
+                <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥 <span id="rules-dot" class="status-dot"></span></button>
+                <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥 <span id="plantilla-dot" class="status-dot"></span></button>
+            </div>
+
+            <div class="rules-box" id="rules-box">
+                <ul>
+                    <li>✅ Respeto mutuo entre todos los miembros.</li>
+                    <li>🛑 Prohibido hacer spam o flood.</li>
+                    <li>🔞 Nada de contenido NSFW o ilegal.</li>
+                    <li>📢 No promociones en canales no adecuados.</li>
+                    <li>🎮 Usa los canales para su propósito.</li>
+                    <li>⚠️ El incumplimiento puede llevar a sanciones.</li>
+                </ul>
+            </div>
+
+            <div class="plantilla-box" id="plantilla-box">
+🎮 Bienvenido a
+# `🚀`・🔥MantaMods🔥
+¿Amas el GTA y tunearlo al máximo?
+Este es tu sitio. Comparte, descarga y transforma tu juego con los mejores mods.
+
+# `🎯`・¿QUÉ ENCONTRARÁS AQUÍ?
+🤖 Bot Propio Con Sistemas Únicos.
+🔫 Armas: M4, AK, MP5, Snipers, Cuerpo A Cuerpo Y Más.
+🎨 Visuales: Huds, Efectos, Miras, Calles, Vegetación, Color Mod, Y Mucho Mas.
+🚗 Vehículos & Skins: Autos, Motos, Patrulas, Skins RP, Y Mas.
+📦 Packs: Full Packs, Tools, Animaciones, Mapas, Sonidos Y Mas.
+🛠️ Soporte: Instalación, Errores, Rendimiento, Atención Al Instante.
+🎉 Eventos & Sorteos: Participa Y Gana Mods Premium.
+🤝 Alianzas: Conecta Con Otras Comunidades.
+💬 Comunidad: Chat, Memes, Música, Sugerencias.
+🧠 Scripts: Pawn, Filterscripts, Gamemodes Para RP/DM.
+🎮 Minijuegos: Clickers, Conteo, Twitter, Bola Magina, Confesiones y más.
+🛡 Postulaciones: Staff, Creador De Contenido.
+
+# `📌`・¿CÓMO UNIRTE?
+✅ Ve a canal de verificación
+✅ Presiona el botón
+🔔 ¡Y disfruta del servidor completo!
+
+🔗 Discord De 🔥MantaMods🔥
+`📍` <a href="https://discord.gg/HqfjQcbDZr" target="_blank">https://discord.gg/HqfjQcbDZr</a>
+
+🌍 Foro De 🔥MantaMods🔥
+`📍` <a href="https://mantaralla0880.github.io/mantamods/" target="_blank">https://mantaralla0880.github.io/mantamods/</a>
+
+`💬` Gracias por ser parte de MantaMods.
+Aquí no solo jugamos... CREAMOS ESTILO 💯
+
+`🔊` Tag: ||@everyone @here||
+https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243/MantaMods.gif
+            </div>
+        </div>
+
+        <div class="reviews-section" id="reviewsSection">
+            <h2>Lo que dicen nuestros usuarios</h2>
+            <div class="reviews-slider" id="reviewsSlider">
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"¡MantaMods es increíble! Encontré todos los mods que necesitaba y la comunidad es súper amigable."</p>
+                    <div class="author">- GamerProRD</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Los tutoriales me ayudaron muchísimo a instalar los mods. ¡Mi GTA nunca se vio tan bien!"</p>
+                    <div class="author">- Modder23</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <p>"Buena variedad de mods, aunque me gustaría ver más actualizaciones frecuentes."</p>
+                    <div class="author">- SA-MPFanatic</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"El soporte es rápido y eficiente. Tenía un problema con un mod y me lo solucionaron al instante."</p>
+                    <div class="author">- SoporteCrack</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"La macro para PC es una maravilla, ¡me ahorra mucho tiempo y es fácil de usar gracias al video!"</p>
+                    <div class="author">- MacroUser</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <p>"El diseño de la página es muy chulo, me encanta el toque neón y el video de fondo."</p>
+                    <div class="author">- NeonGamer</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Una comunidad activa y los mods son de muy alta calidad. Siempre encuentro algo nuevo."</p>
+                    <div class="author">- GTAProDR</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Si buscas mods únicos para SA-MP, este es el lugar. ¡Recomendado al 100%!"</p>
+                    <div class="author">- ModMaster</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <p>"Faltan algunos mods para versiones específicas de GTA, pero en general, muy satisfecho."</p>
+                    <div class="author">- VersionHunter</div>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p>"Me gusta que tengan una sección para GTA Virgen, es muy útil para empezar de cero."</p>
+                    <div class="author">- CleanStart</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            🔥MantaMods🔥 | "¡RD dándole ese sazon a tu juego, con mods que están a otro nivel!"
+        </footer>
     </div>
 
-    <div class="animated-section">
-        <h2>Sección Animada 2</h2>
-        <p>Aquí tienes más información que aparece con la misma animación, ligeramente retrasada.</p>
+    <div id="gtaVirgenContent" class="content-section">
+        <img src="static.png" alt="Logo MantaMods" class="logo" />
+        <h2>🖥️ GTA Virgen - Versiones Limpias por Categorías</h2>
+
+        <div class="category-section">
+            <h3>🎮 GTA para PCs de Bajos Recursos</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🔹 GTA Lite 500MB</h3>
+                    <p>Ideal para PCs de muy bajos recursos.</p>
+                    <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
+                    <img src="Fotito.png" alt="Preview GTA Lite">
+                </div>
+                <div class="gta-box">
+                    <h3>🔸 GTA Lite Optimiz.</h3>
+                    <p>Versión ultra-optimizada para la mejor fluidez.</p>
+                    <a href="https://www.mediafire.com/file/example_lite_opt" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Lite+Opt" alt="Preview GTA Lite Optimizado">
+                </div>
+                <div class="gta-box">
+                    <h3>🟢 GTA Sin Sonido</h3>
+                    <p>Versión sin audio para un rendimiento máximo.</p>
+                    <a href="https://www.mediafire.com/file/example_no_sound" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Sin+Sonido" alt="Preview GTA Sin Sonido">
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h3>💻 GTA para PCs de Medios Recursos</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🔸 GTA Full 4GB</h3>
+                    <p>Con audio y vídeos originales, sin mods.</p>
+                    <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Full" alt="Preview GTA Full">
+                </div>
+                <div class="gta-box">
+                    <h3>🟢 GTA RP Base</h3>
+                    <p>Preparado para servidores Roleplay.</p>
+                    <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=RP" alt="Preview GTA RP">
+                </div>
+                <div class="gta-box">
+                    <h3>🔵 GTA Base Clásica</h3>
+                    <p>La versión original, limpia y estable.</p>
+                    <a href="https://www.mediafire.com/file/example_classic" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Classic" alt="Preview GTA Classic">
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h3>🚀 GTA para PCs de Altos Recursos</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🟠 GTA Clean MTA</h3>
+                    <p>Optimizado para jugar en MTA sin errores.</p>
+                    <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=MTA" alt="Preview GTA MTA">
+                </div>
+                <div class="gta-box">
+                    <h3>✨ GTA Texturas HD</h3>
+                    <p>Versión con texturas mejoradas y limpias.</p>
+                    <a href="https://www.mediafire.com/file/example_hd" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=HD+Textures" alt="Preview GTA HD Texturas">
+                </div>
+                <div class="gta-box">
+                    <h3>🔥 GTA Gráficos Mejorados</h3>
+                    <p>Base con mejoras gráficas sutiles.</p>
+                    <a href="https://www.mediafire.com/file/example_graphics" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Graphics" alt="Preview GTA Mejorado">
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h3>🛠️ Otros Tipos de GTA Base</h3>
+            <div class="gta-grid">
+                <div class="gta-box">
+                    <h3>🟣 GTA Customizable</h3>
+                    <p>Lista para añadir tus propios mods.</p>
+                    <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Custom" alt="Preview GTA Custom">
+                </div>
+                <div class="gta-box">
+                    <h3>🔵 GTA Portable</h3>
+                    <p>Funciona desde USB sin instalación.</p>
+                    <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=Portable" alt="Preview GTA Portable">
+                </div>
+                <div class="gta-box">
+                    <h3>📦 GTA Sin Instalador</h3>
+                    <p>Versión compacta, solo descomprimir y jugar.</p>
+                    <a href="https://www.mediafire.com/file/example_no_installer" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/200x110?text=No+Installer" alt="Preview GTA Sin Instalador">
+                </div>
+            </div>
+        </div>
+
+        <button id="volverBtnGta" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
 
-    <div class="animated-section">
-        <h2>Sección Animada 3</h2>
-        <p>Puedes agregar tantas secciones o elementos como necesites con esta clase.</p>
+    <div id="macroContent" class="content-section">
+        <img src="static.png" alt="Logo MantaMods" class="logo" />
+        <h2>⚙️ Macro para PC</h2>
+        <p>Tutorial para usar la macro desde el mismo foro:</p>
+        <iframe src="https://www.youtube.com/embed/kRZY0eJzFSY" allowfullscreen></iframe>
+        <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
+        <button id="volverBtnMacro" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
 
-    </body>
+    <script>
+        const music = document.getElementById('music');
+        const video = document.getElementById('bg-video');
+        const foroPrincipal = document.getElementById('foroPrincipal');
+        const botonesInicio = document.getElementById('botonesInicio');
+        const contentSections = document.querySelectorAll('.content-section');
+        const volverBtnGta = document.getElementById('volverBtnGta');
+        const volverBtnMacro = document.getElementById('volverBtnMacro');
+        const reviewsSlider = document.getElementById('reviewsSlider');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        function startMedia() {
+            music.play().catch(e => console.error("Error al reproducir música:", e));
+            video.play().catch(e => console.error("Error al reproducir video:", e));
+            document.getElementById('startBtn').style.display = 'none';
+            foroPrincipal.classList.remove('hidden-forum');
+            botonesInicio.classList.remove('hidden');
+        }
+
+        // Asegura que la música y el video inicien automáticamente en escritorio
+        if (window.innerWidth >= 768) {
+            startMedia();
+        }
+
+        function toggleRules() {
+            const box = document.getElementById('rules-box');
+            const dot = document.getElementById('rules-dot');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+            dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+            dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+        }
+
+        function togglePlantilla() {
+            const box = document.getElementById('plantilla-box');
+            const dot = document.getElementById('plantilla-dot');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+            dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+            dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+        }
+
+        let currentActiveSection = null;
+
+        function hideSectionSmoothly(sectionElement, callback) {
+            if (!sectionElement || !sectionElement.classList.contains('active-visible')) {
+                if (callback) callback();
+                return;
+            }
+            sectionElement.classList.remove('active-visible');
+            sectionElement.classList.add('active-hidden');
+            sectionElement.addEventListener('transitionend', function handler() {
+                sectionElement.style.display = 'none';
+                sectionElement.classList.remove('active-hidden');
+                sectionElement.removeEventListener('transitionend', handler);
+                if (callback) callback();
+            });
+        }
+
+        function showSectionSmoothly(sectionElement) {
+            sectionElement.style.display = 'block';
+            // Forzar reflow para que la transición ocurra
+            sectionElement.offsetWidth;
+            sectionElement.classList.add('active-visible');
+        }
+
+        function mostrarGtaVirgen() {
+            hideSectionSmoothly(foroPrincipal, () => {
+                showSectionSmoothly(document.getElementById('gtaVirgenContent'));
+                volverBtnGta.style.display = 'block';
+                currentActiveSection = 'gta';
+            });
+            botonesInicio.classList.add('hidden');
+        }
+
+        function mostrarMacro() {
+            hideSectionSmoothly(foroPrincipal, () => {
+                showSectionSmoothly(document.getElementById('macroContent'));
+                volverBtnMacro.style.display = 'block';
+                currentActiveSection = 'macro';
+            });
+            botonesInicio.classList.add('hidden');
+        }
+
+        function volverAlForo() {
+            let sectionToHide;
+            let buttonToHide;
+            if (currentActiveSection === 'gta') {
+                sectionToHide = document.getElementById('gtaVirgenContent');
+                buttonToHide = volverBtnGta;
+            } else if (currentActiveSection === 'macro') {
+                sectionToHide = document.getElementById('macroContent');
+                buttonToHide = volverBtnMacro;
+            }
+
+            if (sectionToHide) {
+                hideSectionSmoothly(sectionToHide, () => {
+                    showSectionSmoothly(foroPrincipal);
+                    buttonToHide.style.display = 'none';
+                    currentActiveSection = null;
+                    botonesInicio.classList.remove('hidden');
+                });
+            }
+        }
+
+        // Slider de reseñas - Eventos de mouse
+        reviewsSlider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            reviewsSlider.classList.add('active-grab');
+            startX = e.pageX - reviewsSlider.offsetLeft;
+            scrollLeft = reviewsSlider.scrollLeft;
+        });
+
+        reviewsSlider.addEventListener('mouseleave', () => {
+            isDown = false;
+            reviewsSlider.classList.remove('active-grab');
+        });
+
+        reviewsSlider.addEventListener('mouseup', () => {
+            isDown = false;
+            reviewsSlider.classList.remove('active-grab');
+        });
+
+        reviewsSlider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - reviewsSlider.offsetLeft;
+            const walk = (x - startX) * 2; // Multiplicador para la velocidad de scroll
+            reviewsSlider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Autoplay del slider de reseñas
+        let reviewScrollInterval;
+        const startReviewAutoScroll = () => {
+            reviewScrollInterval = setInterval(() => {
+                if (reviewsSlider.scrollWidth - reviewsSlider.scrollLeft === reviewsSlider.clientWidth) {
+                    reviewsSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    reviewsSlider.scrollBy({ left: 300, behavior: 'smooth' }); // Ajusta el valor para la velocidad
+                }
+            }, 3000); // Cambia cada 3 segundos
+        };
+
+        const stopReviewAutoScroll = () => {
+            clearInterval(reviewScrollInterval);
+        };
+
+        reviewsSlider.addEventListener('mouseenter', stopReviewAutoScroll);
+        reviewsSlider.addEventListener('mouseleave', startReviewAutoScroll);
+
+        // Iniciar el scroll automático cuando la página cargue si la sección está visible
+        window.onload = () => {
+            if (window.innerWidth >= 768) {
+                // Solo iniciar si el foro principal está visible por defecto en escritorio
+                startReviewAutoScroll();
+            } else {
+                // Para móviles, iniciar una vez que se activa el foro principal
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.attributeName === 'class' && foroPrincipal.classList.contains('active-visible') && !foroPrincipal.classList.contains('hidden-forum')) {
+                            startReviewAutoScroll();
+                            observer.disconnect(); // Desconectar el observador una vez iniciado
+                        }
+                    });
+                });
+                observer.observe(foroPrincipal, { attributes: true });
+            }
+        };
+
+    </script>
+</body>
 </html>
