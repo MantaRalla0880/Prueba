@@ -393,15 +393,28 @@
             -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
             cursor: grab; /* Indicate draggable */
             position: relative;
+            display: flex; /* Ensure flex container directly scrolls */
+            flex-wrap: nowrap; /* Prevent wrapping to new line */
         }
         
+        /* Styles for when dragging */
+        .reviews-section.active-grab {
+            cursor: grabbing;
+        }
+
         .reviews-section::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for cleaner look */
+            height: 8px; /* Make scrollbar visible but thin for desktop */
+            background-color: transparent;
         }
         
+        .reviews-section::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 255, 255, 0.3); /* Color of the thumb */
+            border-radius: 10px;
+        }
+
         .reviews-section {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: auto;  /* IE and Edge - changed to auto to show scrollbar */
+            scrollbar-width: thin;  /* Firefox - changed to thin to show scrollbar */
         }
 
         .reviews-section h2 {
@@ -409,12 +422,17 @@
             color: #00faff;
             text-shadow: 0 0 10px #00faff;
             margin-bottom: 25px;
+            width: 100%; /* Ensure heading takes full width above slider */
+            text-align: center;
+            flex-shrink: 0; /* Prevent heading from shrinking in flex container */
         }
 
         .reviews-slider {
             display: flex;
             gap: 20px; /* Space between reviews */
             padding-bottom: 10px; /* Space for potential scrollbar if not hidden */
+            /* Removed transition: transform... as we're now directly manipulating scrollLeft */
+            /* Removed justify-content: flex-start; as reviews-section is the flex container */
         }
 
         .review-card {
@@ -446,9 +464,6 @@
             color: gold;
             margin-bottom: 5px;
         }
-
-        /* No slider-nav needed for drag/swipe */
-        /* .slider-nav { ... } */
 
         footer {
             margin-top: 40px;
@@ -482,12 +497,12 @@
                 <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
             </div>
         </div>
-
+        
         <header>
             <img src="static.png" alt="Logo MantaMods" />
             <h1>🔥MantaMods🔥</h1>
         </header>
-
+        
         <div class="section">
             <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
             <p class="rgb-text">
@@ -604,10 +619,10 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <p>"Me gusta que tengan una sección para GTA Virgen, es muy útil para empezar de cero."</p>
                     <div class="author">- CleanStart</div>
-                </div>
+                </div
             </div>
             </div>
-
+        
         <footer>
             🔥MantaMods🔥 | “RD Un Flow Diferente, Un Mod Distinto Y Unico.”
         </footer>
@@ -756,7 +771,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 foroPrincipal.classList.remove('fadeZoomOut');
                 foroPrincipal.classList.add('fadeZoomIn');
                 foroPrincipal.style.display = 'flex';
-                // No need to reset slider position for drag/swipe, it maintains naturally
             }
         }
 
