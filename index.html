@@ -95,6 +95,8 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease, transform 0.4s ease;
+        /* Añade padding-bottom para que el contenido no se oculte detrás del botón fijo */
+        padding-bottom: 80px; /* Suficiente espacio para el botón "Volver al foro" */
     }
 
     .content-section.active-visible {
@@ -214,7 +216,15 @@
         font-size: 0.95em;
         box-shadow: none;
         transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
+        /* Propiedades para el botón fijo */
+        position: fixed; /* Hace que el botón sea fijo */
+        bottom: 20px; /* Distancia desde la parte inferior */
+        left: 50%; /* Centra horizontalmente */
+        transform: translateX(-50%); /* Ajuste para centrar correctamente */
+        z-index: 100; /* Asegura que esté por encima de otros elementos */
+        display: none; /* Inicialmente oculto */
     }
+
 
     #volverBtnGta:hover, #volverBtnMacro:hover {
         background: #00FFFF;
@@ -559,7 +569,7 @@
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
-                <a href="https://www.youtube.com/@TuNombreDeUsuarioOCanal" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a>
                 <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a>
             </div>
@@ -802,7 +812,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <img src="static.png" alt="Logo MantaMods" class="logo" />
         <h2>⚙️ Macro para PC</h2>
         <p>Tutorial para usar la macro desde el mismo foro:</p>
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kRZY0eJzFSY" allowfullscreen></iframe>
         <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
         <button id="volverBtnMacro" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
@@ -813,7 +823,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
         const contentSections = document.querySelectorAll('.content-section');
-
+        const volverBtnGta = document.getElementById('volverBtnGta');
+        const volverBtnMacro = document.getElementById('volverBtnMacro');
         const reviewsSlider = document.getElementById('reviewsSlider');
         let isDown = false;
         let startX;
@@ -885,19 +896,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 hideSectionSmoothly(currentActiveSection, () => {
                     showSectionSmoothly(targetSection);
                     currentActiveSection = targetSection;
+                    // Mostrar el botón de "Volver al foro" específico para la sección activa
+                    if (interfazId === 'gtaVirgenContent') {
+                        volverBtnGta.style.display = 'block';
+                        volverBtnMacro.style.display = 'none';
+                    } else if (interfazId === 'macroContent') {
+                        volverBtnMacro.style.display = 'block';
+                        volverBtnGta.style.display = 'none';
+                    }
                 });
-            });
-        }
-
-        function volverAlForo() {
-            hideSectionSmoothly(currentActiveSection, () => {
-                currentActiveSection = null; // Reiniciar la sección activa
-                foroPrincipal.classList.remove('hidden-forum'); // Mostrar el foro
-                foroPrincipal.style.display = 'flex'; // Asegurarse de que el foro principal esté visible
-                requestAnimationFrame(() => {
-                    foroPrincipal.classList.add('active-visible'); // Animación de entrada
-                });
-                botonesInicio.classList.remove('hidden'); // Mostrar los botones superiores
             });
         }
 
@@ -909,7 +916,18 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             mostrarInterfaz('macroContent');
         }
 
-        // Lógica de slider de reseñas (sin cambios)
+        function volverAlForo() {
+            hideSectionSmoothly(currentActiveSection, () => {
+                currentActiveSection = null;
+                foroPrincipal.classList.remove('hidden-forum');
+                botonesInicio.classList.remove('hidden');
+                // Ocultar ambos botones de "Volver al foro" al regresar a la pantalla principal
+                volverBtnGta.style.display = 'none';
+                volverBtnMacro.style.display = 'none';
+            });
+        }
+
+        // Funcionalidad de arrastrar para el slider de reseñas
         reviewsSlider.addEventListener('mousedown', (e) => {
             isDown = true;
             reviewsSlider.classList.add('active-grab');
@@ -931,26 +949,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - reviewsSlider.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            reviewsSlider.scrollLeft = scrollLeft - walk;
-        });
-
-        reviewsSlider.addEventListener('touchstart', (e) => {
-            isDown = true;
-            reviewsSlider.classList.add('active-grab');
-            startX = e.touches[0].pageX - reviewsSlider.offsetLeft;
-            scrollLeft = reviewsSlider.scrollLeft;
-        }, { passive: true });
-
-        reviewsSlider.addEventListener('touchend', () => {
-            isDown = false;
-            reviewsSlider.classList.remove('active-grab');
-        });
-
-        reviewsSlider.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const x = e.touches[0].pageX - reviewsSlider.offsetLeft;
-            const walk = (x - startX) * 1.5;
+            const walk = (x - startX) * 1.5; // Ajusta la velocidad del scroll
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
     </script>
