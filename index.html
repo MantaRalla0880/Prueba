@@ -28,7 +28,6 @@
             margin-left: 15px;
             justify-content: flex-start;
             flex-wrap: wrap;
-            /* Asegura que los botones estén sobre todo */
             position: relative;
             z-index: 2;
         }
@@ -65,20 +64,19 @@
         .content-section {
             display: none;
             width: 100%;
-            /* min-height: 100vh; */ /* Esto podría hacer que las interfaces sean muy largas si el contenido es poco */
             background: #000;
             color: #0ff;
             padding: 30px 20px;
             text-align: center;
             animation-duration: 0.5s;
             animation-fill-mode: both;
-            /* Posicionamiento para las interfaces */
-            position: absolute; /* O fixed, dependiendo de si quieres que se muevan con el scroll */
+            position: absolute; /* Usamos absolute para que no afecte el flujo del main content */
             top: 0;
             left: 0;
-            z-index: 1; /* Asegura que estén por encima del video de fondo pero debajo de los botones superiores cuando la interfaz está activa */
-            overflow-y: auto; /* Permite el scroll si el contenido es largo */
-            height: 100%; /* Ocupa el 100% de la altura de su contenedor padre con posición absoluta */
+            z-index: 1;
+            overflow-y: auto;
+            min-height: 100vh; /* Asegura que la interfaz ocupe la altura completa */
+            box-sizing: border-box;
         }
 
         .fadeZoomIn {
@@ -138,7 +136,7 @@
             box-shadow: 0 0 10px #0ff;
         }
 
-        #volverBtnGta, #volverBtnMacro { /* Aplicar a ambos botones */
+        #volverBtnGta, #volverBtnMacro {
             margin-top: 40px;
             padding: 12px 20px;
             background: #0ff;
@@ -167,7 +165,6 @@
             box-shadow: 0 0 10px #0ff;
         }
 
-        /* Estilos existentes de tu página principal */
         .video-bg {
             position: fixed;
             top: 0; left: 0;
@@ -177,14 +174,31 @@
             z-index: -1;
         }
 
+        /* Contenedor principal del foro */
         .container {
-            min-height: 100vh;
+            min-height: 100vh; /* Asegura que ocupe la altura completa de la ventana */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: center; /* Centra horizontalmente */
+            justify-content: center; /* Centra verticalmente los elementos flex */
             padding: 40px 20px 60px;
             text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            /* Ajuste para el centrado vertical en caso de contenido corto */
+            position: relative; /* Necesario para que z-index funcione correctamente si lo necesitáramos */
+            z-index: 0; /* Asegura que el foro principal esté debajo de los botones superiores y las interfaces */
+        }
+
+        /* Ajustes para el contenido dentro del contenedor principal */
+        .container header,
+        .container .redes-section,
+        .container .section,
+        .container footer {
+            width: 100%;
+            max-width: 800px; /* Limita el ancho del contenido para que no se extienda demasiado */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         header img {
@@ -207,7 +221,6 @@
         }
 
         .redes-section {
-            text-align: center;
             margin-top: 20px;
         }
 
@@ -236,7 +249,6 @@
         }
 
         .section {
-            max-width: 800px;
             margin-top: 20px;
         }
 
@@ -516,7 +528,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     <script>
         const music = document.getElementById('music');
         const video = document.getElementById('bg-video');
-        const foroPrincipal = document.getElementById('foroPrincipal'); // Obtenemos el elemento foroPrincipal
+        const foroPrincipal = document.getElementById('foroPrincipal');
 
         function startMedia() {
             music.play().catch(() => {});
@@ -543,12 +555,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         function ocultarTodasLasInterfaces() {
             const interfaces = document.querySelectorAll('.content-section');
             interfaces.forEach(interfaz => {
-                if (interfaz.style.display === 'block') { // Solo animar si está visible
+                if (interfaz.style.display === 'block') {
                     interfaz.classList.remove('fadeZoomIn');
                     interfaz.classList.add('fadeZoomOut');
                     interfaz.addEventListener('animationend', function handler() {
                         interfaz.style.display = 'none';
-                        interfaz.classList.remove('fadeZoomOut'); // Limpiar la clase de salida
+                        interfaz.classList.remove('fadeZoomOut');
                         interfaz.removeEventListener('animationend', handler);
                     }, { once: true });
                 }
@@ -556,25 +568,22 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         }
 
         function mostrarInterfaz(interfazId) {
-            ocultarTodasLasInterfaces(); // Asegura que cualquier otra interfaz esté oculta primero
+            ocultarTodasLasInterfaces();
 
-            // Animar y ocultar el foro principal
-            if (foroPrincipal.style.display !== 'none') { // Solo animar si el foro está visible
+            if (foroPrincipal.style.display !== 'none') {
                 foroPrincipal.classList.remove('fadeZoomIn');
                 foroPrincipal.classList.add('fadeZoomOut');
                 foroPrincipal.addEventListener('animationend', function handler() {
                     foroPrincipal.style.display = 'none';
-                    foroPrincipal.classList.remove('fadeZoomOut'); // Limpiar la clase de salida
+                    foroPrincipal.classList.remove('fadeZoomOut');
                     foroPrincipal.removeEventListener('animationend', handler);
 
-                    // Después de ocultar el foro, muestra la nueva interfaz
                     const interfazAMostrar = document.getElementById(interfazId);
-                    interfazAMostrar.classList.remove('fadeZoomOut'); // Asegurarse de que no tenga la clase de salida
+                    interfazAMostrar.classList.remove('fadeZoomOut');
                     interfazAMostrar.classList.add('fadeZoomIn');
                     interfazAMostrar.style.display = 'block';
                 }, { once: true });
             } else {
-                // Si el foro ya está oculto (por si acaso), simplemente muestra la interfaz
                 const interfazAMostrar = document.getElementById(interfazId);
                 interfazAMostrar.classList.remove('fadeZoomOut');
                 interfazAMostrar.classList.add('fadeZoomIn');
@@ -591,13 +600,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         }
 
         function volverAlForo() {
-            ocultarTodasLasInterfaces(); // Oculta cualquier interfaz que esté visible
+            ocultarTodasLasInterfaces();
 
-            // Muestra el foro principal con animación
-            if (foroPrincipal.style.display === 'none') { // Solo si está oculto
-                foroPrincipal.classList.remove('fadeZoomOut'); // Limpiar cualquier clase de salida previa
+            if (foroPrincipal.style.display === 'none') {
+                foroPrincipal.classList.remove('fadeZoomOut');
                 foroPrincipal.classList.add('fadeZoomIn');
-                foroPrincipal.style.display = 'block';
+                foroPrincipal.style.display = 'flex'; /* Asegura que se muestre como flex para centrar */
             }
         }
 
