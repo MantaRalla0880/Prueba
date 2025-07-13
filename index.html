@@ -79,22 +79,28 @@
 
     /* INTERFACES */
     .content-section {
+        /* Eliminar position: fixed; y ajustes de altura para permitir scroll en el body */
         display: none;
         width: 100%;
         background: rgba(0, 0, 0, 0.9);
         color: #00FFFF;
         padding: 20px;
         text-align: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 15;
-        overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura */
-        min-height: 100vh;
+        /* position: fixed; REMOVED */
+        /* top: 0; REMOVED */
+        /* left: 0; REMOVED */
+        /* min-height: 100vh; REMOVED (o ajustado si es necesario para un contenedor específico) */
+        overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura de esta sección */
         box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease, transform 0.4s ease;
+        /* Ajuste: Para que ocupe todo el viewport cuando esté activo */
+        position: absolute; /* Usar absolute para que se superponga, pero sin fijarse al viewport */
+        top: 0;
+        left: 0;
+        min-height: 100%; /* Ocupa el 100% de la altura de su padre (body en este caso) */
+        z-index: 15; /* Asegura que esté por encima del foro principal */
     }
 
     .content-section.active-visible {
@@ -102,6 +108,8 @@
         opacity: 1;
         transform: scale(1) translateY(0);
         pointer-events: auto;
+        /* Ajustar overflow del body cuando una sección está activa */
+        /* (Esto se manejará con JS para que el body no haga scroll si la sección es más pequeña que la ventana) */
     }
 
     .content-section.active-hidden {
@@ -131,6 +139,16 @@
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;
+        /* Asegura que el foro principal no ocupe espacio cuando está oculto */
+        height: 0;
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* Ocultar el scroll del body cuando una sección está activa si es necesario */
+    body.no-scroll {
+        overflow: hidden;
     }
 
     .logo {
@@ -214,6 +232,7 @@
         font-size: 0.95em;
         box-shadow: none;
         transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
+        margin-bottom: 20px; /* Añadir margen inferior para que no quede pegado al borde */
     }
 
     #volverBtnGta:hover, #volverBtnMacro:hover {
@@ -663,7 +682,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <div class="author">- MacroUser</div>
                 </div>
                 <div class="review-card">
-                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="rating">⭐⭐⭐⭐}</div>
                     <p>"El diseño de la página es muy chulo, me encanta el toque neón y el video de fondo."</p>
                     <div class="author">- NeonGamer</div>
                 </div>
@@ -813,6 +832,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
         const contentSections = document.querySelectorAll('.content-section');
+        const body = document.body; // Referencia al body
 
         const reviewsSlider = document.getElementById('reviewsSlider');
         let isDown = false;
@@ -857,6 +877,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
+            body.classList.remove('no-scroll'); // Restaurar scroll del body
             requestAnimationFrame(() => {
                 sectionElement.addEventListener('transitionend', function handler() {
                     sectionElement.style.display = 'none';
@@ -870,8 +891,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         function showSectionSmoothly(sectionElement) {
             if (!sectionElement) return;
             sectionElement.style.display = 'block';
+            // Ocultar scroll del body si la sección activa NO necesita scroll propio (es decir, cabe en la pantalla)
+            // Si la sección es más alta que la ventana, su propio overflow-y: auto se encargará
+            // Aquí, la sección activa siempre debería permitir scroll, así que no necesitamos esconder el scroll del body
+            // body.classList.add('no-scroll'); // Considerar si esto es realmente necesario. Probablemente no con position: absolute.
+
             requestAnimationFrame(() => {
                 sectionElement.classList.add('active-visible');
+                // Al mostrar una nueva sección, desplazar la ventana al principio
+                window.scrollTo(0, 0);
             });
         }
 
@@ -879,9 +907,10 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             const targetSection = document.getElementById(interfazId);
 
             hideSectionSmoothly(foroPrincipal, () => {
+                // Al ocultar el foro principal, lo hacemos realmente invisible y no ocupando espacio
                 foroPrincipal.classList.add('hidden-forum');
                 botonesInicio.classList.add('hidden');
-
+                
                 hideSectionSmoothly(currentActiveSection, () => {
                     showSectionSmoothly(targetSection);
                     currentActiveSection = targetSection;
@@ -892,10 +921,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         function volverAlForo() {
             hideSectionSmoothly(currentActiveSection, () => {
                 currentActiveSection = null; // Reiniciar la sección activa
-                foroPrincipal.classList.remove('hidden-forum'); // Mostrar el foro
-                foroPrincipal.style.display = 'flex'; // Asegurarse de que el foro principal esté visible
+                
+                foroPrincipal.classList.remove('hidden-forum'); // Mostrar el foro (remover clases de ocultamiento)
+                // Asegurarse de que el foro principal esté visible (flex) antes de la transición
+                foroPrincipal.style.display = 'flex'; 
+                
                 requestAnimationFrame(() => {
                     foroPrincipal.classList.add('active-visible'); // Animación de entrada
+                    body.classList.remove('no-scroll'); // Asegurarse de que el scroll del body esté habilitado
+                    window.scrollTo(0, 0); // Volver al inicio del foro
                 });
                 botonesInicio.classList.remove('hidden'); // Mostrar los botones superiores
             });
