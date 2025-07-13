@@ -12,63 +12,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <style>
-
-/* Pega el código CSS de arriba aquí */
-        /* Define la animación fadeInUp */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px); /* Empieza 20px abajo */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0); /* Termina en su posición original */
-            }
-        }
-
-        /* Clase para aplicar la animación sin retraso */
-        .animacion-entrada-inmediata {
-            animation-name: fadeInUp;
-            animation-duration: 1s; /* Duración de la animación: 1 segundo */
-            animation-timing-function: ease-out; /* Velocidad de la animación: empieza rápido y desacelera */
-            animation-fill-mode: both; /* Mantiene el estado final de la animación */
-            /* Aquí NO incluimos 'animation-delay' */
-
-            /* Opcional: estilos para que se vea el efecto */
-            margin-top: 20px; /* Un poco de margen para separar elementos */
-            padding: 20px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Puedes seguir teniendo otros estilos base si los necesitas */
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #e0e0e0;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="animacion-entrada-inmediata">
-        <h1>¡Hola, interfaz!</h1>
-        <p>Este elemento aparece inmediatamente.</p>
-    </div>
-
-    <div class="animacion-entrada-inmediata">
-        <p>Este otro también, sin ningún retraso.</p>
-    </div>
-
-    <div class="animacion-entrada-inmediata">
-        <p>Todos los elementos con esta clase se animarán al mismo tiempo.</p>
-    </div>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
