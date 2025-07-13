@@ -9,415 +9,518 @@
     <meta property="og:image" content="https://mantamods.github.io/static.png" />
     <meta property="og:url" content="https://mantamods.github.io/" />
     <meta name="theme-color" content="#00ffff" />
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@600;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <style>
-        /* IMPORTANTE: Coloca el CSS DENTRO del <head> o en un archivo .css externo */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@600;800&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #000;
+        color: #33FF99;
+        overflow-x: hidden;
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: #33FF99;
-            overflow-x: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
-        }
+    /* Overlay de ruido/glitch */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABjFqzyAAAABlBMVEVHcExra2tSUlJgbKrbAAAAAXRSTlMAQObYZgAAABFJREFUCNdjYKAAMjAwMDQxMEkAK2i4JkF+G0AAAAAASUVORK5CYII=') repeat;
+        opacity: 0.05;
+        pointer-events: none;
+        z-index: 10;
+    }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABjFqzyAAAABlBMVEVHcExra2tSUlJgbKrbAAAAAXRSTlMAQObYZgAAABFJREFUCNdjYKAAMjAwMDQxMEkAK2i4JkF+G0AAAAAASUVORK5CYII=') repeat;
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 10;
-        }
+    /* BOTONES ARRIBA IZQUIERDA */
+    .botones-superiores {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        margin-left: 15px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 20;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
 
+    .botones-superiores.hidden {
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+    }
+
+    .botones-superiores button {
+        padding: 10px 14px;
+        font-size: 1em;
+        background: #00FFFF;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .botones-superiores button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6);
+    }
+
+    @media (max-width: 600px) {
         .botones-superiores {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            margin-left: 15px;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 20;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            flex-direction: column;
+            align-items: flex-start;
         }
-
-        .botones-superiores.hidden {
-            opacity: 0;
-            transform: translateY(-20px);
-            pointer-events: none;
-        }
-
         .botones-superiores button {
-            padding: 10px 14px;
-            font-size: 1em;
-            background: #00FFFF;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
+            width: fit-content;
         }
+    }
 
-        .botones-superiores button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6);
-        }
+    /* INTERFACES (Optimizado: Usar opacidad y visibilidad) */
+    .content-section {
+        display: none; /* Se mantiene para que no ocupe espacio cuando está oculto */
+        width: 100%;
+        background: #000;
+        color: #00FFFF;
+        padding: 30px 20px;
+        text-align: center;
+        /* Las animaciones fadeZoomIn/Out se manejarán con clases */
+        position: fixed; /* Usar fixed para que cubra la pantalla sin problemas de flujo */
+        top: 0;
+        left: 0;
+        z-index: 15;
+        overflow-y: auto;
+        min-height: 100vh; /* Asegura que cubra al menos la altura del viewport */
+        height: 100%; /* Para que el scroll funcione si el contenido excede min-height */
+        box-sizing: border-box;
+        opacity: 0; /* Controlaremos la visibilidad con opacidad para transiciones suaves */
+        pointer-events: none; /* No clickable when hidden */
+    }
 
-        @media (max-width: 600px) {
-            .botones-superiores {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .botones-superiores button {
-                width: fit-content;
-            }
-        }
+    .content-section.active-visible {
+        display: block; /* Solo se hace block cuando está activa para la animación */
+        animation-name: fadeZoomIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
+        pointer-events: auto; /* Clickable when visible */
+    }
 
-        /* INTERFACES (Simplificado el manejo de display/opacity) */
-        .content-section {
-            display: none; /* Por defecto oculto */
-            width: 100%;
-            background: #000;
-            color: #00FFFF;
-            padding: 30px 20px;
-            text-align: center;
-            position: fixed; /* Usar fixed para ocupar toda la pantalla sin scroll extra */
-            top: 0;
-            left: 0;
-            z-index: 15;
-            overflow-y: auto;
-            height: 100vh; /* Ocupa el 100% del viewport height */
-            box-sizing: border-box;
-            opacity: 0; /* Por defecto transparente */
-            transition: opacity 0.5s ease; /* Transición suave de opacidad */
-            pointer-events: none; /* No interactuable cuando oculto */
-        }
+    .content-section.active-hidden {
+        animation-name: fadeZoomOut;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        pointer-events: none;
+    }
 
-        .content-section.active {
-            display: block; /* Muestra el elemento para que la transición de opacidad funcione */
-            opacity: 1; /* Hace el elemento visible */
-            pointer-events: auto; /* Permite la interacción */
-        }
+    @keyframes fadeZoomIn {
+        0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
 
-        /* Animaciones para el foro principal (home) */
-        .container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 40px 20px 60px;
-            text-align: center;
-            box-sizing: border-box;
-            width: 100%;
-            position: relative;
-            z-index: 0;
-            opacity: 1; /* Por defecto visible */
-            transition: opacity 0.5s ease; /* Transición para ocultar el foro principal */
-        }
+    @keyframes fadeZoomOut {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    }
 
-        .container.hidden {
-            opacity: 0;
-            pointer-events: none; /* Deshabilita interacciones cuando está oculto */
-        }
+    /* Contenedor principal del foro */
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 20px 60px;
+        text-align: center;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        z-index: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease; /* Añadida transición para el contenedor principal */
+        opacity: 1; /* Por defecto visible */
+        pointer-events: auto; /* Por defecto interactuable */
+    }
 
-        .container > * {
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-            flex-shrink: 0;
-        }
+    .container.hidden-forum {
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+    }
 
-        .container header {
-            margin-bottom: 20px;
-        }
+    .logo {
+        width: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
+    }
 
-        header img {
-            width: 140px;
-            border-radius: 50%;
-            margin-top: 10px;
-            animation: pulseGlow 2s infinite alternate;
-        }
+    .gta-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 30px;
+    }
 
-        header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5em;
-            color: #00FFFF;
-            text-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6);
-            margin: 10px 0;
-        }
+    .gta-box {
+        background: rgba(0,255,255,0.08);
+        border: 2px solid #00FFFF;
+        border-radius: 12px;
+        padding: 20px;
+        width: 300px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
 
-        @keyframes pulseGlow {
-            0% { filter: brightness(1) drop-shadow(0 0 15px #00FFFF); }
-            100% { filter: brightness(1.4) drop-shadow(0 0 35px #00FFFF); }
-        }
+    .gta-box:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 0 25px #00FFFF, 0 8px 15px rgba(0,255,255,0.5);
+    }
 
-        .redes-section {
-            text-align: center;
-            margin-bottom: 10px;
-            padding-top: 20px;
-        }
+    .gta-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-top: 10px;
+        box-shadow: 0 0 10px #00FFFF;
+    }
 
-        .redes-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            color: #00FFFF;
-            text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
-            margin-bottom: 10px;
-            width: 100%;
-            text-align: center;
-            flex-shrink: 0;
-        }
+    #volverBtnGta, #volverBtnMacro {
+        margin-top: 40px;
+        padding: 12px 20px;
+        background: #00FFFF;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1em;
+        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
+        transition: transform 0.2s, background 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .social {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 20px;
-        }
+    #volverBtnGta:hover, #volverBtnMacro:hover {
+        background: #00c9c9;
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 0 20px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6);
+    }
 
-        .social a {
-            font-size: 2.3em;
-            text-decoration: none;
-            transition: transform 0.2s ease-out, filter 0.3s;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-        }
+    iframe {
+        width: 90%;
+        max-width: 800px;
+        height: 450px;
+        border: 2px solid #00FFFF;
+        border-radius: 10px;
+        margin: 20px auto;
+        display: block;
+        box-shadow: 0 0 15px #00FFFF;
+    }
 
-        .social a:hover {
-            transform: scale(1.3) translateY(-5px);
-            filter: drop-shadow(0 0 10px #00FFFF);
-        }
+    .video-bg {
+        position: fixed;
+        top: 0; left: 0;
+        min-width: 100vw;
+        min-height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
 
-        .section {
-            margin-top: 20px;
-        }
+    /* Ajustes para el contenido dentro del contenedor principal */
+    .container > * {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        flex-shrink: 0;
+    }
 
-        .cta {
-            background: #00FFFF;
-            color: #000;
-            padding: 18px 45px;
-            font-size: 1.4em;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-            margin: 20px auto 10px;
-            display: inline-block;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-        }
+    .container header {
+        margin-bottom: 20px;
+    }
 
-        .cta:hover {
-            background: #00c9c9;
-            box-shadow: 0 0 25px #00FFFF, 0 0 50px rgba(0, 255, 255, 0.7);
-            transform: scale(1.03);
-        }
+    header img {
+        width: 140px;
+        border-radius: 50%;
+        margin-top: 10px;
+        animation: pulseGlow 2s infinite alternate;
+    }
 
-        .buttons-row {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
+    header h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3.5em;
+        color: #00FFFF;
+        text-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.6);
+        margin: 10px 0;
+    }
 
-        .rules-btn, .plantilla-btn {
-            background: #00FFFF;
-            color: #000;
-            padding: 15px 30px;
-            font-size: 1.15em;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
-            cursor: pointer;
-            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Orbitron', sans-serif;
-        }
+    @keyframes pulseGlow {
+        0% { filter: brightness(1) drop-shadow(0 0 15px #00FFFF); }
+        100% { filter: brightness(1.4) drop-shadow(0 0 35px #00FFFF); }
+    }
 
-        .rules-btn:hover, .plantilla-btn:hover {
-            background: #00c9c9;
-            box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6);
-            transform: translateY(-3px);
-        }
+    /* Centrado de la sección de redes */
+    .redes-section {
+        text-align: center;
+        margin-bottom: 10px;
+        padding-top: 20px;
+    }
 
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: red;
-            box-shadow: 0 0 6px red;
-        }
+    .redes-section h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5em;
+        color: #00FFFF;
+        text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
+        margin-bottom: 10px;
+    }
 
-        .rules-box, .plantilla-box {
-            display: none;
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #00FFFF;
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 95vw;
-            margin: 20px auto;
-            color: #00FFFF;
-            white-space: pre-wrap;
-            font-size: 1.05em;
-            line-height: 1.6;
-            text-align: left;
-            max-height: 60vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            word-wrap: break-word;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
+    .social {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-bottom: 20px;
+    }
 
-        .rgb-text {
-            animation: rgbCycle 5s linear infinite;
-        }
+    .social a {
+        font-size: 2.3em;
+        text-decoration: none;
+        transition: transform 0.2s ease-out, filter 0.3s;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    }
 
-        @keyframes rgbCycle {
-            0% { color: red; }
-            25% { color: orange; }
-            50% { color: lime; }
-            75% { color: cyan; }
-            100% { color: red; }
-        }
+    .social a:hover {
+        transform: scale(1.3) translateY(-5px);
+        filter: drop-shadow(0 0 10px #00FFFF);
+    }
 
-        #startBtn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 25px 40px;
-            font-size: 1.5em;
-            z-index: 30;
-            background: #00FFFF;
-            color: #000;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5);
-            cursor: pointer;
-            animation: pulseBtn 1.5s infinite ease-in-out;
-            font-family: 'Orbitron', sans-serif;
-        }
+    .section {
+        margin-top: 20px;
+    }
 
-        @keyframes pulseBtn {
-            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
-            50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 30px #00FFFF; }
-            100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
-        }
+    .cta {
+        background: #00FFFF;
+        color: #000;
+        padding: 18px 45px;
+        font-size: 1.4em;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        margin: 20px auto 10px;
+        display: inline-block;
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+    }
 
-        @media (min-width: 768px) {
-            #startBtn { display: none; } /* En pantallas grandes, el botón de inicio no es necesario */
-        }
+    .cta:hover {
+        background: #00c9c9;
+        box-shadow: 0 0 25px #00FFFF, 0 0 50px rgba(0, 255, 255, 0.7);
+        transform: scale(1.03);
+    }
 
-        /* RESEÑAS SECTION */
-        .reviews-section {
-            margin-top: 50px;
-            padding: 20px;
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid #00FFFF;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            max-width: 900px;
-            width: 95%;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .reviews-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            color: #00FFFF;
-            text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
-            margin-bottom: 25px;
-            width: 100%;
-            text-align: center;
-        }
+    .buttons-row {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
 
-        .reviews-slider {
-            display: flex;
-            gap: 25px;
-            padding-bottom: 10px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            cursor: grab;
-            width: 100%;
-        }
-        
-        .reviews-slider.active-grab {
-            cursor: grabbing;
-        }
+    .rules-btn, .plantilla-btn {
+        background: #00FFFF;
+        color: #000;
+        padding: 15px 30px;
+        font-size: 1.15em;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.4);
+        cursor: pointer;
+        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Orbitron', sans-serif;
+    }
 
-        .reviews-slider::-webkit-scrollbar {
-            height: 8px;
-            background-color: transparent;
-        }
-        
-        .reviews-slider::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 255, 255, 0.5);
-            border-radius: 10px;
-            border: 1px solid #00FFFF;
-        }
+    .rules-btn:hover, .plantilla-btn:hover {
+        background: #00c9c9;
+        box-shadow: 0 0 20px #00FFFF, 0 0 35px rgba(0, 255, 255, 0.6);
+        transform: translateY(-3px);
+    }
 
-        .reviews-slider {
-            -ms-overflow-style: auto;
-            scrollbar-width: thin;
-        }
+    .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: red;
+        box-shadow: 0 0 6px red;
+    }
 
-        .review-card {
-            background: rgba(0, 255, 255, 0.12);
-            border: 1px solid #00FFFF;
-            border-radius: 12px;
-            padding: 25px;
-            min-width: 320px;
-            flex: 0 0 auto;
-            text-align: left;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 25px rgba(0, 255, 255, 0.1);
-        }
+    .rules-box, .plantilla-box {
+        display: none;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid #00FFFF;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 95vw;
+        margin: 20px auto;
+        color: #00FFFF;
+        white-space: pre-wrap;
+        font-size: 1.05em;
+        line-height: 1.6;
+        text-align: left;
+        max-height: 60vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
 
-        .review-card p {
-            font-size: 1.05em;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            color: #E0FFFF;
-        }
+    .rgb-text {
+        animation: rgbCycle 5s linear infinite;
+    }
 
-        .review-card .author {
-            font-weight: bold;
-            color: #00FFFF;
-            font-size: 0.95em;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-        }
+    @keyframes rgbCycle {
+        0% { color: red; }
+        25% { color: orange; }
+        50% { color: lime; }
+        75% { color: cyan; }
+        100% { color: red; }
+    }
 
-        .review-card .rating {
-            color: gold;
-            margin-bottom: 8px;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
-        }
+    #startBtn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 25px 40px;
+        font-size: 1.5em;
+        z-index: 30;
+        background: #00FFFF;
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.5);
+        cursor: pointer;
+        animation: pulseBtn 1.5s infinite ease-in-out;
+        font-family: 'Orbitron', sans-serif;
+    }
 
-        footer {
-            margin-top: auto;
-            font-size: 0.9em;
-            color: #999;
-            padding-top: 40px;
-            width: 100%;
-        }
-    </style>
+    @keyframes pulseBtn {
+        0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
+        50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 30px #00FFFF; }
+        100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px #00FFFF; }
+    }
+
+    @media (min-width: 768px) {
+        #startBtn { display: none; }
+    }
+
+    /* RESEÑAS SECTION */
+    .reviews-section {
+        margin-top: 50px;
+        padding: 20px;
+        background: rgba(0, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 1px solid #00FFFF;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        max-width: 900px;
+        width: 95%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .reviews-section h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5em;
+        color: #00FFFF;
+        text-shadow: 0 0 12px #00FFFF, 0 0 25px rgba(0, 255, 255, 0.5);
+        margin-bottom: 25px;
+        width: 100%;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .reviews-slider {
+        display: flex;
+        gap: 25px;
+        padding-bottom: 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        cursor: grab;
+        width: 100%;
+        flex-shrink: 0;
+    }
+    
+    /* Styles for when dragging */
+    .reviews-slider.active-grab {
+        cursor: grabbing;
+    }
+
+    .reviews-slider::-webkit-scrollbar {
+        height: 8px;
+        background-color: transparent;
+    }
+    
+    .reviews-slider::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 255, 255, 0.5);
+        border-radius: 10px;
+        border: 1px solid #00FFFF;
+    }
+
+    .reviews-slider {
+        -ms-overflow-style: auto;
+        scrollbar-width: thin;
+    }
+
+    .review-card {
+        background: rgba(0, 255, 255, 0.12);
+        border: 1px solid #00FFFF;
+        border-radius: 12px;
+        padding: 25px;
+        min-width: 320px;
+        flex: 0 0 auto;
+        text-align: left;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 25px rgba(0, 255, 255, 0.1);
+    }
+
+    .review-card p {
+        font-size: 1.05em;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        color: #E0FFFF;
+    }
+
+    .review-card .author {
+        font-weight: bold;
+        color: #00FFFF;
+        font-size: 0.95em;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    }
+
+    .review-card .rating {
+        color: gold;
+        margin-bottom: 8px;
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+    }
+
+    footer {
+        margin-top: auto;
+        font-size: 0.9em;
+        color: #999;
+        padding-top: 40px;
+        width: 100%;
+    }
+</style>
 </head>
 <body>
     <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
@@ -439,8 +542,7 @@
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
-                <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a>
-                <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
+                <a href="http://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube">🔴</a> <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick">🟢</a>
                 <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
             </div>
         </div>
@@ -623,8 +725,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <img src="static.png" alt="Logo MantaMods" class="logo" />
         <h2>⚙️ Macro para PC</h2>
         <p>Tutorial para usar la macro desde el mismo foro:</p>
-        <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
-        <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
+        <iframe src="http://www.youtube.com/embed/6" allowfullscreen></iframe> <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
         <button id="volverBtnMacro" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
 
@@ -633,34 +734,29 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const video = document.getElementById('bg-video');
         const foroPrincipal = document.getElementById('foroPrincipal');
         const botonesInicio = document.getElementById('botonesInicio');
-        const contentSections = document.querySelectorAll('.content-section'); // Selecciona todas las secciones de contenido
+        // Obtener todas las secciones de contenido para una gestión más fácil
+        const contentSections = document.querySelectorAll('.content-section');
 
-        // Review Slider Variables for Drag/Swipe
+        // Lógica del slider de reseñas (manteniendo tu implementación original)
         const reviewsSlider = document.getElementById('reviewsSlider');
         let isDown = false;
         let startX;
         let scrollLeft;
 
-        // Listener para el botón de inicio (solo en móviles, oculta en desktop via CSS)
-        // No necesitas un listener condicional, el CSS se encarga de ocultar el botón
-        // y la función startMedia() solo se llama al hacer clic.
-        if (window.innerWidth < 768) { // Solo si es un dispositivo móvil (ejecutar la lógica si el botón está visible)
-            // Se asume que el botón startBtn es clickeable solo en móviles
-            document.getElementById('startBtn').addEventListener('click', () => {
-                startMedia();
-            });
-        } else {
-             // En desktop, donde no hay botón, se puede intentar reproducir automáticamente de inmediato
-             // Aunque esto puede ser bloqueado por el navegador si no hay interacción previa.
-            music.play().catch(e => console.log("Música no se pudo reproducir automáticamente:", e));
-            video.play().catch(e => console.log("Video no se pudo reproducir automáticamente:", e));
+        // Función para iniciar medios (música y video)
+        function startMedia() {
+            music.play().catch(e => console.error("Error al reproducir música:", e));
+            video.play().catch(e => console.error("Error al reproducir video:", e));
+            document.getElementById('startBtn').style.display = 'none'; // Oculta el botón
+            // Aseguramos que el foro principal esté visible si el usuario tuvo que hacer clic
+            foroPrincipal.classList.remove('hidden-forum');
+            botonesInicio.classList.remove('hidden'); // Asegura que los botones de inicio estén visibles
         }
 
-        function startMedia() {
-            music.play().catch(() => { /* Manejar si la reproducción falla (ej. por política del navegador) */ });
-            video.play().catch(() => { /* Manejar si la reproducción falla */ });
-            document.getElementById('startBtn').style.display = 'none'; // Oculta el botón después de la interacción
-            foroPrincipal.classList.remove('hidden'); // Asegura que el foro principal esté visible si se oculta por defecto al inicio
+        // Si la pantalla es grande, intentar iniciar medios inmediatamente (sin el botón)
+        // Esto puede ser bloqueado por el navegador si no ha habido interacción previa.
+        if (window.innerWidth >= 768) {
+            startMedia();
         }
 
         function toggleRules() {
@@ -679,28 +775,57 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
-        function ocultarTodasLasInterfaces() {
-            contentSections.forEach(interfaz => {
-                if (interfaz.classList.contains('active')) {
-                    interfaz.classList.remove('active');
-                }
-            });
+        // Nueva lógica para mostrar/ocultar interfaces de forma suave
+        let currentActiveSection = null; // Para llevar un registro de la sección activa
+
+        function hideSectionSmoothly(sectionElement, callback) {
+            if (!sectionElement || !sectionElement.classList.contains('active-visible')) {
+                if (callback) callback(); // Si no está visible, simplemente ejecuta el callback
+                return;
+            }
+            sectionElement.classList.remove('active-visible');
+            sectionElement.classList.add('active-hidden');
+            sectionElement.addEventListener('animationend', function handler() {
+                sectionElement.style.display = 'none';
+                sectionElement.classList.remove('active-hidden');
+                sectionElement.removeEventListener('animationend', handler);
+                if (callback) callback();
+            }, { once: true });
+        }
+
+        function showSectionSmoothly(sectionElement) {
+            if (!sectionElement) return;
+            sectionElement.style.display = 'block'; // Asegura que esté en display block para la animación
+            sectionElement.classList.add('active-visible');
         }
 
         function mostrarInterfaz(interfazId) {
-            // Oculta el foro principal
-            foroPrincipal.classList.add('hidden');
-            // Oculta los botones superiores (siempre se ocultarán al ir a una sub-interfaz)
-            botonesInicio.classList.add('hidden');
+            const targetSection = document.getElementById(interfazId);
 
-            // Asegura que todas las demás interfaces de contenido estén inactivas
-            ocultarTodasLasInterfaces();
+            // 1. Ocultar foroPrincipal con animación
+            hideSectionSmoothly(foroPrincipal, () => {
+                foroPrincipal.classList.add('hidden-forum'); // Esconde el foro principal después de la animación
+                botonesInicio.classList.add('hidden'); // Oculta los botones superiores inmediatamente
 
-            // Muestra la interfaz deseada con la clase 'active'
-            const interfazAMostrar = document.getElementById(interfazId);
-            if (interfazAMostrar) {
-                interfazAMostrar.classList.add('active');
-            }
+                // 2. Ocultar la sección activa actual (si existe)
+                hideSectionSmoothly(currentActiveSection, () => {
+                    // 3. Mostrar la nueva sección
+                    showSectionSmoothly(targetSection);
+                    currentActiveSection = targetSection; // Actualiza la sección activa
+                });
+            });
+        }
+
+        function volverAlForo() {
+            // Ocultar la sección actualmente visible
+            hideSectionSmoothly(currentActiveSection, () => {
+                currentActiveSection = null; // No hay sección activa
+                // Mostrar el foro principal
+                foroPrincipal.classList.remove('hidden-forum'); // Quita la clase hidden-forum
+                foroPrincipal.style.display = 'flex'; // Asegura que el foro sea flexbox
+                // Mostrar los botones superiores
+                botonesInicio.classList.remove('hidden');
+            });
         }
 
         // Funciones para los botones del menú superior
@@ -710,15 +835,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function mostrarMacro() {
             mostrarInterfaz('macroContent');
-        }
-
-        function volverAlForo() {
-            // Oculta todas las interfaces secundarias
-            ocultarTodasLasInterfaces();
-            // Muestra el foro principal
-            foroPrincipal.classList.remove('hidden');
-            // Muestra los botones superiores
-            botonesInicio.classList.remove('hidden');
         }
 
         // Lógica del slider de reseñas (manteniendo tu implementación original)
@@ -743,7 +859,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - reviewsSlider.offsetLeft;
-            const walk = (x - startX) * 1.5; // Multiplicador para la velocidad de scroll
+            const walk = (x - startX) * 1.5;
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
 
@@ -753,7 +869,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             reviewsSlider.classList.add('active-grab');
             startX = e.touches[0].pageX - reviewsSlider.offsetLeft;
             scrollLeft = reviewsSlider.scrollLeft;
-        }, { passive: true }); // Use passive listener for better scroll performance
+        }, { passive: true });
 
         reviewsSlider.addEventListener('touchend', () => {
             isDown = false;
