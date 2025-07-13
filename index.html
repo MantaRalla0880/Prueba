@@ -19,10 +19,9 @@
         font-family: 'Poppins', sans-serif;
         background: #000;
         color: #00FFFF;
-        overflow-x: hidden;
+        overflow: hidden; /* Controlamos el scroll por cada sección activa */
         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
-        /* Permitir scroll del body solo cuando sea necesario, inicialmente oculto para la pantalla de inicio */
-        overflow-y: hidden; 
+        position: relative; /* Para que las secciones absolutas se posicionen respecto al body */
     }
 
     /* BOTONES ARRIBA IZQUIERDA */
@@ -33,16 +32,19 @@
         margin-left: 10px;
         justify-content: flex-start;
         flex-wrap: wrap;
-        position: relative;
+        position: fixed; /* Fijo para que siempre esté visible */
+        top: 0;
+        left: 0;
         z-index: 20;
         transition: opacity 0.5s ease, transform 0.5s ease;
-        /* Vuelve a estar oculto inicialmente */
         opacity: 0; 
         transform: translateY(-10px);
         pointer-events: none;
+        width: 100%; /* Asegura que ocupe todo el ancho para centrar en móviles */
+        padding: 10px; /* Añade padding para que no se pegue a los bordes */
     }
 
-    .botones-superiores.active { /* Nueva clase para mostrar */
+    .botones-superiores.active { 
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
@@ -72,7 +74,6 @@
         .botones-superiores {
             flex-direction: row;
             justify-content: center;
-            width: 100%;
             margin-left: 0;
             padding: 5px;
         }
@@ -83,10 +84,14 @@
         }
     }
 
-    /* INTERFACES */
+    /* INTERFACES (incluye el foro principal ahora) */
     .content-section {
         display: none;
+        position: absolute; /* Ocupa toda la pantalla */
+        top: 0;
+        left: 0;
         width: 100%;
+        min-height: 100vh; /* Ocupa al menos el alto de la ventana */
         background: rgba(0, 0, 0, 0.9);
         color: #00FFFF;
         padding: 20px;
@@ -94,56 +99,47 @@
         box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        position: relative;
-        z-index: 10;
-        min-height: 100vh; /* Asegura que ocupe al menos la altura de la vista */
-        overflow-y: auto; /* Permite scroll dentro de la sección si el contenido es largo */
+        transition: opacity 0.4s ease;
+        overflow-y: auto; /* Permite scroll interno si el contenido es más largo que 100vh */
+        padding-top: 60px; /* Espacio para los botones superiores fijos */
+        padding-bottom: 60px; /* Espacio para el botón de volver fijo */
     }
 
     .content-section.active-visible {
         display: block;
         opacity: 1;
-        transform: scale(1) translateY(0);
         pointer-events: auto;
     }
+    /* No necesitamos active-hidden si usamos display: none */
 
-    .content-section.active-hidden {
-        opacity: 0;
-        transform: scale(0.95) translateY(10px);
-    }
-
-    /* Contenedor principal del foro */
-    .container {
+    /* Contenedor principal del foro (ahora se comporta como un content-section) */
+    #foroPrincipal {
+        /* Sus estilos serán manejados principalmente por .content-section */
+        position: absolute; /* También lo hacemos absoluto */
+        top: 0;
+        left: 0;
+        width: 100%;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
+        background: rgba(0, 0, 0, 0.9); /* Se asegura el fondo si el video es transparente */
+        color: #00FFFF;
         padding: 20px;
         text-align: center;
         box-sizing: border-box;
-        width: 100%;
-        position: relative;
-        z-index: 0;
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        /* Vuelve a estar oculto inicialmente */
         opacity: 0;
         pointer-events: none;
-        height: 0;
-        overflow: hidden;
-        padding-top: 0;
-        padding-bottom: 0;
+        transition: opacity 0.4s ease;
+        overflow-y: auto; /* Permite scroll interno */
+        padding-top: 60px; /* Espacio para los botones superiores fijos */
+        padding-bottom: 60px; /* Espacio para el footer y botón volver */
     }
 
-    .container.active { /* Nueva clase para mostrar */
+    #foroPrincipal.active-visible {
+        display: flex; /* Mantén flex para los hijos */
+        flex-direction: column; /* Mantén la dirección de columna */
+        align-items: center;
+        justify-content: flex-start;
         opacity: 1;
-        transform: translateY(0);
         pointer-events: auto;
-        height: auto;
-        overflow: visible;
-        padding-top: 20px; /* Restaurar padding cuando esté activo */
-        padding-bottom: 20px;
     }
 
     body.no-scroll {
@@ -265,7 +261,8 @@
         z-index: -1;
     }
 
-    .container > * {
+    /* Estos estilos se aplicarán al contenido dentro de cada content-section */
+    #foroPrincipal > * {
         max-width: 700px;
         margin-left: auto;
         margin-right: auto;
@@ -273,7 +270,7 @@
         flex-shrink: 0;
     }
 
-    .container header {
+    #foroPrincipal header {
         margin-bottom: 15px;
     }
 
@@ -429,7 +426,6 @@
     }
 
     #startBtn {
-        /* Vuelve a ser visible inicialmente */
         display: block; 
         position: absolute;
         top: 50%;
@@ -455,7 +451,6 @@
     }
 
     @media (min-width: 768px) {
-        /* El botón de inicio se mantiene oculto en pantallas grandes */
         #startBtn { display: none; }
     }
 
@@ -556,7 +551,7 @@
     }
 
     footer {
-        margin-top: auto;
+        margin-top: auto; /* Para que el footer siempre vaya al final del contenido */
         font-size: 0.8em;
         color: #777;
         padding-top: 25px;
@@ -571,7 +566,8 @@
         Tu navegador no soporta video HTML5.
     </video>
 
-    <audio id="music" loop> <source src="Musicas.mp3" type="audio/mpeg" />
+    <audio id="music" loop>
+        <source src="Musicas.mp3" type="audio/mpeg" />
     </audio>
 
     <div class="botones-superiores" id="botonesInicio">
@@ -579,7 +575,7 @@
         <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
     </div>
 
-    <div id="foroPrincipal" class="container">
+    <div id="foroPrincipal" class="content-section">
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
@@ -820,8 +816,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 </div>
             </div>
         </div>
-        <div style="height: 80px;"></div> 
-    </div>
+        </div>
 
     <div id="macroContent" class="content-section">
         <img src="static.png" alt="Logo MantaMods" class="logo" />
@@ -829,8 +824,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <p>Tutorial para usar la macro desde el mismo foro:</p>
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe> 
         <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
-        <div style="height: 80px;"></div> 
-    </div>
+        </div>
 
     <script>
         const music = document.getElementById('music');
@@ -849,32 +843,30 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         // Función que se ejecuta al presionar "Tocar para iniciar"
         function startMedia() {
-            // Reproducir música y video
             music.play().catch(e => console.error("Error al reproducir música:", e));
             video.play().catch(e => console.error("Error al reproducir video:", e));
 
-            // Ocultar el botón de inicio
             startBtn.style.display = 'none';
             
             // Mostrar el foro principal y los botones superiores
-            foroPrincipal.classList.add('active');
+            foroPrincipal.classList.add('active-visible'); // Usamos active-visible aquí también
             botonesInicio.classList.add('active');
-            body.style.overflowY = 'auto'; // Habilitar el scroll del body
+            body.style.overflow = 'hidden'; // Mantener el scroll del body oculto
         }
 
         // Lógica inicial al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
-            // Asegurarse de que el foro principal y los botones superiores estén ocultos al inicio
-            foroPrincipal.classList.remove('active');
+            // Asegurarse de que todas las secciones de contenido estén ocultas al inicio
+            contentSections.forEach(section => {
+                section.classList.remove('active-visible');
+                section.style.display = 'none'; // Asegurar que estén ocultas visualmente
+            });
             botonesInicio.classList.remove('active');
 
-            // Solo en móviles, mostrar el botón de inicio
-            if (window.innerWidth < 768) { // Mismo breakpoint que tu CSS para #startBtn
+            if (window.innerWidth < 768) {
                 startBtn.style.display = 'block';
-                body.style.overflowY = 'hidden'; // Ocultar scroll en la pantalla de inicio móvil
             } else {
-                // En desktop, iniciar directamente como antes (sin botón de inicio)
-                startMedia(); 
+                startMedia(); // En desktop, iniciar directamente
             }
         });
 
@@ -896,70 +888,42 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         let currentActiveSection = null;
 
-        function hideSectionSmoothly(sectionElement, callback) {
-            if (!sectionElement || !sectionElement.classList.contains('active-visible')) {
-                if (callback) callback();
-                return;
-            }
-            sectionElement.classList.remove('active-visible');
-            sectionElement.classList.add('active-hidden');
-            requestAnimationFrame(() => {
-                sectionElement.addEventListener('transitionend', function handler() {
-                    sectionElement.style.display = 'none';
-                    sectionElement.classList.remove('active-hidden');
-                    sectionElement.removeEventListener('transitionend', handler);
-                    if (callback) callback();
-                }, { once: true });
+        function hideAllSectionsExcept(targetSectionId) {
+            contentSections.forEach(section => {
+                if (section.id !== targetSectionId) {
+                    section.classList.remove('active-visible');
+                    section.style.display = 'none'; // Ocultar inmediatamente
+                }
             });
         }
 
-        function showSectionSmoothly(sectionElement) {
+        function showSection(sectionElement) {
             if (!sectionElement) return;
-            // Ocultar foro principal y botones superiores (usando la clase 'active')
-            foroPrincipal.classList.remove('active');
-            botonesInicio.classList.remove('active');
-            
-            // Mostrar la sección objetivo
+
+            hideAllSectionsExcept(sectionElement.id); // Oculta las otras antes de mostrar
+
             sectionElement.style.display = 'block';
             requestAnimationFrame(() => {
                 sectionElement.classList.add('active-visible');
-                // IMPORTANTE: NO hacer scroll automático aquí. 
-                // El diseño de la interfaz y el min-height del CSS deberían ajustarse
-                // para que el contenido sea visible.
-                // Asegúrate de que los iframes y elementos dentro de content-section
-                // tengan alturas y anchos que se adapten bien al viewport.
+                // IMPORTANTE: Resetear el scroll de la sección a 0 para que siempre inicie arriba
+                sectionElement.scrollTop = 0; 
                 volverBtnFixed.style.display = 'block'; // Mostrar el botón de volver
             });
-        }
-
-        function mostrarInterfaz(interfazId) {
-            const targetSection = document.getElementById(interfazId);
-
-            // Ocultar la sección actualmente activa si existe
-            hideSectionSmoothly(currentActiveSection, () => {
-                showSectionSmoothly(targetSection);
-                currentActiveSection = targetSection;
-            });
-        }
-
-        function volverAlForo() {
-            hideSectionSmoothly(currentActiveSection, () => {
-                currentActiveSection = null; // Reiniciar la sección activa
-                
-                // Mostrar el foro principal y los botones superiores
-                foroPrincipal.classList.add('active'); 
-                botonesInicio.classList.add('active'); 
-                
-                volverBtnFixed.style.display = 'none'; // Ocultar el botón de volver
-            });
+            currentActiveSection = sectionElement;
         }
 
         function mostrarGtaVirgen() {
-            mostrarInterfaz('gtaVirgenContent');
+            showSection(document.getElementById('gtaVirgenContent'));
         }
 
         function mostrarMacro() {
-            mostrarInterfaz('macroContent');
+            showSection(document.getElementById('macroContent'));
+        }
+
+        function volverAlForo() {
+            hideAllSectionsExcept('foroPrincipal'); // Oculta las otras
+            showSection(foroPrincipal); // Muestra el foro principal
+            volverBtnFixed.style.display = 'none'; // Ocultar el botón de volver
         }
 
         // Lógica de slider de reseñas (sin cambios)
