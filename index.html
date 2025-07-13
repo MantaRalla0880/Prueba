@@ -89,7 +89,7 @@
         top: 0;
         left: 0;
         z-index: 15;
-        overflow-y: auto;
+        overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura */
         min-height: 100vh;
         box-sizing: border-box;
         opacity: 0;
@@ -145,8 +145,8 @@
         margin-bottom: 30px;
         width: 100%;
         max-width: 700px; /* Asegura que cada categoría esté centrada y tenga un ancho máximo */
-        margin-left: auto; /* Centrar category-section */
-        margin-right: auto; /* Centrar category-section */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .category-section h3 {
@@ -160,9 +160,9 @@
 
     .gta-grid {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea */
         justify-content: center; /* Centra los gta-box dentro de cada grid */
-        gap: 15px;
+        gap: 10px; /* Reducir el gap para que quepan 3 cajas más fácilmente */
         margin-top: 0;
     }
 
@@ -171,20 +171,22 @@
         border: 1px solid #00FFFF;
         border-radius: 8px;
         padding: 15px;
-        width: 280px; /* Mantener un ancho fijo para 3 por fila en un max-width de 700px con gaps */
+        /* Calcular el ancho para que 3 quepan en 700px con un gap de 10px */
+        width: calc((700px - 2 * 10px) / 3); /* (Ancho máximo - 2 * gap) / 3 */
+        min-width: 180px; /* Ancho mínimo para evitar que se hagan demasiado pequeños */
         box-shadow: none;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         text-align: center;
     }
-    /* Para pantallas más pequeñas, permitir que los gta-box se ajusten */
-    @media (max-width: 900px) {
+
+    @media (max-width: 768px) { /* Ajuste para tablets y pantallas más pequeñas */
         .gta-box {
             width: calc(50% - 10px); /* Dos por fila en pantallas medianas */
         }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 480px) { /* Ajuste para móviles */
         .gta-box {
-            width: 100%; /* Uno por fila en pantallas pequeñas */
+            width: 100%; /* Uno por fila en pantallas muy pequeñas */
         }
     }
 
@@ -710,13 +712,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <h3>🔸 GTA Lite Optimiz.</h3>
                     <p>Versión ultra-optimizada para la mejor fluidez.</p>
                     <a href="https://www.mediafire.com/file/example_lite_opt" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Lite+Opt" alt="Preview GTA Lite Optimizado">
+                    <img src="https://via.placeholder.com/200x110?text=Lite+Opt" alt="Preview GTA Lite Optimizado">
                 </div>
                 <div class="gta-box">
                     <h3>🟢 GTA Sin Sonido</h3>
                     <p>Versión sin audio para un rendimiento máximo.</p>
                     <a href="https://www.mediafire.com/file/example_no_sound" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Sin+Sonido" alt="Preview GTA Sin Sonido">
+                    <img src="https://via.placeholder.com/200x110?text=Sin+Sonido" alt="Preview GTA Sin Sonido">
                 </div>
             </div>
         </div>
@@ -728,19 +730,19 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <h3>🔸 GTA Full 4GB</h3>
                     <p>Con audio y vídeos originales, sin mods.</p>
                     <a href="https://www.mediafire.com/file/example2" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Full" alt="Preview GTA Full">
+                    <img src="https://via.placeholder.com/200x110?text=Full" alt="Preview GTA Full">
                 </div>
                 <div class="gta-box">
                     <h3>🟢 GTA RP Base</h3>
                     <p>Preparado para servidores Roleplay.</p>
                     <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=RP" alt="Preview GTA RP">
+                    <img src="https://via.placeholder.com/200x110?text=RP" alt="Preview GTA RP">
                 </div>
                 <div class="gta-box">
                     <h3>🔵 GTA Base Clásica</h3>
                     <p>La versión original, limpia y estable.</p>
                     <a href="https://www.mediafire.com/file/example_classic" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Classic" alt="Preview GTA Classic">
+                    <img src="https://via.placeholder.com/200x110?text=Classic" alt="Preview GTA Classic">
                 </div>
             </div>
         </div>
@@ -752,19 +754,19 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <h3>🟠 GTA Clean MTA</h3>
                     <p>Optimizado para jugar en MTA sin errores.</p>
                     <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=MTA" alt="Preview GTA MTA">
+                    <img src="https://via.placeholder.com/200x110?text=MTA" alt="Preview GTA MTA">
                 </div>
                 <div class="gta-box">
                     <h3>✨ GTA Texturas HD</h3>
                     <p>Versión con texturas mejoradas y limpias.</p>
                     <a href="https://www.mediafire.com/file/example_hd" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=HD+Textures" alt="Preview GTA HD Texturas">
+                    <img src="https://via.placeholder.com/200x110?text=HD+Textures" alt="Preview GTA HD Texturas">
                 </div>
                 <div class="gta-box">
                     <h3>🔥 GTA Gráficos Mejorados</h3>
                     <p>Base con mejoras gráficas sutiles.</p>
                     <a href="https://www.mediafire.com/file/example_graphics" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Graphics" alt="Preview GTA Mejorado">
+                    <img src="https://via.placeholder.com/200x110?text=Graphics" alt="Preview GTA Mejorado">
                 </div>
             </div>
         </div>
@@ -776,19 +778,19 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <h3>🟣 GTA Customizable</h3>
                     <p>Lista para añadir tus propios mods.</p>
                     <a href="https://www.mediafire.com/file/example5" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Custom" alt="Preview GTA Custom">
+                    <img src="https://via.placeholder.com/200x110?text=Custom" alt="Preview GTA Custom">
                 </div>
                 <div class="gta-box">
                     <h3>🔵 GTA Portable</h3>
                     <p>Funciona desde USB sin instalación.</p>
                     <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=Portable" alt="Preview GTA Portable">
+                    <img src="https://via.placeholder.com/200x110?text=Portable" alt="Preview GTA Portable">
                 </div>
                 <div class="gta-box">
                     <h3>📦 GTA Sin Instalador</h3>
                     <p>Versión compacta, solo descomprimir y jugar.</p>
                     <a href="https://www.mediafire.com/file/example_no_installer" target="_blank">Descargar 🔽</a>
-                    <img src="https://via.placeholder.com/300x160?text=No+Installer" alt="Preview GTA Sin Instalador">
+                    <img src="https://via.placeholder.com/200x110?text=No+Installer" alt="Preview GTA Sin Instalador">
                 </div>
             </div>
         </div>
@@ -855,7 +857,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
-            // Usar requestAnimationFrame para asegurar que la clase se añada antes de que empiece la transición
             requestAnimationFrame(() => {
                 sectionElement.addEventListener('transitionend', function handler() {
                     sectionElement.style.display = 'none';
@@ -869,7 +870,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         function showSectionSmoothly(sectionElement) {
             if (!sectionElement) return;
             sectionElement.style.display = 'block';
-            // Usar requestAnimationFrame para asegurar que el display se aplique antes de añadir la clase de animación
             requestAnimationFrame(() => {
                 sectionElement.classList.add('active-visible');
             });
@@ -893,9 +893,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             hideSectionSmoothly(currentActiveSection, () => {
                 currentActiveSection = null; // Reiniciar la sección activa
                 foroPrincipal.classList.remove('hidden-forum'); // Mostrar el foro
-                // Asegurarse de que el foro principal esté visible (flex) antes de la transición
-                foroPrincipal.style.display = 'flex';
-                // Usar requestAnimationFrame para aplicar la visibilidad antes de la animación
+                foroPrincipal.style.display = 'flex'; // Asegurarse de que el foro principal esté visible
                 requestAnimationFrame(() => {
                     foroPrincipal.classList.add('active-visible'); // Animación de entrada
                 });
