@@ -12,26 +12,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap'); /* Ajuste de pesos de fuente */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-        font-family: 'Poppins', sans-serif; /* Fuente principal más sencilla */
+        font-family: 'Poppins', sans-serif;
         background: #000;
-        color: #00FFFF; /* Color principal más limpio */
+        color: #00FFFF;
         overflow-x: hidden;
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair; /* Cursor más sutil */
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
     }
 
-    /* Eliminar overlay de ruido para un look más limpio */
-    /* body::before { display: none; } */
-
-    /* BOTONES ARRIBA IZQUIERDA - Más discretos */
+    /* BOTONES ARRIBA IZQUIERDA */
     .botones-superiores {
         display: flex;
-        gap: 8px; /* Reducir espacio entre botones */
-        margin-top: 10px; /* Reducir margen */
-        margin-left: 10px; /* Reducir margen */
+        gap: 8px;
+        margin-top: 10px;
+        margin-left: 10px;
         justify-content: flex-start;
         flex-wrap: wrap;
         position: relative;
@@ -41,33 +38,33 @@
 
     .botones-superiores.hidden {
         opacity: 0;
-        transform: translateY(-10px); /* Menor desplazamiento */
+        transform: translateY(-10px);
         pointer-events: none;
     }
 
     .botones-superiores button {
-        padding: 8px 12px; /* Reducir padding */
-        font-size: 0.9em; /* Reducir tamaño de fuente */
-        background: rgba(0, 255, 255, 0.1); /* Fondo semitransparente para un look minimalista */
+        padding: 8px 12px;
+        font-size: 0.9em;
+        background: rgba(0, 255, 255, 0.1);
         color: #00FFFF;
-        border: 1px solid #00FFFF; /* Borde más sutil */
-        border-radius: 6px; /* Bordes menos redondeados */
-        font-weight: 500; /* Peso de fuente más ligero */
-        box-shadow: none; /* Eliminar sombras para look minimalista */
+        border: 1px solid #00FFFF;
+        border-radius: 6px;
+        font-weight: 500;
+        box-shadow: none;
         cursor: pointer;
         transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
     }
 
     .botones-superiores button:hover {
-        transform: scale(1.03); /* Menor escala al pasar el ratón */
+        transform: scale(1.03);
         background: #00FFFF;
         color: #000;
-        box-shadow: 0 0 8px #00FFFF; /* Sombra sutil al pasar el ratón */
+        box-shadow: 0 0 8px #00FFFF;
     }
 
     @media (max-width: 600px) {
         .botones-superiores {
-            flex-direction: row; /* Mantener en fila si es posible, o ajustar con wrap */
+            flex-direction: row;
             justify-content: center;
             width: 100%;
             margin-left: 0;
@@ -75,18 +72,18 @@
         }
         .botones-superiores button {
             width: auto;
-            flex-grow: 1; /* Para que ocupen el espacio disponible */
-            max-width: 48%; /* Dos por fila */
+            flex-grow: 1;
+            max-width: 48%;
         }
     }
 
-    /* INTERFACES (Optimizadas para minimalismo) */
+    /* INTERFACES */
     .content-section {
         display: none;
         width: 100%;
-        background: rgba(0, 0, 0, 0.9); /* Fondo ligeramente transparente */
+        background: rgba(0, 0, 0, 0.9);
         color: #00FFFF;
-        padding: 20px; /* Reducir padding */
+        padding: 20px;
         text-align: center;
         position: fixed;
         top: 0;
@@ -97,7 +94,7 @@
         box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.4s ease, transform 0.4s ease; /* Transiciones más rápidas */
+        transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .content-section.active-visible {
@@ -109,17 +106,17 @@
 
     .content-section.active-hidden {
         opacity: 0;
-        transform: scale(0.95) translateY(10px); /* Menor desplazamiento */
+        transform: scale(0.95) translateY(10px);
     }
 
-    /* Contenedor principal del foro - Más compacto */
+    /* Contenedor principal del foro */
     .container {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding: 20px; /* Reducir padding */
+        padding: 20px;
         text-align: center;
         box-sizing: border-box;
         width: 100%;
@@ -132,94 +129,107 @@
 
     .container.hidden-forum {
         opacity: 0;
-        transform: translateY(-10px); /* Menor desplazamiento */
+        transform: translateY(-10px);
         pointer-events: none;
     }
 
     .logo {
-        width: 100px; /* Reducir tamaño del logo */
+        width: 100px;
         border-radius: 50%;
-        margin-bottom: 15px; /* Reducir margen */
-        box-shadow: 0 0 10px #00FFFF; /* Sombra más sutil */
+        margin-bottom: 15px;
+        box-shadow: 0 0 10px #00FFFF;
     }
 
     /* Estilos para las nuevas categorías */
     .category-section {
-        margin-bottom: 30px; /* Espacio entre categorías */
+        margin-bottom: 30px;
         width: 100%;
-        max-width: 700px; /* Limitar ancho como el resto del contenido */
+        max-width: 700px; /* Asegura que cada categoría esté centrada y tenga un ancho máximo */
+        margin-left: auto; /* Centrar category-section */
+        margin-right: auto; /* Centrar category-section */
     }
 
     .category-section h3 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 1.8em; /* Tamaño para títulos de categoría */
+        font-size: 1.8em;
         color: #00FFFF;
         text-shadow: 0 0 8px #00FFFF, 0 0 15px rgba(0, 255, 255, 0.3);
-        margin-bottom: 15px; /* Espacio debajo del título de categoría */
+        margin-bottom: 15px;
         text-align: center;
     }
 
     .gta-grid {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px; /* Reducir espacio entre elementos */
-        margin-top: 0; /* Eliminar margen superior ya que la categoría lo maneja */
+        justify-content: center; /* Centra los gta-box dentro de cada grid */
+        gap: 15px;
+        margin-top: 0;
     }
 
     .gta-box {
-        background: rgba(0, 255, 255, 0.05); /* Fondo más transparente */
-        border: 1px solid #00FFFF; /* Borde más delgado */
-        border-radius: 8px; /* Menos redondeado */
-        padding: 15px; /* Reducir padding */
-        width: 280px; /* Reducir ancho */
-        box-shadow: none; /* Eliminar sombras */
+        background: rgba(0, 255, 255, 0.05);
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        padding: 15px;
+        width: 280px; /* Mantener un ancho fijo para 3 por fila en un max-width de 700px con gaps */
+        box-shadow: none;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         text-align: center;
     }
+    /* Para pantallas más pequeñas, permitir que los gta-box se ajusten */
+    @media (max-width: 900px) {
+        .gta-box {
+            width: calc(50% - 10px); /* Dos por fila en pantallas medianas */
+        }
+    }
+    @media (max-width: 600px) {
+        .gta-box {
+            width: 100%; /* Uno por fila en pantallas pequeñas */
+        }
+    }
 
     .gta-box:hover {
-        transform: translateY(-4px) scale(1.02); /* Menor transformación */
-        box-shadow: 0 0 10px #00FFFF; /* Sombra sutil al pasar el ratón */
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 0 10px #00FFFF;
     }
 
     .gta-box img {
         width: 100%;
         height: auto;
-        border-radius: 8px; /* Menos redondeado */
-        margin-top: 8px; /* Reducir margen */
-        box-shadow: none; /* Eliminar sombras */
+        border-radius: 8px;
+        margin-top: 8px;
+        box-shadow: none;
     }
 
     #volverBtnGta, #volverBtnMacro {
-        margin-top: 25px; /* Reducir margen */
-        padding: 10px 16px; /* Reducir padding */
-        background: rgba(0, 255, 255, 0.1); /* Fondo semitransparente */
+        margin-top: 25px;
+        padding: 10px 16px;
+        background: rgba(0, 255, 255, 0.1);
         color: #00FFFF;
-        border: 1px solid #00FFFF; /* Borde más sutil */
-        border-radius: 8px; /* Menos redondeado */
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 0.95em; /* Reducir tamaño de fuente */
-        box-shadow: none; /* Eliminar sombras */
+        font-size: 0.95em;
+        box-shadow: none;
         transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     #volverBtnGta:hover, #volverBtnMacro:hover {
         background: #00FFFF;
         color: #000;
-        transform: scale(1.03) translateY(-2px); /* Menor transformación */
-        box-shadow: 0 0 10px #00FFFF; /* Sombra sutil */
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 0 10px #00FFFF;
     }
 
     iframe {
-        width: 95%; /* Ajustar al 95% del contenedor */
-        max-width: 700px; /* Reducir ancho máximo */
-        height: 400px; /* Reducir altura */
-        border: 1px solid #00FFFF; /* Borde más delgado */
-        border-radius: 8px; /* Menos redondeado */
-        margin: 15px auto; /* Reducir margen */
+        width: 95%;
+        max-width: 700px;
+        height: 400px;
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        margin: 15px auto;
         display: block;
-        box-shadow: none; /* Eliminar sombras */
+        box-shadow: none;
     }
 
     .video-bg {
@@ -232,7 +242,7 @@
     }
 
     .container > * {
-        max-width: 700px; /* Reducir ancho máximo del contenido */
+        max-width: 700px;
         margin-left: auto;
         margin-right: auto;
         width: 100%;
@@ -240,77 +250,77 @@
     }
 
     .container header {
-        margin-bottom: 15px; /* Reducir margen */
+        margin-bottom: 15px;
     }
 
     header img {
-        width: 110px; /* Reducir tamaño del logo */
+        width: 110px;
         border-radius: 50%;
-        margin-top: 8px; /* Reducir margen */
-        animation: pulseGlow 1.8s infinite alternate; /* Animación más sutil */
+        margin-top: 8px;
+        animation: pulseGlow 1.8s infinite alternate;
     }
 
     header h1 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.8em; /* Reducir tamaño de fuente */
+        font-size: 2.8em;
         color: #00FFFF;
-        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.4); /* Sombra más sutil */
-        margin: 8px 0; /* Reducir margen */
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.4);
+        margin: 8px 0;
     }
 
     @keyframes pulseGlow {
         0% { filter: brightness(1) drop-shadow(0 0 10px #00FFFF); }
-        100% { filter: brightness(1.2) drop-shadow(0 0 25px #00FFFF); } /* Brillo y sombra más sutiles */
+        100% { filter: brightness(1.2) drop-shadow(0 0 25px #00FFFF); }
     }
 
     .redes-section {
         text-align: center;
-        margin-bottom: 5px; /* Reducir margen */
-        padding-top: 15px; /* Reducir padding */
+        margin-bottom: 5px;
+        padding-top: 15px;
     }
 
     .redes-section h2 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2em; /* Reducir tamaño de fuente */
+        font-size: 2em;
         color: #00FFFF;
-        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra más sutil */
-        margin-bottom: 8px; /* Reducir margen */
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3);
+        margin-bottom: 8px;
     }
 
     .social {
         display: flex;
         justify-content: center;
-        gap: 15px; /* Reducir espacio entre iconos */
-        margin-bottom: 15px; /* Reducir margen */
+        gap: 15px;
+        margin-bottom: 15px;
     }
 
     .social a {
-        font-size: 2em; /* Reducir tamaño de iconos */
+        font-size: 2em;
         text-decoration: none;
-        transition: transform 0.2s ease-out, filter 0.2s; /* Transición más rápida */
-        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2)); /* Sombra más sutil */
+        transition: transform 0.2s ease-out, filter 0.2s;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
     }
 
     .social a:hover {
-        transform: scale(1.2) translateY(-3px); /* Menor transformación */
-        filter: drop-shadow(0 0 8px #00FFFF); /* Sombra sutil al pasar el ratón */
+        transform: scale(1.2) translateY(-3px);
+        filter: drop-shadow(0 0 8px #00FFFF);
     }
 
     .section {
-        margin-top: 15px; /* Reducir margen */
+        margin-top: 15px;
     }
 
     .cta {
         background: #00FFFF;
         color: #000;
-        padding: 15px 30px; /* Reducir padding */
-        font-size: 1.2em; /* Reducir tamaño de fuente */
+        padding: 15px 30px;
+        font-size: 1.2em;
         border: none;
-        border-radius: 10px; /* Menos redondeado */
-        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4); /* Sombra más sutil */
+        border-radius: 10px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4);
         cursor: pointer;
         transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-        margin: 15px auto 8px; /* Reducir margen */
+        margin: 15px auto 8px;
         display: inline-block;
         font-family: 'Orbitron', sans-serif;
         text-transform: uppercase;
@@ -318,72 +328,72 @@
 
     .cta:hover {
         background: #00c9c9;
-        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.6); /* Sombra sutil al pasar el ratón */
-        transform: scale(1.02); /* Menor escala */
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.6);
+        transform: scale(1.02);
     }
 
     .buttons-row {
         display: flex;
-        gap: 10px; /* Reducir espacio */
+        gap: 10px;
         justify-content: center;
         flex-wrap: wrap;
-        margin-top: 8px; /* Reducir margen */
+        margin-top: 8px;
     }
 
     .rules-btn, .plantilla-btn {
-        background: rgba(0, 255, 255, 0.1); /* Fondo semitransparente */
+        background: rgba(0, 255, 255, 0.1);
         color: #00FFFF;
-        padding: 12px 20px; /* Reducir padding */
-        font-size: 1em; /* Reducir tamaño de fuente */
-        border: 1px solid #00FFFF; /* Borde más sutil */
-        border-radius: 8px; /* Menos redondeado */
-        box-shadow: none; /* Eliminar sombras */
+        padding: 12px 20px;
+        font-size: 1em;
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        box-shadow: none;
         cursor: pointer;
         transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
         display: flex;
         align-items: center;
-        gap: 6px; /* Reducir espacio */
+        gap: 6px;
         font-family: 'Orbitron', sans-serif;
     }
 
     .rules-btn:hover, .plantilla-btn:hover {
         background: #00FFFF;
         color: #000;
-        box-shadow: 0 0 10px #00FFFF; /* Sombra sutil */
-        transform: translateY(-2px); /* Menor desplazamiento */
+        box-shadow: 0 0 10px #00FFFF;
+        transform: translateY(-2px);
     }
 
     .status-dot {
-        width: 10px; /* Reducir tamaño del punto */
+        width: 10px;
         height: 10px;
         border-radius: 50%;
         background: red;
-        box-shadow: 0 0 5px red; /* Sombra más sutil */
+        box-shadow: 0 0 5px red;
     }
 
     .rules-box, .plantilla-box {
         display: none;
-        background: rgba(0, 0, 0, 0.9); /* Fondo ligeramente transparente */
-        border: 1px solid #00FFFF; /* Borde más delgado */
-        border-radius: 8px; /* Menos redondeado */
-        padding: 15px; /* Reducir padding */
-        max-width: 90vw; /* Ajustar ancho máximo */
-        margin: 15px auto; /* Reducir margen */
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        padding: 15px;
+        max-width: 90vw;
+        margin: 15px auto;
         color: #00FFFF;
         white-space: pre-wrap;
-        font-size: 0.95em; /* Reducir tamaño de fuente */
-        line-height: 1.5; /* Espaciado de línea más compacto */
+        font-size: 0.95em;
+        line-height: 1.5;
         text-align: left;
-        max-height: 50vh; /* Reducir altura máxima */
+        max-height: 50vh;
         overflow-y: auto;
         overflow-x: hidden;
         word-wrap: break-word;
-        box-shadow: none; /* Eliminar sombras */
+        box-shadow: none;
     }
 
     .rgb-text {
         animation: rgbCycle 5s linear infinite;
-        font-weight: 600; /* Un poco más de peso para la legibilidad */
+        font-weight: 600;
     }
 
     @keyframes rgbCycle {
@@ -399,22 +409,22 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        padding: 20px 35px; /* Reducir padding */
-        font-size: 1.3em; /* Reducir tamaño de fuente */
+        padding: 20px 35px;
+        font-size: 1.3em;
         z-index: 30;
         background: #00FFFF;
         color: #000;
         border: none;
-        border-radius: 10px; /* Menos redondeado */
-        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4); /* Sombra más sutil */
+        border-radius: 10px;
+        box-shadow: 0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.4);
         cursor: pointer;
-        animation: pulseBtn 1.2s infinite ease-in-out; /* Animación más sutil */
+        animation: pulseBtn 1.2s infinite ease-in-out;
         font-family: 'Orbitron', sans-serif;
     }
 
     @keyframes pulseBtn {
         0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #00FFFF; }
-        50% { transform: translate(-50%, -50%) scale(1.03); box-shadow: 0 0 20px #00FFFF; } /* Menor escala y sombra */
+        50% { transform: translate(-50%, -50%) scale(1.03); box-shadow: 0 0 20px #00FFFF; }
         100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #00FFFF; }
     }
 
@@ -422,15 +432,15 @@
         #startBtn { display: none; }
     }
 
-    /* RESEÑAS SECTION - Más compacto */
+    /* RESEÑAS SECTION */
     .reviews-section {
-        margin-top: 30px; /* Reducir margen */
-        padding: 15px; /* Reducir padding */
-        background: rgba(0, 255, 255, 0.03); /* Fondo más transparente */
-        border-radius: 10px; /* Menos redondeado */
-        border: 1px solid #00FFFF; /* Borde más delgado */
-        box-shadow: none; /* Eliminar sombras */
-        max-width: 800px; /* Reducir ancho máximo */
+        margin-top: 30px;
+        padding: 15px;
+        background: rgba(0, 255, 255, 0.03);
+        border-radius: 10px;
+        border: 1px solid #00FFFF;
+        box-shadow: none;
+        max-width: 800px;
         width: 95%;
         position: relative;
         display: flex;
@@ -440,10 +450,10 @@
     
     .reviews-section h2 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2em; /* Reducir tamaño de fuente */
+        font-size: 2em;
         color: #00FFFF;
-        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra más sutil */
-        margin-bottom: 20px; /* Reducir margen */
+        text-shadow: 0 0 10px #00FFFF, 0 0 20px rgba(0, 255, 255, 0.3);
+        margin-bottom: 20px;
         width: 100%;
         text-align: center;
         flex-shrink: 0;
@@ -451,8 +461,8 @@
 
     .reviews-slider {
         display: flex;
-        gap: 15px; /* Reducir espacio */
-        padding-bottom: 8px; /* Reducir padding */
+        gap: 15px;
+        padding-bottom: 8px;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
@@ -466,14 +476,14 @@
     }
 
     .reviews-slider::-webkit-scrollbar {
-        height: 6px; /* Scrollbar más delgado */
+        height: 6px;
         background-color: transparent;
     }
     
     .reviews-slider::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 255, 255, 0.3); /* Scrollbar más sutil */
+        background-color: rgba(0, 255, 255, 0.3);
         border-radius: 8px;
-        border: none; /* Eliminar borde */
+        border: none;
     }
 
     .reviews-slider {
@@ -482,48 +492,48 @@
     }
 
     .review-card {
-        background: rgba(0, 255, 255, 0.08); /* Fondo más transparente */
-        border: 1px solid #00FFFF; /* Borde más delgado */
-        border-radius: 10px; /* Menos redondeado */
-        padding: 20px; /* Reducir padding */
-        min-width: 280px; /* Reducir ancho mínimo */
+        background: rgba(0, 255, 255, 0.08);
+        border: 1px solid #00FFFF;
+        border-radius: 10px;
+        padding: 20px;
+        min-width: 280px;
         flex: 0 0 auto;
         text-align: left;
-        box-shadow: none; /* Eliminar sombras */
+        box-shadow: none;
         transition: transform 0.2s ease;
     }
 
     .review-card:hover {
-        transform: translateY(-3px); /* Menor transformación */
+        transform: translateY(-3px);
     }
 
     .review-card p {
-        font-size: 1em; /* Ajustar tamaño de fuente */
-        line-height: 1.5; /* Espaciado de línea más compacto */
-        margin-bottom: 12px; /* Reducir margen */
+        font-size: 1em;
+        line-height: 1.5;
+        margin-bottom: 12px;
         color: #E0FFFF;
     }
 
     .review-card .author {
-        font-weight: 600; /* Peso de fuente ligeramente mayor */
+        font-weight: 600;
         color: #00FFFF;
-        font-size: 0.9em; /* Ajustar tamaño de fuente */
-        text-shadow: none; /* Eliminar sombras */
+        font-size: 0.9em;
+        text-shadow: none;
     }
 
     .review-card .rating {
         color: gold;
-        margin-bottom: 6px; /* Reducir margen */
-        text-shadow: none; /* Eliminar sombras */
-        font-size: 1.1em; /* Ajustar tamaño de fuente */
+        margin-bottom: 6px;
+        text-shadow: none;
+        font-size: 1.1em;
     }
 
     footer {
         margin-top: auto;
-        font-size: 0.8em; /* Reducir tamaño de fuente */
-        color: #777; /* Color más discreto */
-        padding-top: 25px; /* Reducir padding */
-        padding-bottom: 15px; /* Añadir padding inferior */
+        font-size: 0.8em;
+        color: #777;
+        padding-top: 25px;
+        padding-bottom: 15px;
         width: 100%;
     }
 </style>
@@ -547,7 +557,10 @@
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
-                <a href="https://www.youtube.com/@TuNombreDeUsuarioOCanal" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a> <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a> <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a> </div>
+                <a href="https://www.youtube.com/@TuNombreDeUsuarioOCanal" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a>
+                <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a>
+            </div>
         </div>
 
         <header>
@@ -689,11 +702,23 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             <div class="gta-grid">
                 <div class="gta-box">
                     <h3>🔹 GTA Lite 500MB</h3>
-                    <p>Ideal para PCs de bajos recursos.</p>
+                    <p>Ideal para PCs de muy bajos recursos.</p>
                     <a href="https://www.mediafire.com/file/example1" target="_blank">Descargar 🔽</a>
                     <img src="Fotito.png" alt="Preview GTA Lite">
                 </div>
+                <div class="gta-box">
+                    <h3>🔸 GTA Lite Optimiz.</h3>
+                    <p>Versión ultra-optimizada para la mejor fluidez.</p>
+                    <a href="https://www.mediafire.com/file/example_lite_opt" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Lite+Opt" alt="Preview GTA Lite Optimizado">
                 </div>
+                <div class="gta-box">
+                    <h3>🟢 GTA Sin Sonido</h3>
+                    <p>Versión sin audio para un rendimiento máximo.</p>
+                    <a href="https://www.mediafire.com/file/example_no_sound" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Sin+Sonido" alt="Preview GTA Sin Sonido">
+                </div>
+            </div>
         </div>
 
         <div class="category-section">
@@ -707,9 +732,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 </div>
                 <div class="gta-box">
                     <h3>🟢 GTA RP Base</h3>
-                    <p>Preparado para servidores RP.</p>
+                    <p>Preparado para servidores Roleplay.</p>
                     <a href="https://www.mediafire.com/file/example3" target="_blank">Descargar 🔽</a>
                     <img src="https://via.placeholder.com/300x160?text=RP" alt="Preview GTA RP">
+                </div>
+                <div class="gta-box">
+                    <h3>🔵 GTA Base Clásica</h3>
+                    <p>La versión original, limpia y estable.</p>
+                    <a href="https://www.mediafire.com/file/example_classic" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Classic" alt="Preview GTA Classic">
                 </div>
             </div>
         </div>
@@ -719,11 +750,23 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             <div class="gta-grid">
                 <div class="gta-box">
                     <h3>🟠 GTA Clean MTA</h3>
-                    <p>Para jugar en MTA sin errores.</p>
+                    <p>Optimizado para jugar en MTA sin errores.</p>
                     <a href="https://www.mediafire.com/file/example4" target="_blank">Descargar 🔽</a>
                     <img src="https://via.placeholder.com/300x160?text=MTA" alt="Preview GTA MTA">
                 </div>
+                <div class="gta-box">
+                    <h3>✨ GTA Texturas HD</h3>
+                    <p>Versión con texturas mejoradas y limpias.</p>
+                    <a href="https://www.mediafire.com/file/example_hd" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=HD+Textures" alt="Preview GTA HD Texturas">
                 </div>
+                <div class="gta-box">
+                    <h3>🔥 GTA Gráficos Mejorados</h3>
+                    <p>Base con mejoras gráficas sutiles.</p>
+                    <a href="https://www.mediafire.com/file/example_graphics" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=Graphics" alt="Preview GTA Mejorado">
+                </div>
+            </div>
         </div>
 
         <div class="category-section">
@@ -741,7 +784,13 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     <a href="https://www.mediafire.com/file/example6" target="_blank">Descargar 🔽</a>
                     <img src="https://via.placeholder.com/300x160?text=Portable" alt="Preview GTA Portable">
                 </div>
+                <div class="gta-box">
+                    <h3>📦 GTA Sin Instalador</h3>
+                    <p>Versión compacta, solo descomprimir y jugar.</p>
+                    <a href="https://www.mediafire.com/file/example_no_installer" target="_blank">Descargar 🔽</a>
+                    <img src="https://via.placeholder.com/300x160?text=No+Installer" alt="Preview GTA Sin Instalador">
                 </div>
+            </div>
         </div>
 
         <button id="volverBtnGta" onclick="volverAlForo()">🔙 Volver al foro</button>
@@ -776,6 +825,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             botonesInicio.classList.remove('hidden');
         }
 
+        // Asegura que la música y el video inicien automáticamente en escritorio
         if (window.innerWidth >= 768) {
             startMedia();
         }
@@ -805,18 +855,24 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
-            sectionElement.addEventListener('animationend', function handler() {
-                sectionElement.style.display = 'none';
-                sectionElement.classList.remove('active-hidden');
-                sectionElement.removeEventListener('animationend', handler);
-                if (callback) callback();
-            }, { once: true });
+            // Usar requestAnimationFrame para asegurar que la clase se añada antes de que empiece la transición
+            requestAnimationFrame(() => {
+                sectionElement.addEventListener('transitionend', function handler() {
+                    sectionElement.style.display = 'none';
+                    sectionElement.classList.remove('active-hidden');
+                    sectionElement.removeEventListener('transitionend', handler);
+                    if (callback) callback();
+                }, { once: true });
+            });
         }
 
         function showSectionSmoothly(sectionElement) {
             if (!sectionElement) return;
             sectionElement.style.display = 'block';
-            sectionElement.classList.add('active-visible');
+            // Usar requestAnimationFrame para asegurar que el display se aplique antes de añadir la clase de animación
+            requestAnimationFrame(() => {
+                sectionElement.classList.add('active-visible');
+            });
         }
 
         function mostrarInterfaz(interfazId) {
@@ -835,10 +891,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function volverAlForo() {
             hideSectionSmoothly(currentActiveSection, () => {
-                currentActiveSection = null;
-                foroPrincipal.classList.remove('hidden-forum');
+                currentActiveSection = null; // Reiniciar la sección activa
+                foroPrincipal.classList.remove('hidden-forum'); // Mostrar el foro
+                // Asegurarse de que el foro principal esté visible (flex) antes de la transición
                 foroPrincipal.style.display = 'flex';
-                botonesInicio.classList.remove('hidden');
+                // Usar requestAnimationFrame para aplicar la visibilidad antes de la animación
+                requestAnimationFrame(() => {
+                    foroPrincipal.classList.add('active-visible'); // Animación de entrada
+                });
+                botonesInicio.classList.remove('hidden'); // Mostrar los botones superiores
             });
         }
 
@@ -850,6 +911,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             mostrarInterfaz('macroContent');
         }
 
+        // Lógica de slider de reseñas (sin cambios)
         reviewsSlider.addEventListener('mousedown', (e) => {
             isDown = true;
             reviewsSlider.classList.add('active-grab');
@@ -893,7 +955,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             const walk = (x - startX) * 1.5;
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
-
     </script>
 </body>
 </html>
