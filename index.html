@@ -31,7 +31,7 @@
         margin-left: 10px;
         justify-content: flex-start;
         flex-wrap: wrap;
-        position: relative;
+        position: relative; /* Mantenido como relative */
         z-index: 20;
         transition: opacity 0.5s ease, transform 0.5s ease;
     }
@@ -85,20 +85,16 @@
         color: #00FFFF;
         padding: 20px;
         text-align: center;
-        /* ANTES: position: fixed; */
-        /* ANTES: top: 0; */
-        /* ANTES: left: 0; */
+        /* No position: fixed; */
         z-index: 15;
         overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura */
-        /* ANTES: min-height: 100vh; */
+        min-height: 100vh; /* REINCORPORADO: Para que ocupe al menos toda la altura de la ventana */
         box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease, transform 0.4s ease;
-        /* Añadido para que no esté fija, pero tenga un margen superior */
-        margin-top: 20px;
-        /* ANTES: Añade padding-bottom para que el contenido no se oculte detrás del botón fijo */
-        /* ANTES: padding-bottom: 80px; */ /* Suficiente espacio para el botón "Volver al foro" */
+        padding-top: 60px; /* Espacio para los botones superiores que no están fijos */
+        padding-bottom: 60px; /* Espacio para el botón de volver */
     }
 
     .content-section.active-visible {
@@ -218,15 +214,9 @@
         font-size: 0.95em;
         box-shadow: none;
         transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
-        /* Propiedades para el botón fijo - ELIMINADAS */
-        /* ANTES: position: fixed; */
-        /* ANTES: bottom: 20px; */
-        /* ANTES: left: 50%; */
-        /* ANTES: transform: translateX(-50%); */
-        /* Propiedades para el botón ahora parte del flujo */
-        position: relative; /* Cambiado de fixed a relative */
+        position: relative; /* Mantenido como relative */
         margin: 25px auto; /* Centrado horizontalmente en el flujo normal */
-        z-index: 100; /* Asegura que esté por encima de otros elementos */
+        z-index: 100;
         display: none; /* Inicialmente oculto */
     }
 
@@ -890,6 +880,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             sectionElement.offsetWidth; 
             sectionElement.classList.remove('active-hidden');
             sectionElement.classList.add('active-visible');
+            // Scroll to the top of the newly displayed section
+            sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function mostrarSeccion(sectionId) {
@@ -928,6 +920,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 // Oculta todos los botones de volver
                 volverBtnGta.style.display = 'none';
                 volverBtnMacro.style.display = 'none';
+                // Scroll to the top of the main forum
+                foroPrincipal.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         }
         
