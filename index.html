@@ -10,9 +10,10 @@
     <meta property="og:url" content="https://mantamods.github.io/" />
     <meta name="theme-color" content="#00ffff" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&family=Montserrat:wght@400;600&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -23,6 +24,52 @@
         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-crosshair"><circle cx="12" cy="12" r="8"></circle><line x1="22" y1="12" x2="2" y2="12"></line><line x1="12" y1="22" x2="12" y2="2"></line></svg>') 12 12, crosshair;
     }
 
+    /* Animaciones generales */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes bounceIn {
+        0%, 20%, 40%, 60%, 80%, 100% {
+            transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+        20% { transform: scale3d(1.1, 1.1, 1.1); }
+        40% { transform: scale3d(0.9, 0.9, 0.9); }
+        60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+        80% { transform: scale3d(0.97, 0.97, 0.97); }
+        100% { opacity: 1; transform: scale3d(1, 1, 1); }
+    }
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
+    @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
     /* BOTONES ARRIBA IZQUIERDA */
     .botones-superiores {
         display: flex;
@@ -31,9 +78,10 @@
         margin-left: 10px;
         justify-content: flex-start;
         flex-wrap: wrap;
-        position: relative; /* Mantenido como relative */
+        position: relative;
         z-index: 20;
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0; /* Oculto inicialmente para la animación */
+        animation: slideInLeft 0.8s ease forwards 0.5s; /* Retraso para que aparezca después de la página */
     }
 
     .botones-superiores.hidden {
@@ -53,6 +101,7 @@
         box-shadow: none;
         cursor: pointer;
         transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para estos botones */
     }
 
     .botones-superiores button:hover {
@@ -85,16 +134,15 @@
         color: #00FFFF;
         padding: 20px;
         text-align: center;
-        /* No position: fixed; */
         z-index: 15;
-        overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura */
-        min-height: 100vh; /* REINCORPORADO: Para que ocupe al menos toda la altura de la ventana */
+        overflow-y: auto;
+        min-height: 100vh;
         box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease, transform 0.4s ease;
-        padding-top: 60px; /* Espacio para los botones superiores que no están fijos */
-        padding-bottom: 60px; /* Espacio para el botón de volver */
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
 
     .content-section.active-visible {
@@ -102,6 +150,7 @@
         opacity: 1;
         transform: scale(1) translateY(0);
         pointer-events: auto;
+        animation: fadeIn 0.5s ease-out; /* Animación al mostrar la sección */
     }
 
     .content-section.active-hidden {
@@ -123,8 +172,9 @@
         position: relative;
         z-index: 0;
         transition: opacity 0.5s ease, transform 0.5s ease;
-        opacity: 1;
+        opacity: 0; /* Oculto inicialmente para animación */
         pointer-events: auto;
+        animation: fadeInUp 1s ease forwards; /* Animación al cargar el foro */
     }
 
     .container.hidden-forum {
@@ -144,10 +194,16 @@
     .category-section {
         margin-bottom: 30px;
         width: 100%;
-        max-width: 700px; /* Asegura que cada categoría esté centrada y tenga un ancho máximo */
+        max-width: 700px;
         margin-left: auto;
         margin-right: auto;
+        opacity: 0; /* Oculto inicialmente para animación */
+        animation: slideInDown 0.8s ease forwards; /* Animación al cargar */
     }
+    .category-section:nth-of-type(2) { animation-delay: 0.2s; } /* Retraso para animaciones secuenciales */
+    .category-section:nth-of-type(3) { animation-delay: 0.4s; }
+    .category-section:nth-of-type(4) { animation-delay: 0.6s; }
+
 
     .category-section h3 {
         font-family: 'Orbitron', sans-serif;
@@ -160,9 +216,9 @@
 
     .gta-grid {
         display: flex;
-        flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea */
-        justify-content: center; /* Centra los gta-box dentro de cada grid */
-        gap: 10px; /* Reducir el gap para que quepan 3 cajas más fácilmente */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
         margin-top: 0;
     }
 
@@ -171,22 +227,34 @@
         border: 1px solid #00FFFF;
         border-radius: 8px;
         padding: 15px;
-        /* Calcular el ancho para que 3 quepan en 700px con un gap de 10px */
-        width: calc((700px - 2 * 10px) / 3); /* (Ancho máximo - 2 * gap) / 3 */
-        min-width: 180px; /* Ancho mínimo para evitar que se hagan demasiado pequeños */
+        width: calc((700px - 2 * 10px) / 3);
+        min-width: 180px;
         box-shadow: none;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         text-align: center;
+        opacity: 0; /* Oculto inicialmente para la animación */
+        animation: zoomIn 0.6s ease forwards; /* Animación para cada caja */
     }
+    /* Añadir retrasos a las gta-box para una animación escalonada */
+    .gta-grid .gta-box:nth-child(1) { animation-delay: 0.7s; }
+    .gta-grid .gta-box:nth-child(2) { animation-delay: 0.8s; }
+    .gta-grid .gta-box:nth-child(3) { animation-delay: 0.9s; }
+    .gta-grid .gta-box:nth-child(4) { animation-delay: 1.0s; }
+    .gta-grid .gta-box:nth-child(5) { animation-delay: 1.1s; }
+    .gta-grid .gta-box:nth-child(6) { animation-delay: 1.2s; }
+    .gta-grid .gta-box:nth-child(7) { animation-delay: 1.3s; }
+    .gta-grid .gta-box:nth-child(8) { animation-delay: 1.4s; }
+    .gta-grid .gta-box:nth-child(9) { animation-delay: 1.5s; }
 
-    @media (max-width: 768px) { /* Ajuste para tablets y pantallas más pequeñas */
+
+    @media (max-width: 768px) {
         .gta-box {
-            width: calc(50% - 10px); /* Dos por fila en pantallas medianas */
+            width: calc(50% - 10px);
         }
     }
-    @media (max-width: 480px) { /* Ajuste para móviles */
+    @media (max-width: 480px) {
         .gta-box {
-            width: 100%; /* Uno por fila en pantallas muy pequeñas */
+            width: 100%;
         }
     }
 
@@ -214,12 +282,12 @@
         font-size: 0.95em;
         box-shadow: none;
         transition: transform 0.2s, background 0.2s ease, box-shadow 0.2s ease;
-        position: relative; /* Mantenido como relative */
-        margin: 25px auto; /* Centrado horizontalmente en el flujo normal */
+        position: relative;
+        margin: 25px auto;
         z-index: 100;
-        display: none; /* Inicialmente oculto */
+        display: none;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para el botón de volver */
     }
-
 
     #volverBtnGta:hover, #volverBtnMacro:hover {
         background: #00FFFF;
@@ -284,6 +352,8 @@
         text-align: center;
         margin-bottom: 5px;
         padding-top: 15px;
+        opacity: 0; /* Oculto inicialmente para animación */
+        animation: slideInUp 0.8s ease forwards 0.2s; /* Animación al cargar con retraso */
     }
 
     .redes-section h2 {
@@ -306,14 +376,15 @@
         text-decoration: none;
         transition: transform 0.2s ease-out, filter 0.2s;
         filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+        color: #00FFFF; /* Color base de los iconos */
     }
 
     .social a:hover {
         transform: scale(1.2) translateY(-3px);
-        filter: drop-shadow(0 0 8px #00FFFF);
+        /* filter: drop-shadow(0 0 8px #00FFFF); */ /* Esto es sobrescrito por los específicos */
     }
 
-/* Colores específicos para cada red social al pasar el mouse */
+    /* Colores específicos para cada red social al pasar el mouse */
     .social a[title="YouTube"]:hover {
         color: #FF0000; /* YouTube Red */
         filter: drop-shadow(0 0 8px #FF0000);
@@ -344,8 +415,10 @@
         transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
         margin: 15px auto 8px;
         display: inline-block;
-        font-family: 'Orbitron', sans-serif;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para este botón */
         text-transform: uppercase;
+        animation: bounceIn 1s ease forwards 0.8s; /* Animación de rebote al cargar */
+        opacity: 0; /* Oculto inicialmente */
     }
 
     .cta:hover {
@@ -375,7 +448,12 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        font-family: 'Orbitron', sans-serif;
+        font-family: 'Montserrat', sans-serif; /* Nueva fuente para estos botones */
+        opacity: 0; /* Oculto inicialmente */
+        animation: slideInUp 0.8s ease forwards 1s; /* Animación al cargar con retraso */
+    }
+    .plantilla-btn {
+        animation-delay: 1.2s; /* Retraso para el segundo botón */
     }
 
     .rules-btn:hover, .plantilla-btn:hover {
@@ -468,6 +546,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        opacity: 0; /* Oculto para animación */
+        animation: fadeInUp 0.8s ease forwards 1.4s; /* Animación al cargar con retraso */
     }
     
     .reviews-section h2 {
@@ -522,7 +602,8 @@
         flex: 0 0 auto;
         text-align: left;
         box-shadow: none;
-        transition: transform 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        animation: float 3s ease-in-out infinite; /* Animación de flotar */
     }
 
     .review-card:hover {
@@ -557,6 +638,8 @@
         padding-top: 25px;
         padding-bottom: 15px;
         width: 100%;
+        opacity: 0; /* Oculto para animación */
+        animation: fadeIn 1s ease forwards 1.6s; /* Animación al cargar con retraso */
     }
 </style>
 <body>
@@ -878,69 +961,61 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
-            requestAnimationFrame(() => {
-                sectionElement.addEventListener('transitionend', function handler() {
-                    sectionElement.style.display = 'none';
-                    sectionElement.classList.remove('active-hidden');
-                    sectionElement.removeEventListener('transitionend', handler);
-                    if (callback) callback();
-                }, { once: true });
+            sectionElement.addEventListener('transitionend', function handler() {
+                sectionElement.style.display = 'none';
+                sectionElement.classList.remove('active-hidden');
+                sectionElement.removeEventListener('transitionend', handler);
+                if (callback) callback();
             });
         }
 
         function showSectionSmoothly(sectionElement) {
-            if (!sectionElement) return;
             sectionElement.style.display = 'block';
-            // Trigger reflow to ensure transition starts from initial state
-            sectionElement.offsetWidth; 
-            sectionElement.classList.remove('active-hidden');
+            // Forzar reflow para que la transición ocurra
+            sectionElement.offsetWidth;
             sectionElement.classList.add('active-visible');
-            // Scroll to the top of the newly displayed section
-            sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function mostrarSeccion(sectionId) {
-            hideSectionSmoothly(currentActiveSection, () => {
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
-                
-                const targetSection = document.getElementById(sectionId);
-                showSectionSmoothly(targetSection);
-                currentActiveSection = targetSection;
-
-                // Muestra el botón de volver correspondiente
-                if (sectionId === 'gtaVirgenContent') {
-                    volverBtnGta.style.display = 'block';
-                    volverBtnMacro.style.display = 'none';
-                } else if (sectionId === 'macroContent') {
-                    volverBtnMacro.style.display = 'block';
-                    volverBtnGta.style.display = 'none';
-                }
-            });
         }
 
         function mostrarGtaVirgen() {
-            mostrarSeccion('gtaVirgenContent');
+            hideSectionSmoothly(foroPrincipal, () => {
+                showSectionSmoothly(document.getElementById('gtaVirgenContent'));
+                volverBtnGta.style.display = 'block';
+                currentActiveSection = 'gta';
+            });
+            botonesInicio.classList.add('hidden');
         }
 
         function mostrarMacro() {
-            mostrarSeccion('macroContent');
+            hideSectionSmoothly(foroPrincipal, () => {
+                showSectionSmoothly(document.getElementById('macroContent'));
+                volverBtnMacro.style.display = 'block';
+                currentActiveSection = 'macro';
+            });
+            botonesInicio.classList.add('hidden');
         }
 
         function volverAlForo() {
-            hideSectionSmoothly(currentActiveSection, () => {
-                foroPrincipal.classList.remove('hidden-forum');
-                botonesInicio.classList.remove('hidden');
-                currentActiveSection = null;
-                // Oculta todos los botones de volver
-                volverBtnGta.style.display = 'none';
-                volverBtnMacro.style.display = 'none';
-                // Scroll to the top of the main forum
-                foroPrincipal.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+            let sectionToHide;
+            let buttonToHide;
+            if (currentActiveSection === 'gta') {
+                sectionToHide = document.getElementById('gtaVirgenContent');
+                buttonToHide = volverBtnGta;
+            } else if (currentActiveSection === 'macro') {
+                sectionToHide = document.getElementById('macroContent');
+                buttonToHide = volverBtnMacro;
+            }
+
+            if (sectionToHide) {
+                hideSectionSmoothly(sectionToHide, () => {
+                    showSectionSmoothly(foroPrincipal);
+                    buttonToHide.style.display = 'none';
+                    currentActiveSection = null;
+                    botonesInicio.classList.remove('hidden');
+                });
+            }
         }
-        
-        // Slider reviews
+
+        // Slider de reseñas - Eventos de mouse
         reviewsSlider.addEventListener('mousedown', (e) => {
             isDown = true;
             reviewsSlider.classList.add('active-grab');
@@ -962,9 +1037,48 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - reviewsSlider.offsetLeft;
-            const walk = (x - startX) * 1.5; // Ajusta la velocidad de arrastre
+            const walk = (x - startX) * 2; // Multiplicador para la velocidad de scroll
             reviewsSlider.scrollLeft = scrollLeft - walk;
         });
+
+        // Autoplay del slider de reseñas
+        let reviewScrollInterval;
+        const startReviewAutoScroll = () => {
+            reviewScrollInterval = setInterval(() => {
+                if (reviewsSlider.scrollWidth - reviewsSlider.scrollLeft === reviewsSlider.clientWidth) {
+                    reviewsSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    reviewsSlider.scrollBy({ left: 300, behavior: 'smooth' }); // Ajusta el valor para la velocidad
+                }
+            }, 3000); // Cambia cada 3 segundos
+        };
+
+        const stopReviewAutoScroll = () => {
+            clearInterval(reviewScrollInterval);
+        };
+
+        reviewsSlider.addEventListener('mouseenter', stopReviewAutoScroll);
+        reviewsSlider.addEventListener('mouseleave', startReviewAutoScroll);
+
+        // Iniciar el scroll automático cuando la página cargue si la sección está visible
+        window.onload = () => {
+            if (window.innerWidth >= 768) {
+                // Solo iniciar si el foro principal está visible por defecto en escritorio
+                startReviewAutoScroll();
+            } else {
+                // Para móviles, iniciar una vez que se activa el foro principal
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.attributeName === 'class' && foroPrincipal.classList.contains('active-visible') && !foroPrincipal.classList.contains('hidden-forum')) {
+                            startReviewAutoScroll();
+                            observer.disconnect(); // Desconectar el observador una vez iniciado
+                        }
+                    });
+                });
+                observer.observe(foroPrincipal, { attributes: true });
+            }
+        };
+
     </script>
 </body>
 </html>
