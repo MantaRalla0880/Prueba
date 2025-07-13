@@ -30,6 +30,14 @@
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
+            /* Añadido para animación de entrada/salida */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .botones-superiores.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none; /* Deshabilita clics cuando está oculto */
         }
 
         .botones-superiores button {
@@ -185,9 +193,8 @@
             text-align: center;
             box-sizing: border-box;
             width: 100%;
-            /* Ajuste para el centrado vertical en caso de contenido corto */
-            position: relative; /* Necesario para que z-index funcione correctamente si lo necesitáramos */
-            z-index: 0; /* Asegura que el foro principal esté debajo de los botones superiores y las interfaces */
+            position: relative;
+            z-index: 0;
         }
 
         /* Ajustes para el contenido dentro del contenedor principal */
@@ -220,8 +227,11 @@
             100% { filter: brightness(1.4) drop-shadow(0 0 25px #0ff); }
         }
 
+        /* Centrado de la sección de redes */
         .redes-section {
+            text-align: center; /* Asegura el texto centrado */
             margin-top: 20px;
+            /* Elimina margen-left y margin-right de .container > .redes-section si los había */
         }
 
         .redes-section h2 {
@@ -233,7 +243,7 @@
 
         .social {
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Centra los íconos */
             gap: 25px;
             margin-bottom: 20px;
         }
@@ -402,7 +412,7 @@
                 <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
             </div>
         </div>
-
+        
         <div class="section">
             <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
             <p class="rgb-text">
@@ -529,6 +539,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const music = document.getElementById('music');
         const video = document.getElementById('bg-video');
         const foroPrincipal = document.getElementById('foroPrincipal');
+        const botonesInicio = document.getElementById('botonesInicio'); // Get the buttons container
 
         function startMedia() {
             music.play().catch(() => {});
@@ -569,6 +580,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function mostrarInterfaz(interfazId) {
             ocultarTodasLasInterfaces();
+            botonesInicio.classList.add('hidden'); // Hide the buttons
 
             if (foroPrincipal.style.display !== 'none') {
                 foroPrincipal.classList.remove('fadeZoomIn');
@@ -601,11 +613,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function volverAlForo() {
             ocultarTodasLasInterfaces();
+            botonesInicio.classList.remove('hidden'); // Show the buttons
 
             if (foroPrincipal.style.display === 'none') {
                 foroPrincipal.classList.remove('fadeZoomOut');
                 foroPrincipal.classList.add('fadeZoomIn');
-                foroPrincipal.style.display = 'flex'; /* Asegura que se muestre como flex para centrar */
+                foroPrincipal.style.display = 'flex'; // Ensure it's displayed as flex for centering
             }
         }
 
