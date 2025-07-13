@@ -12,6 +12,63 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <style>
+
+/* Pega el código CSS de arriba aquí */
+        /* Define la animación fadeInUp */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Empieza 20px abajo */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Termina en su posición original */
+            }
+        }
+
+        /* Clase para aplicar la animación sin retraso */
+        .animacion-entrada-inmediata {
+            animation-name: fadeInUp;
+            animation-duration: 1s; /* Duración de la animación: 1 segundo */
+            animation-timing-function: ease-out; /* Velocidad de la animación: empieza rápido y desacelera */
+            animation-fill-mode: both; /* Mantiene el estado final de la animación */
+            /* Aquí NO incluimos 'animation-delay' */
+
+            /* Opcional: estilos para que se vea el efecto */
+            margin-top: 20px; /* Un poco de margen para separar elementos */
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Puedes seguir teniendo otros estilos base si los necesitas */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animacion-entrada-inmediata">
+        <h1>¡Hola, interfaz!</h1>
+        <p>Este elemento aparece inmediatamente.</p>
+    </div>
+
+    <div class="animacion-entrada-inmediata">
+        <p>Este otro también, sin ningún retraso.</p>
+    </div>
+
+    <div class="animacion-entrada-inmediata">
+        <p>Todos los elementos con esta clase se animarán al mismo tiempo.</p>
+    </div>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -77,7 +134,7 @@
         }
     }
 
-    /* INTERFASES */
+    /* INTERFACES */
     .content-section {
         display: none;
         width: 100%;
@@ -254,6 +311,10 @@
         margin-right: auto;
         width: 100%;
         flex-shrink: 0;
+    }
+
+    .container header {
+        margin-bottom: 15px;
     }
 
     header img {
@@ -554,47 +615,6 @@
         padding-bottom: 15px;
         width: 100%;
     }
-
-    /* ANIMACIÓN DE ENTRADA DURA */
-    @keyframes bounceIn {
-      0%, 20%, 40%, 60%, 80%, 100% {
-        -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
-        transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
-      }
-      0% {
-        opacity: 0;
-        -webkit-transform: scale3d(.3, .3, .3);
-        transform: scale3d(.3, .3, .3);
-      }
-      20% {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1);
-        transform: scale3d(1.1, 1.1, 1.1);
-      }
-      40% {
-        -webkit-transform: scale3d(.9, .9, .9);
-        transform: scale3d(.9, .9, .9);
-      }
-      60% {
-        opacity: 1;
-        -webkit-transform: scale3d(1.03, 1.03, 1.03);
-        transform: scale3d(1.03, 1.03, 1.03);
-      }
-      80% {
-        -webkit-transform: scale3d(.97, .97, .97);
-        transform: scale3d(.97, .97, .97);
-      }
-      100% {
-        opacity: 1;
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-      }
-    }
-
-    /* Aplica la animación al contenedor principal del foro */
-    .container.animated-entry {
-        animation: bounceIn 1s; /* Dura 1 segundo */
-        animation-fill-mode: both; /* Mantiene el estado final de la animación */
-    }
 </style>
 <body>
     <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
@@ -612,7 +632,7 @@
         <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
     </div>
 
-    <div id="foroPrincipal" class="container animated-entry">
+    <div id="foroPrincipal" class="container">
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
@@ -883,15 +903,6 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             document.getElementById('startBtn').style.display = 'none';
             foroPrincipal.classList.remove('hidden-forum');
             botonesInicio.classList.remove('hidden');
-
-            // Asegurarse de que la animación se dispare solo cuando el foro principal sea visible
-            // y no tenga la clase 'hidden-forum'
-            if (!foroPrincipal.classList.contains('hidden-forum')) {
-                // Reiniciar animación si ya estaba aplicada o si el elemento estaba oculto y se muestra
-                foroPrincipal.classList.remove('animated-entry'); // Remover para permitir el re-animado
-                void foroPrincipal.offsetWidth; // Truco para forzar reflow (reiniciar animación)
-                foroPrincipal.classList.add('animated-entry'); // Añadir para disparar la animación
-            }
         }
 
         // Asegura que la música y el video inicien automáticamente en escritorio
@@ -926,81 +937,91 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             sectionElement.classList.add('active-hidden');
             requestAnimationFrame(() => {
                 sectionElement.addEventListener('transitionend', function handler() {
-                    sectionElement.removeEventListener('transitionend', handler);
                     sectionElement.style.display = 'none';
                     sectionElement.classList.remove('active-hidden');
+                    sectionElement.removeEventListener('transitionend', handler);
                     if (callback) callback();
-                });
+                }, { once: true });
             });
         }
 
         function showSectionSmoothly(sectionElement) {
+            if (!sectionElement) return;
             sectionElement.style.display = 'block';
-            requestAnimationFrame(() => {
-                sectionElement.classList.add('active-visible');
+            // Trigger reflow to ensure transition starts from initial state
+            sectionElement.offsetWidth; 
+            sectionElement.classList.remove('active-hidden');
+            sectionElement.classList.add('active-visible');
+            // Scroll to the top of the newly displayed section
+            sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function mostrarSeccion(sectionId) {
+            hideSectionSmoothly(currentActiveSection, () => {
+                foroPrincipal.classList.add('hidden-forum');
+                botonesInicio.classList.add('hidden');
+                
+                const targetSection = document.getElementById(sectionId);
+                showSectionSmoothly(targetSection);
+                currentActiveSection = targetSection;
+
+                // Muestra el botón de volver correspondiente
+                if (sectionId === 'gtaVirgenContent') {
+                    volverBtnGta.style.display = 'block';
+                    volverBtnMacro.style.display = 'none';
+                } else if (sectionId === 'macroContent') {
+                    volverBtnMacro.style.display = 'block';
+                    volverBtnGta.style.display = 'none';
+                }
             });
         }
 
         function mostrarGtaVirgen() {
-            hideSectionSmoothly(foroPrincipal, () => {
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
-                showSectionSmoothly(document.getElementById('gtaVirgenContent'));
-                volverBtnGta.style.display = 'block';
-                currentActiveSection = document.getElementById('gtaVirgenContent');
-            });
+            mostrarSeccion('gtaVirgenContent');
         }
 
         function mostrarMacro() {
-            hideSectionSmoothly(foroPrincipal, () => {
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
-                showSectionSmoothly(document.getElementById('macroContent'));
-                volverBtnMacro.style.display = 'block';
-                currentActiveSection = document.getElementById('macroContent');
-            });
+            mostrarSeccion('macroContent');
         }
 
         function volverAlForo() {
-            if (currentActiveSection) {
-                hideSectionSmoothly(currentActiveSection, () => {
-                    currentActiveSection = null;
-                    volverBtnGta.style.display = 'none';
-                    volverBtnMacro.style.display = 'none';
-                    foroPrincipal.classList.remove('hidden-forum');
-                    botonesInicio.classList.remove('hidden');
-                    showSectionSmoothly(foroPrincipal);
-                });
-            }
-        }
-
-        // Funcionalidad de arrastrar para el slider de reseñas
-        if (reviewsSlider) {
-            reviewsSlider.addEventListener('mousedown', (e) => {
-                isDown = true;
-                reviewsSlider.classList.add('active-grab');
-                startX = e.pageX - reviewsSlider.offsetLeft;
-                scrollLeft = reviewsSlider.scrollLeft;
-            });
-
-            reviewsSlider.addEventListener('mouseleave', () => {
-                isDown = false;
-                reviewsSlider.classList.remove('active-grab');
-            });
-
-            reviewsSlider.addEventListener('mouseup', () => {
-                isDown = false;
-                reviewsSlider.classList.remove('active-grab');
-            });
-
-            reviewsSlider.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - reviewsSlider.offsetLeft;
-                const walk = (x - startX) * 2; // Ajusta la velocidad de desplazamiento
-                reviewsSlider.scrollLeft = scrollLeft - walk;
+            hideSectionSmoothly(currentActiveSection, () => {
+                foroPrincipal.classList.remove('hidden-forum');
+                botonesInicio.classList.remove('hidden');
+                currentActiveSection = null;
+                // Oculta todos los botones de volver
+                volverBtnGta.style.display = 'none';
+                volverBtnMacro.style.display = 'none';
+                // Scroll to the top of the main forum
+                foroPrincipal.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         }
+        
+        // Slider reviews
+        reviewsSlider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            reviewsSlider.classList.add('active-grab');
+            startX = e.pageX - reviewsSlider.offsetLeft;
+            scrollLeft = reviewsSlider.scrollLeft;
+        });
+
+        reviewsSlider.addEventListener('mouseleave', () => {
+            isDown = false;
+            reviewsSlider.classList.remove('active-grab');
+        });
+
+        reviewsSlider.addEventListener('mouseup', () => {
+            isDown = false;
+            reviewsSlider.classList.remove('active-grab');
+        });
+
+        reviewsSlider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - reviewsSlider.offsetLeft;
+            const walk = (x - startX) * 1.5; // Ajusta la velocidad de arrastre
+            reviewsSlider.scrollLeft = scrollLeft - walk;
+        });
     </script>
 </body>
 </html>
