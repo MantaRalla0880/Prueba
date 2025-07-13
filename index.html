@@ -29,8 +29,8 @@
             justify-content: flex-start;
             flex-wrap: wrap;
             /* Asegura que los botones estén sobre todo */
-            position: relative; 
-            z-index: 2; 
+            position: relative;
+            z-index: 2;
         }
 
         .botones-superiores button {
@@ -138,7 +138,7 @@
             box-shadow: 0 0 10px #0ff;
         }
 
-        #volverBtn {
+        #volverBtnGta, #volverBtnMacro { /* Aplicar a ambos botones */
             margin-top: 40px;
             padding: 12px 20px;
             background: #0ff;
@@ -151,7 +151,7 @@
             transition: transform 0.2s;
         }
 
-        #volverBtn:hover {
+        #volverBtnGta:hover, #volverBtnMacro:hover {
             background: #00c9c9;
             transform: scale(1.05);
         }
@@ -168,13 +168,6 @@
         }
 
         /* Estilos existentes de tu página principal */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: #33FF99;
-            overflow-x: hidden;
-        }
-
         .video-bg {
             position: fixed;
             top: 0; left: 0;
@@ -523,6 +516,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
     <script>
         const music = document.getElementById('music');
         const video = document.getElementById('bg-video');
+        const foroPrincipal = document.getElementById('foroPrincipal'); // Obtenemos el elemento foroPrincipal
 
         function startMedia() {
             music.play().catch(() => {});
@@ -549,31 +543,43 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         function ocultarTodasLasInterfaces() {
             const interfaces = document.querySelectorAll('.content-section');
             interfaces.forEach(interfaz => {
-                interfaz.classList.remove('fadeZoomIn');
-                interfaz.classList.add('fadeZoomOut'); // Añade la animación de salida
-                // Oculta después de que termine la animación
-                interfaz.addEventListener('animationend', function handler() {
-                    interfaz.style.display = 'none';
-                    interfaz.removeEventListener('animationend', handler);
-                }, { once: true });
+                if (interfaz.style.display === 'block') { // Solo animar si está visible
+                    interfaz.classList.remove('fadeZoomIn');
+                    interfaz.classList.add('fadeZoomOut');
+                    interfaz.addEventListener('animationend', function handler() {
+                        interfaz.style.display = 'none';
+                        interfaz.classList.remove('fadeZoomOut'); // Limpiar la clase de salida
+                        interfaz.removeEventListener('animationend', handler);
+                    }, { once: true });
+                }
             });
         }
 
         function mostrarInterfaz(interfazId) {
-            ocultarTodasLasInterfaces(); // Oculta todas las interfaces antes de mostrar una nueva
-            document.getElementById('foroPrincipal').classList.remove('fadeZoomIn');
-            document.getElementById('foroPrincipal').classList.add('fadeZoomOut');
-            
-            // Espera a que termine la animación de salida del foro principal
-            document.getElementById('foroPrincipal').addEventListener('animationend', function handler() {
-                document.getElementById('foroPrincipal').style.display = 'none';
-                document.getElementById('foroPrincipal').removeEventListener('animationend', handler);
+            ocultarTodasLasInterfaces(); // Asegura que cualquier otra interfaz esté oculta primero
 
+            // Animar y ocultar el foro principal
+            if (foroPrincipal.style.display !== 'none') { // Solo animar si el foro está visible
+                foroPrincipal.classList.remove('fadeZoomIn');
+                foroPrincipal.classList.add('fadeZoomOut');
+                foroPrincipal.addEventListener('animationend', function handler() {
+                    foroPrincipal.style.display = 'none';
+                    foroPrincipal.classList.remove('fadeZoomOut'); // Limpiar la clase de salida
+                    foroPrincipal.removeEventListener('animationend', handler);
+
+                    // Después de ocultar el foro, muestra la nueva interfaz
+                    const interfazAMostrar = document.getElementById(interfazId);
+                    interfazAMostrar.classList.remove('fadeZoomOut'); // Asegurarse de que no tenga la clase de salida
+                    interfazAMostrar.classList.add('fadeZoomIn');
+                    interfazAMostrar.style.display = 'block';
+                }, { once: true });
+            } else {
+                // Si el foro ya está oculto (por si acaso), simplemente muestra la interfaz
                 const interfazAMostrar = document.getElementById(interfazId);
                 interfazAMostrar.classList.remove('fadeZoomOut');
                 interfazAMostrar.classList.add('fadeZoomIn');
                 interfazAMostrar.style.display = 'block';
-            }, { once: true });
+            }
         }
 
         function mostrarGtaVirgen() {
@@ -585,19 +591,20 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         }
 
         function volverAlForo() {
-            ocultarTodasLasInterfaces();
-            const foroPrincipal = document.getElementById('foroPrincipal');
-            foroPrincipal.classList.remove('fadeZoomOut');
-            foroPrincipal.classList.add('fadeZoomIn');
-            foroPrincipal.style.display = 'block';
+            ocultarTodasLasInterfaces(); // Oculta cualquier interfaz que esté visible
+
+            // Muestra el foro principal con animación
+            if (foroPrincipal.style.display === 'none') { // Solo si está oculto
+                foroPrincipal.classList.remove('fadeZoomOut'); // Limpiar cualquier clase de salida previa
+                foroPrincipal.classList.add('fadeZoomIn');
+                foroPrincipal.style.display = 'block';
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Intenta reproducir los medios automáticamente al cargar
             video.play().catch(() => {});
             music.play().catch(() => {});
 
-            // Si es un dispositivo móvil o no se pudo reproducir automáticamente, muestra el botón de inicio
             if (window.innerWidth < 768 || music.paused || video.paused) {
                 document.getElementById('startBtn').style.display = 'block';
             } else {
