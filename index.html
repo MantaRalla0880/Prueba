@@ -30,14 +30,13 @@
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
-            /* Añadido para animación de entrada/salida */
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .botones-superiores.hidden {
             opacity: 0;
             transform: translateY(-20px);
-            pointer-events: none; /* Deshabilita clics cuando está oculto */
+            pointer-events: none;
         }
 
         .botones-superiores button {
@@ -78,12 +77,12 @@
             text-align: center;
             animation-duration: 0.5s;
             animation-fill-mode: both;
-            position: absolute; /* Usamos absolute para que no afecte el flujo del main content */
+            position: absolute;
             top: 0;
             left: 0;
             z-index: 1;
             overflow-y: auto;
-            min-height: 100vh; /* Asegura que la interfaz ocupe la altura completa */
+            min-height: 100vh;
             box-sizing: border-box;
         }
 
@@ -198,14 +197,15 @@
         }
 
         /* Ajustes para el contenido dentro del contenedor principal */
-        .container header,
-        .container .redes-section,
-        .container .section,
-        .container footer {
-            width: 100%;
+        .container > * {
             max-width: 800px; /* Limita el ancho del contenido para que no se extienda demasiado */
             margin-left: auto;
             margin-right: auto;
+            width: 100%; /* Asegura que los elementos puedan ocupar el ancho máximo disponible */
+        }
+
+        .container header {
+            margin-bottom: 20px; /* Espacio entre redes y logo */
         }
 
         header img {
@@ -230,8 +230,7 @@
         /* Centrado de la sección de redes */
         .redes-section {
             text-align: center; /* Asegura el texto centrado */
-            margin-top: 20px;
-            /* Elimina margen-left y margin-right de .container > .redes-section si los había */
+            margin-bottom: 10px; /* Espacio debajo de redes */
         }
 
         .redes-section h2 {
@@ -399,11 +398,6 @@
     </div>
 
     <div id="foroPrincipal" class="container">
-        <header>
-            <img src="static.png" alt="Logo MantaMods" />
-            <h1>🔥MantaMods🔥</h1>
-        </header>
-
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
@@ -412,7 +406,12 @@
                 <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch">🟣</a>
             </div>
         </div>
-        
+
+        <header>
+            <img src="static.png" alt="Logo MantaMods" />
+            <h1>🔥MantaMods🔥</h1>
+        </header>
+
         <div class="section">
             <h2 class="rgb-text">Bienvenido a la comunidad más potente y dura de mods para SA-MP.</h2>
             <p class="rgb-text">
@@ -539,7 +538,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         const music = document.getElementById('music');
         const video = document.getElementById('bg-video');
         const foroPrincipal = document.getElementById('foroPrincipal');
-        const botonesInicio = document.getElementById('botonesInicio'); // Get the buttons container
+        const botonesInicio = document.getElementById('botonesInicio');
 
         function startMedia() {
             music.play().catch(() => {});
@@ -580,7 +579,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function mostrarInterfaz(interfazId) {
             ocultarTodasLasInterfaces();
-            botonesInicio.classList.add('hidden'); // Hide the buttons
+            botonesInicio.classList.add('hidden');
 
             if (foroPrincipal.style.display !== 'none') {
                 foroPrincipal.classList.remove('fadeZoomIn');
@@ -613,12 +612,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function volverAlForo() {
             ocultarTodasLasInterfaces();
-            botonesInicio.classList.remove('hidden'); // Show the buttons
+            botonesInicio.classList.remove('hidden');
 
             if (foroPrincipal.style.display === 'none') {
                 foroPrincipal.classList.remove('fadeZoomOut');
                 foroPrincipal.classList.add('fadeZoomIn');
-                foroPrincipal.style.display = 'flex'; // Ensure it's displayed as flex for centering
+                foroPrincipal.style.display = 'flex';
             }
         }
 
