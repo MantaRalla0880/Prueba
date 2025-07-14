@@ -97,8 +97,8 @@
         padding-bottom: 60px; /* Espacio para el botón de volver */
     }
 
- .fadeZoomIn {
-      animation-name: fadeZoomIn;
+   .fadeZoomIn {
+     animation-name: fadeZoomIn;
     }
 
     .fadeZoomOut {
@@ -380,7 +380,40 @@
       display: inline-block;
     }
 
-    .buttons-row {
+    /* INICIO del CSS para los botones neón agregados */
+    .button-container {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .neon-button {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        padding: 15px 30px;
+        border: 2px solid #00ffff;
+        border-radius: 8px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .neon-button:hover {
+        background-color: #00ffff;
+        color: #1a1a1a;
+        box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff;
+        transform: translateY(-2px);
+    }
+    /* FIN del CSS para los botones neón agregados */
+
+    .buttons-row { /* Esta clase y los estilos ya no se usan directamente para los botones de reglas y plantilla, pero se mantienen por si los usas para otra cosa */
         display: flex;
         gap: 10px;
         justify-content: center;
@@ -388,7 +421,8 @@
         margin-top: 8px;
     }
 
-    .rules-btn, .plantilla-btn {
+    /* Los estilos para .rules-btn y .plantilla-btn fueron eliminados ya que los nuevos botones neon los reemplazan */
+    /* .rules-btn, .plantilla-btn {
       background: #0ff;
       color: #000;
       padding: 12px 25px;
@@ -407,7 +441,7 @@
         color: #000;
         box-shadow: 0 0 10px #00FFFF;
         transform: translateY(-2px);
-    }
+    } */
 
     .status-dot {
         width: 10px;
@@ -623,11 +657,14 @@
 
             <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
-            <div class="buttons-row">
-                <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥 <span id="rules-dot" class="status-dot"></span></button>
-                <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥 <span id="plantilla-dot" class="status-dot"></span></button>
+            <div class="button-container">
+                <a href="#" class="neon-button" onclick="toggleRules()">
+                    📜 Reglas De 🔥MantaMods🔥
+                </a>
+                <a href="#" class="neon-button" onclick="togglePlantilla()">
+                    📋 Plantilla De 🔥MantaMods🔥
+                </a>
             </div>
-
             <div class="rules-box" id="rules-box">
                 <ul>
                     <li>✅ Respeto mutuo entre todos los miembros.</li>
@@ -879,18 +916,21 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function toggleRules() {
             const box = document.getElementById('rules-box');
-            const dot = document.getElementById('rules-dot');
+            // Nota: El elemento 'rules-dot' ya no existe directamente con los nuevos botones neón.
+            // Si quieres un indicador visual, deberías añadir un nuevo elemento span dentro del nuevo botón neón
+            // y darle un ID como 'rules-neon-dot' para controlar su estado.
+            // Por ahora, simplemente toggleamos la visibilidad de la caja.
             box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
-            dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+            // Eliminado: dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+            // Eliminado: dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
         function togglePlantilla() {
             const box = document.getElementById('plantilla-box');
-            const dot = document.getElementById('plantilla-dot');
+            // Similar al caso anterior, el 'plantilla-dot' ya no existe.
             box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
-            dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+            // Eliminado: dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+            // Eliminado: dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
         let currentActiveSection = null;
@@ -902,93 +942,84 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
-            requestAnimationFrame(() => {
-                sectionElement.addEventListener('transitionend', function handler() {
-                    sectionElement.style.display = 'none';
-                    sectionElement.classList.remove('active-hidden');
-                    sectionElement.removeEventListener('transitionend', handler);
-                    if (callback) callback();
-                }, { once: true });
-            });
+            sectionElement.classList.remove('fadeZoomIn');
+            sectionElement.classList.add('fadeZoomOut');
+            setTimeout(() => {
+                sectionElement.style.display = 'none';
+                sectionElement.classList.remove('active-hidden');
+                sectionElement.classList.remove('fadeZoomOut');
+                if (callback) callback();
+            }, 400); // Duración de la animación
         }
 
         function showSectionSmoothly(sectionElement) {
-            if (!sectionElement) return;
+            if (sectionElement.classList.contains('active-visible')) return;
+
             sectionElement.style.display = 'block';
-            // Trigger reflow to ensure transition starts from initial state
-            sectionElement.offsetWidth; 
-            sectionElement.classList.remove('active-hidden');
-            sectionElement.classList.add('active-visible');
-            // Scroll to the top of the newly displayed section
-            sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function mostrarSeccion(sectionId) {
-            hideSectionSmoothly(currentActiveSection, () => {
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
-                
-                const targetSection = document.getElementById(sectionId);
-                showSectionSmoothly(targetSection);
-                currentActiveSection = targetSection;
-
-                // Muestra el botón de volver correspondiente
-                if (sectionId === 'gtaVirgenContent') {
-                    volverBtnGta.style.display = 'block';
-                    volverBtnMacro.style.display = 'none';
-                } else if (sectionId === 'macroContent') {
-                    volverBtnMacro.style.display = 'block';
-                    volverBtnGta.style.display = 'none';
-                }
-            });
+            sectionElement.classList.add('fadeZoomIn');
+            setTimeout(() => {
+                sectionElement.classList.add('active-visible');
+                sectionElement.classList.remove('fadeZoomIn');
+            }, 10);
         }
 
         function mostrarGtaVirgen() {
-            mostrarSeccion('gtaVirgenContent');
+            hideSectionSmoothly(foroPrincipal, () => {
+                showSectionSmoothly(document.getElementById('gtaVirgenContent'));
+                volverBtnGta.style.display = 'block';
+                botonesInicio.classList.add('hidden');
+                currentActiveSection = document.getElementById('gtaVirgenContent');
+            });
         }
 
         function mostrarMacro() {
-            mostrarSeccion('macroContent');
+            hideSectionSmoothly(foroPrincipal, () => {
+                showSectionSmoothly(document.getElementById('macroContent'));
+                volverBtnMacro.style.display = 'block';
+                botonesInicio.classList.add('hidden');
+                currentActiveSection = document.getElementById('macroContent');
+            });
         }
 
         function volverAlForo() {
-            hideSectionSmoothly(currentActiveSection, () => {
-                foroPrincipal.classList.remove('hidden-forum');
-                botonesInicio.classList.remove('hidden');
-                currentActiveSection = null;
-                // Oculta todos los botones de volver
-                volverBtnGta.style.display = 'none';
-                volverBtnMacro.style.display = 'none';
-                // Scroll to the top of the main forum
-                foroPrincipal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (currentActiveSection) {
+                hideSectionSmoothly(currentActiveSection, () => {
+                    showSectionSmoothly(foroPrincipal);
+                    volverBtnGta.style.display = 'none';
+                    volverBtnMacro.style.display = 'none';
+                    botonesInicio.classList.remove('hidden');
+                    currentActiveSection = null;
+                });
+            }
+        }
+
+        // Eventos para el slider de reseñas
+        if (reviewsSlider) {
+            reviewsSlider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                reviewsSlider.classList.add('active-grab');
+                startX = e.pageX - reviewsSlider.offsetLeft;
+                scrollLeft = reviewsSlider.scrollLeft;
+            });
+
+            reviewsSlider.addEventListener('mouseleave', () => {
+                isDown = false;
+                reviewsSlider.classList.remove('active-grab');
+            });
+
+            reviewsSlider.addEventListener('mouseup', () => {
+                isDown = false;
+                reviewsSlider.classList.remove('active-grab');
+            });
+
+            reviewsSlider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - reviewsSlider.offsetLeft;
+                const walk = (x - startX) * 1.5; // Multiplicador para mayor velocidad de arrastre
+                reviewsSlider.scrollLeft = scrollLeft - walk;
             });
         }
-        
-        // Slider reviews
-        reviewsSlider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            reviewsSlider.classList.add('active-grab');
-            startX = e.pageX - reviewsSlider.offsetLeft;
-            scrollLeft = reviewsSlider.scrollLeft;
-        });
-
-        reviewsSlider.addEventListener('mouseleave', () => {
-            isDown = false;
-            reviewsSlider.classList.remove('active-grab');
-        });
-
-        reviewsSlider.addEventListener('mouseup', () => {
-            isDown = false;
-            reviewsSlider.classList.remove('active-grab');
-        });
-
-        reviewsSlider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - reviewsSlider.offsetLeft;
-            const walk = (x - startX) * 1.5; // Ajusta la velocidad de arrastre
-            reviewsSlider.scrollLeft = scrollLeft - walk;
-        });
     </script>
 </body>
 </html>
