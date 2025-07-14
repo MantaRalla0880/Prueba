@@ -97,8 +97,27 @@
         padding-bottom: 60px; /* Espacio para el botón de volver */
     }
 
+   /* Animaciones para transiciones de sección */
+    .fadeZoomIn {
+        animation: fadeZoomIn 0.4s ease forwards;
+    }
+
+    .fadeZoomOut {
+        animation: fadeZoomOut 0.4s ease forwards;
+    }
+
+    @keyframes fadeZoomIn {
+        0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes fadeZoomOut {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.9) translateY(30px); }
+    }
+
     .content-section.active-visible {
-        display: block;
+        display: block; /* Asegura que esté visible para que las animaciones se vean */
         opacity: 1;
         transform: scale(1) translateY(0);
         pointer-events: auto;
@@ -306,7 +325,7 @@
 
     .social a:hover {
         transform: scale(1.2) translateY(-3px);
-        filter: drop-shadow(0 0 8px #00FFFF);
+        filter: drop_shadow(0 0 8px #00FFFF);
     }
 
 /* Colores específicos para cada red social al pasar el mouse */
@@ -616,10 +635,10 @@
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
-    <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-    <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a>
-    <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a>
-</div>
+                <a href="https://www.youtube.com/@MantaRalla0880" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://kick.com/MantaRalla0880" target="_blank" title="Kick"><i class="fab fa-kickstarter-k"></i></a>
+                <a href="https://www.twitch.tv/MantaRalla0880" target="_blank" title="Twitch"><i class="fab fa-twitch"></i></a>
+            </div>
         </div>
 
         <header>
@@ -876,22 +895,20 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         let isDown = false;
         let startX;
         let scrollLeft;
+        
+        // Variable para controlar la sección activa actual
+        let currentActiveSection = null;
 
+        /**
+         * Inicia la reproducción de medios (música y video) y muestra los elementos principales.
+         * Oculta el botón de inicio.
+         */
         function startMedia() {
             music.play().catch(e => console.error("Error al reproducir música:", e));
             video.play().catch(e => console.error("Error al reproducir video:", e));
             document.getElementById('startBtn').style.display = 'none';
-            foroPrincipal.classList.remove('hidden-forum');
-            botonesInicio.classList.remove('hidden');
-
-            // Asegurarse de que la animación se dispare solo cuando el foro principal sea visible
-            // y no tenga la clase 'hidden-forum'
-            if (!foroPrincipal.classList.contains('hidden-forum')) {
-                // Reiniciar animación si ya estaba aplicada o si el elemento estaba oculto y se muestra
-                foroPrincipal.classList.remove('animated-entry'); // Remover para permitir el re-animado
-                void foroPrincipal.offsetWidth; // Truco para forzar reflow (reiniciar animación)
-                foroPrincipal.classList.add('animated-entry'); // Añadir para disparar la animación
-            }
+            foroPrincipal.classList.remove('hidden-forum'); // Asegura que el foro principal sea visible
+            botonesInicio.classList.remove('hidden'); // Asegura que los botones superiores sean visibles
         }
 
         // Asegura que la música y el video inicien automáticamente en escritorio
@@ -899,6 +916,9 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             startMedia();
         }
 
+        /**
+         * Alterna la visibilidad de la caja de reglas y actualiza el estado del punto.
+         */
         function toggleRules() {
             const box = document.getElementById('rules-box');
             const dot = document.getElementById('rules-dot');
@@ -907,6 +927,9 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
+        /**
+         * Alterna la visibilidad de la caja de plantilla y actualiza el estado del punto.
+         */
         function togglePlantilla() {
             const box = document.getElementById('plantilla-box');
             const dot = document.getElementById('plantilla-dot');
@@ -915,60 +938,92 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
-        let currentActiveSection = null;
-
+        /**
+         * Oculta una sección con una animación suave de desvanecimiento y zoom hacia afuera.
+         * @param {HTMLElement} sectionElement - El elemento de la sección a ocultar.
+         * @param {Function} [callback] - Función a ejecutar una vez que la animación haya terminado.
+         */
         function hideSectionSmoothly(sectionElement, callback) {
             if (!sectionElement || !sectionElement.classList.contains('active-visible')) {
                 if (callback) callback();
                 return;
             }
+
             sectionElement.classList.remove('active-visible');
-            sectionElement.classList.add('active-hidden');
-            requestAnimationFrame(() => {
-                sectionElement.addEventListener('transitionend', function handler() {
-                    sectionElement.removeEventListener('transitionend', handler);
-                    sectionElement.style.display = 'none';
-                    sectionElement.classList.remove('active-hidden');
-                    if (callback) callback();
-                });
-            });
+            sectionElement.classList.add('active-hidden'); // Para el estado inicial de la animación
+            sectionElement.classList.add('fadeZoomOut'); // Inicia la animación de salida
+
+            const onAnimationEnd = () => {
+                sectionElement.removeEventListener('animationend', onAnimationEnd);
+                sectionElement.style.display = 'none'; // Oculta finalmente
+                sectionElement.classList.remove('active-hidden'); // Limpia la clase
+                sectionElement.classList.remove('fadeZoomOut'); // Limpia la clase de animación
+                if (callback) callback();
+            };
+
+            sectionElement.addEventListener('animationend', onAnimationEnd);
+            // Fallback en caso de que animationend no se dispare (ej. elemento ya oculto o no renderizado)
+            setTimeout(onAnimationEnd, 400); // 400ms = duración de la animación fadeZoomOut
         }
 
+        /**
+         * Muestra una sección con una animación suave de desvanecimiento y zoom hacia adentro.
+         * @param {HTMLElement} sectionElement - El elemento de la sección a mostrar.
+         */
         function showSectionSmoothly(sectionElement) {
-            sectionElement.style.display = 'block';
-            requestAnimationFrame(() => {
-                sectionElement.classList.add('active-visible');
-            });
+            if (sectionElement.classList.contains('active-visible')) return;
+
+            sectionElement.style.display = 'block'; // Hace visible el elemento para que la animación se aplique
+            sectionElement.classList.add('fadeZoomIn'); // Inicia la animación de entrada
+
+            const onAnimationEnd = () => {
+                sectionElement.removeEventListener('animationend', onAnimationEnd);
+                sectionElement.classList.add('active-visible'); // Marca como visible una vez terminada la animación
+                sectionElement.classList.remove('fadeZoomIn'); // Limpia la clase de animación
+            };
+
+            sectionElement.addEventListener('animationend', onAnimationEnd);
+            // Fallback en caso de que animationend no se dispare
+            setTimeout(onAnimationEnd, 400); // 400ms = duración de la animación fadeZoomIn
         }
 
+        /**
+         * Muestra la sección "GTA Virgen" y oculta el foro principal.
+         */
         function mostrarGtaVirgen() {
             hideSectionSmoothly(foroPrincipal, () => {
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
+                foroPrincipal.classList.add('hidden-forum'); // Oculta el foro de forma visual y de flujo
+                botonesInicio.classList.add('hidden'); // Oculta los botones superiores durante la transición
                 showSectionSmoothly(document.getElementById('gtaVirgenContent'));
                 volverBtnGta.style.display = 'block';
                 currentActiveSection = document.getElementById('gtaVirgenContent');
             });
         }
 
+        /**
+         * Muestra la sección "Macro para PC" y oculta el foro principal.
+         */
         function mostrarMacro() {
             hideSectionSmoothly(foroPrincipal, () => {
-                foroPrincipal.classList.add('hidden-forum');
-                botonesInicio.classList.add('hidden');
+                foroPrincipal.classList.add('hidden-forum'); // Oculta el foro de forma visual y de flujo
+                botonesInicio.classList.add('hidden'); // Oculta los botones superiores durante la transición
                 showSectionSmoothly(document.getElementById('macroContent'));
                 volverBtnMacro.style.display = 'block';
                 currentActiveSection = document.getElementById('macroContent');
             });
         }
 
+        /**
+         * Oculta la sección activa y vuelve a mostrar el foro principal.
+         */
         function volverAlForo() {
             if (currentActiveSection) {
                 hideSectionSmoothly(currentActiveSection, () => {
                     currentActiveSection = null;
                     volverBtnGta.style.display = 'none';
                     volverBtnMacro.style.display = 'none';
-                    foroPrincipal.classList.remove('hidden-forum');
-                    botonesInicio.classList.remove('hidden');
+                    foroPrincipal.classList.remove('hidden-forum'); // Vuelve a mostrar el foro en el flujo
+                    botonesInicio.classList.remove('hidden'); // Vuelve a mostrar los botones superiores
                     showSectionSmoothly(foroPrincipal);
                 });
             }
@@ -982,17 +1037,14 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 startX = e.pageX - reviewsSlider.offsetLeft;
                 scrollLeft = reviewsSlider.scrollLeft;
             });
-
             reviewsSlider.addEventListener('mouseleave', () => {
                 isDown = false;
                 reviewsSlider.classList.remove('active-grab');
             });
-
             reviewsSlider.addEventListener('mouseup', () => {
                 isDown = false;
                 reviewsSlider.classList.remove('active-grab');
             });
-
             reviewsSlider.addEventListener('mousemove', (e) => {
                 if (!isDown) return;
                 e.preventDefault();
