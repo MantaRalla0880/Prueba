@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -77,7 +77,7 @@
         }
     }
 
-    /* INTERFACES */
+    /* INTERFASES */
     .content-section {
         display: none;
         width: 100%;
@@ -95,24 +95,6 @@
         transition: opacity 0.4s ease, transform 0.4s ease;
         padding-top: 60px; /* Espacio para los botones superiores que no están fijos */
         padding-bottom: 60px; /* Espacio para el botón de volver */
-    }
-
-   .fadeZoomIn {
-     animation-name: fadeZoomIn;
-    }
-
-    .fadeZoomOut {
-      animation-name: fadeZoomOut;
-    }
-
-    @keyframes fadeZoomIn {
-      0% { opacity: 0; transform: scale(0.9) translateY(30px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    @keyframes fadeZoomOut {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.9) translateY(30px); }
     }
 
     .content-section.active-visible {
@@ -274,10 +256,6 @@
         flex-shrink: 0;
     }
 
-    .container header {
-        margin-bottom: 15px;
-    }
-
     header img {
         width: 110px;
         border-radius: 50%;
@@ -366,54 +344,13 @@
         text-transform: uppercase;
     }
 
-    .cta {
-      background: #0ff;
-      color: #000;
-      padding: 15px 40px;
-      font-size: 1.3em;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #0ff;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      margin: 20px auto 10px;
-      display: inline-block;
+    .cta:hover {
+        background: #00c9c9;
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0, 255, 255, 0.6);
+        transform: scale(1.02);
     }
 
-    /* INICIO del CSS para los botones neón agregados */
-    .button-container {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .neon-button {
-        background-color: #1a1a1a;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        padding: 15px 30px;
-        border: 2px solid #00ffff;
-        border-radius: 8px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .neon-button:hover {
-        background-color: #00ffff;
-        color: #1a1a1a;
-        box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff;
-        transform: translateY(-2px);
-    }
-    /* FIN del CSS para los botones neón agregados */
-
-    .buttons-row { /* Esta clase y los estilos ya no se usan directamente para los botones de reglas y plantilla, pero se mantienen por si los usas para otra cosa */
+    .buttons-row {
         display: flex;
         gap: 10px;
         justify-content: center;
@@ -421,27 +358,28 @@
         margin-top: 8px;
     }
 
-    /* Los estilos para .rules-btn y .plantilla-btn fueron eliminados ya que los nuevos botones neon los reemplazan */
-    /* .rules-btn, .plantilla-btn {
-      background: #0ff;
-      color: #000;
-      padding: 12px 25px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #0ff;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .rules-btn, .plantilla-btn {
+        background: rgba(0, 255, 255, 0.1);
+        color: #00FFFF;
+        padding: 12px 20px;
+        font-size: 1em;
+        border: 1px solid #00FFFF;
+        border-radius: 8px;
+        box-shadow: none;
+        cursor: pointer;
+        transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Orbitron', sans-serif;
     }
+
     .rules-btn:hover, .plantilla-btn:hover {
         background: #00FFFF;
         color: #000;
         box-shadow: 0 0 10px #00FFFF;
         transform: translateY(-2px);
-    } */
+    }
 
     .status-dot {
         width: 10px;
@@ -616,6 +554,47 @@
         padding-bottom: 15px;
         width: 100%;
     }
+
+    /* ANIMACIÓN DE ENTRADA DURA */
+    @keyframes bounceIn {
+      0%, 20%, 40%, 60%, 80%, 100% {
+        -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
+      }
+      0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+      }
+      20% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+      }
+      40% {
+        -webkit-transform: scale3d(.9, .9, .9);
+        transform: scale3d(.9, .9, .9);
+      }
+      60% {
+        opacity: 1;
+        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+        transform: scale3d(1.03, 1.03, 1.03);
+      }
+      80% {
+        -webkit-transform: scale3d(.97, .97, .97);
+        transform: scale3d(.97, .97, .97);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+    }
+
+    /* Aplica la animación al contenedor principal del foro */
+    .container.animated-entry {
+        animation: bounceIn 1s; /* Dura 1 segundo */
+        animation-fill-mode: both; /* Mantiene el estado final de la animación */
+    }
 </style>
 <body>
     <button id="startBtn" onclick="startMedia()">▶️ Tocar para iniciar</button>
@@ -633,7 +612,7 @@
         <button onclick="mostrarMacro()">⚙️ Macro para PC</button>
     </div>
 
-    <div id="foroPrincipal" class="container">
+    <div id="foroPrincipal" class="container animated-entry">
         <div class="redes-section">
             <h2>Redes</h2>
             <div class="social">
@@ -657,14 +636,11 @@
 
             <a class="cta" href="https://discord.gg/HqfjQcbDZr" target="_blank">💬 ÚNETE AL DISCORD</a>
 
-            <div class="button-container">
-                <a href="#" class="neon-button" onclick="toggleRules()">
-                    📜 Reglas De 🔥MantaMods🔥
-                </a>
-                <a href="#" class="neon-button" onclick="togglePlantilla()">
-                    📋 Plantilla De 🔥MantaMods🔥
-                </a>
+            <div class="buttons-row">
+                <button class="rules-btn" onclick="toggleRules()">📜 Reglas De 🔥MantaMods🔥 <span id="rules-dot" class="status-dot"></span></button>
+                <button class="plantilla-btn" onclick="togglePlantilla()">📋 Plantilla De 🔥MantaMods🔥 <span id="plantilla-dot" class="status-dot"></span></button>
             </div>
+
             <div class="rules-box" id="rules-box">
                 <ul>
                     <li>✅ Respeto mutuo entre todos los miembros.</li>
@@ -883,7 +859,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         <img src="static.png" alt="Logo MantaMods" class="logo" />
         <h2>⚙️ Macro para PC</h2>
         <p>Tutorial para usar la macro desde el mismo foro:</p>
-        <iframe src="https://www.youtube.com/embed/kdZYUejztSY" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kRZY0eJzFSY" allowfullscreen></iframe>
         <a href="https://www.mediafire.com/file/example_macro" target="_blank" style="display:block;margin-top:15px;color:#0ff;font-weight:bold;">🔽 Descargar Macro</a>
         <button id="volverBtnMacro" onclick="volverAlForo()">🔙 Volver al foro</button>
     </div>
@@ -907,6 +883,15 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             document.getElementById('startBtn').style.display = 'none';
             foroPrincipal.classList.remove('hidden-forum');
             botonesInicio.classList.remove('hidden');
+
+            // Asegurarse de que la animación se dispare solo cuando el foro principal sea visible
+            // y no tenga la clase 'hidden-forum'
+            if (!foroPrincipal.classList.contains('hidden-forum')) {
+                // Reiniciar animación si ya estaba aplicada o si el elemento estaba oculto y se muestra
+                foroPrincipal.classList.remove('animated-entry'); // Remover para permitir el re-animado
+                void foroPrincipal.offsetWidth; // Truco para forzar reflow (reiniciar animación)
+                foroPrincipal.classList.add('animated-entry'); // Añadir para disparar la animación
+            }
         }
 
         // Asegura que la música y el video inicien automáticamente en escritorio
@@ -916,21 +901,18 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
 
         function toggleRules() {
             const box = document.getElementById('rules-box');
-            // Nota: El elemento 'rules-dot' ya no existe directamente con los nuevos botones neón.
-            // Si quieres un indicador visual, deberías añadir un nuevo elemento span dentro del nuevo botón neón
-            // y darle un ID como 'rules-neon-dot' para controlar su estado.
-            // Por ahora, simplemente toggleamos la visibilidad de la caja.
+            const dot = document.getElementById('rules-dot');
             box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            // Eliminado: dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
-            // Eliminado: dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+            dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+            dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
         function togglePlantilla() {
             const box = document.getElementById('plantilla-box');
-            // Similar al caso anterior, el 'plantilla-dot' ya no existe.
+            const dot = document.getElementById('plantilla-dot');
             box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            // Eliminado: dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
-            // Eliminado: dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
+            dot.style.background = box.style.display === 'block' ? 'lime' : 'red';
+            dot.style.boxShadow = box.style.display === 'block' ? '0 0 5px lime' : '0 0 5px red';
         }
 
         let currentActiveSection = null;
@@ -942,41 +924,39 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             }
             sectionElement.classList.remove('active-visible');
             sectionElement.classList.add('active-hidden');
-            sectionElement.classList.remove('fadeZoomIn');
-            sectionElement.classList.add('fadeZoomOut');
-            setTimeout(() => {
-                sectionElement.style.display = 'none';
-                sectionElement.classList.remove('active-hidden');
-                sectionElement.classList.remove('fadeZoomOut');
-                if (callback) callback();
-            }, 400); // Duración de la animación
+            requestAnimationFrame(() => {
+                sectionElement.addEventListener('transitionend', function handler() {
+                    sectionElement.removeEventListener('transitionend', handler);
+                    sectionElement.style.display = 'none';
+                    sectionElement.classList.remove('active-hidden');
+                    if (callback) callback();
+                });
+            });
         }
 
         function showSectionSmoothly(sectionElement) {
-            if (sectionElement.classList.contains('active-visible')) return;
-
             sectionElement.style.display = 'block';
-            sectionElement.classList.add('fadeZoomIn');
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 sectionElement.classList.add('active-visible');
-                sectionElement.classList.remove('fadeZoomIn');
-            }, 10);
+            });
         }
 
         function mostrarGtaVirgen() {
             hideSectionSmoothly(foroPrincipal, () => {
+                foroPrincipal.classList.add('hidden-forum');
+                botonesInicio.classList.add('hidden');
                 showSectionSmoothly(document.getElementById('gtaVirgenContent'));
                 volverBtnGta.style.display = 'block';
-                botonesInicio.classList.add('hidden');
                 currentActiveSection = document.getElementById('gtaVirgenContent');
             });
         }
 
         function mostrarMacro() {
             hideSectionSmoothly(foroPrincipal, () => {
+                foroPrincipal.classList.add('hidden-forum');
+                botonesInicio.classList.add('hidden');
                 showSectionSmoothly(document.getElementById('macroContent'));
                 volverBtnMacro.style.display = 'block';
-                botonesInicio.classList.add('hidden');
                 currentActiveSection = document.getElementById('macroContent');
             });
         }
@@ -984,16 +964,17 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
         function volverAlForo() {
             if (currentActiveSection) {
                 hideSectionSmoothly(currentActiveSection, () => {
-                    showSectionSmoothly(foroPrincipal);
+                    currentActiveSection = null;
                     volverBtnGta.style.display = 'none';
                     volverBtnMacro.style.display = 'none';
+                    foroPrincipal.classList.remove('hidden-forum');
                     botonesInicio.classList.remove('hidden');
-                    currentActiveSection = null;
+                    showSectionSmoothly(foroPrincipal);
                 });
             }
         }
 
-        // Eventos para el slider de reseñas
+        // Funcionalidad de arrastrar para el slider de reseñas
         if (reviewsSlider) {
             reviewsSlider.addEventListener('mousedown', (e) => {
                 isDown = true;
@@ -1016,7 +997,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - reviewsSlider.offsetLeft;
-                const walk = (x - startX) * 1.5; // Multiplicador para mayor velocidad de arrastre
+                const walk = (x - startX) * 2; // Ajusta la velocidad de desplazamiento
                 reviewsSlider.scrollLeft = scrollLeft - walk;
             });
         }
