@@ -908,7 +908,7 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             video.play().catch(e => console.error("Error al reproducir video:", e));
             document.getElementById('startBtn').style.display = 'none';
             foroPrincipal.classList.remove('hidden-forum'); // Asegura que el foro principal sea visible
-            botonesInicio.classList.remove('hidden'); // Asegura que los botones superiores sean visibles
+            botonesInicio.classList.remove('hidden'); // Asegura que los botones superiores sean visible
         }
 
         // Asegura que la música y el video inicien automáticamente en escritorio
@@ -994,9 +994,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             hideSectionSmoothly(foroPrincipal, () => {
                 foroPrincipal.classList.add('hidden-forum'); // Oculta el foro de forma visual y de flujo
                 botonesInicio.classList.add('hidden'); // Oculta los botones superiores durante la transición
-                showSectionSmoothly(document.getElementById('gtaVirgenContent'));
+                const gtaVirgenContent = document.getElementById('gtaVirgenContent');
+                showSectionSmoothly(gtaVirgenContent);
                 volverBtnGta.style.display = 'block';
-                currentActiveSection = document.getElementById('gtaVirgenContent');
+                currentActiveSection = gtaVirgenContent;
+                // Desplazarse a la sección
+                gtaVirgenContent.scrollIntoView({ behavior: 'smooth' });
             });
         }
 
@@ -1007,9 +1010,12 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
             hideSectionSmoothly(foroPrincipal, () => {
                 foroPrincipal.classList.add('hidden-forum'); // Oculta el foro de forma visual y de flujo
                 botonesInicio.classList.add('hidden'); // Oculta los botones superiores durante la transición
-                showSectionSmoothly(document.getElementById('macroContent'));
+                const macroContent = document.getElementById('macroContent');
+                showSectionSmoothly(macroContent);
                 volverBtnMacro.style.display = 'block';
-                currentActiveSection = document.getElementById('macroContent');
+                currentActiveSection = macroContent;
+                // Desplazarse a la sección
+                macroContent.scrollIntoView({ behavior: 'smooth' });
             });
         }
 
@@ -1025,6 +1031,8 @@ https://media.discordapp.net/attachments/1386567025102426276/1389751640357077243
                     foroPrincipal.classList.remove('hidden-forum'); // Vuelve a mostrar el foro en el flujo
                     botonesInicio.classList.remove('hidden'); // Vuelve a mostrar los botones superiores
                     showSectionSmoothly(foroPrincipal);
+                    // Desplazarse al foro principal
+                    foroPrincipal.scrollIntoView({ behavior: 'smooth' });
                 });
             }
         }
